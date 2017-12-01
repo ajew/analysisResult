@@ -1,0 +1,2116 @@
+/home/arthur/analysis/projects/glide/revisions/rev_fa8e803_d216308/rev_fa8e803-d216308/library/tests/src/com/bumptech/glide/GlideTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyUrlLoader.java;<<<<<<< MINE
+    /**
+     * Constructor for a new Factory that runs requests using a static singleton request queue.
+     */
+    public Factory(Context context) {
+      this(getInternalQueue(context));
+    }
+=======
+        /**
+         * Constructor for a new Factory that runs requests using the given {@link RequestQueue}.
+         */
+        public Factory(RequestQueue requestQueue) {
+            this(requestQueue, VolleyStreamFetcher.DEFAULT_REQUEST_FACTORY);
+        }
+
+        /**
+         * Constructor for a new Factory with a custom Volley request factory that runs requests
+         * using the given {@link RequestQueue}.
+         */
+        public Factory(RequestQueue requestQueue, VolleyRequestFactory requestFactory) {
+            this.requestFactory = requestFactory;
+            this.requestQueue = requestQueue;
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/library/src/main/java/com/bumptech/glide/manager/SupportRequestManagerFragment.java;<<<<<<< MINE
+  public SupportRequestManagerFragment() {
+    this(new ActivityFragmentLifecycle());
+  }
+
+  // For testing only.
+  @SuppressLint("ValidFragment")
+  public SupportRequestManagerFragment(ActivityFragmentLifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+  }
+
+  /**
+   * Sets the current {@link com.bumptech.glide.RequestManager}.
+   *
+   * @param requestManager The manager to set.
+   */
+  public void setRequestManager(RequestManager requestManager) {
+    this.requestManager = requestManager;
+  }
+
+  ActivityFragmentLifecycle getLifecycle() {
+    return lifecycle;
+  }
+
+  /**
+   * Returns the current {@link com.bumptech.glide.RequestManager} or null if none is set.
+   */
+  public RequestManager getRequestManager() {
+    return requestManager;
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    lifecycle.onStart();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    lifecycle.onStop();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    lifecycle.onDestroy();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    requestManager.onLowMemory();
+  }
+=======
+    public SupportRequestManagerFragment() {
+        this(new ActivityFragmentLifecycle());
+    }
+
+    // For testing only.
+    @SuppressLint("ValidFragment")
+    public SupportRequestManagerFragment(ActivityFragmentLifecycle lifecycle) {
+        this.lifecycle = lifecycle;
+    }
+
+    /**
+     * Sets the current {@link com.bumptech.glide.RequestManager}.
+     *
+     * @param requestManager The manager to set.
+     */
+    public void setRequestManager(RequestManager requestManager) {
+        this.requestManager = requestManager;
+    }
+
+    ActivityFragmentLifecycle getLifecycle() {
+        return lifecycle;
+    }
+
+    /**
+     * Returns the current {@link com.bumptech.glide.RequestManager} or null if none is set.
+     */
+    public RequestManager getRequestManager() {
+        return requestManager;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        lifecycle.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lifecycle.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        lifecycle.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        // If an activity is re-created, onLowMemory may be called before a manager is ever set.
+        // See #329.
+        if (requestManager != null) {
+            requestManager.onLowMemory();
+        }
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/library/src/main/java/com/bumptech/glide/manager/RequestManagerFragment.java;<<<<<<< MINE
+  public RequestManagerFragment() {
+    this(new ActivityFragmentLifecycle());
+  }
+
+  // For testing only.
+  @SuppressLint("ValidFragment")
+  RequestManagerFragment(ActivityFragmentLifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+  }
+
+  /**
+   * Sets the current {@link com.bumptech.glide.RequestManager}.
+   *
+   * @param requestManager The request manager to use.
+   */
+  public void setRequestManager(RequestManager requestManager) {
+    this.requestManager = requestManager;
+  }
+
+  ActivityFragmentLifecycle getLifecycle() {
+    return lifecycle;
+  }
+
+  /**
+   * Returns the current {@link com.bumptech.glide.RequestManager} or null if none exists.
+   */
+  public RequestManager getRequestManager() {
+    return requestManager;
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    lifecycle.onStart();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    lifecycle.onStop();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    lifecycle.onDestroy();
+  }
+
+  @Override
+  public void onTrimMemory(int level) {
+    requestManager.onTrimMemory(level);
+  }
+
+  @Override
+  public void onLowMemory() {
+    requestManager.onLowMemory();
+  }
+=======
+    public RequestManagerFragment() {
+        this(new ActivityFragmentLifecycle());
+    }
+
+    // For testing only.
+    @SuppressLint("ValidFragment")
+    RequestManagerFragment(ActivityFragmentLifecycle lifecycle) {
+        this.lifecycle = lifecycle;
+    }
+
+    /**
+     * Sets the current {@link com.bumptech.glide.RequestManager}.
+     *
+     * @param requestManager The request manager to use.
+     */
+    public void setRequestManager(RequestManager requestManager) {
+        this.requestManager = requestManager;
+    }
+
+    ActivityFragmentLifecycle getLifecycle() {
+        return lifecycle;
+    }
+
+    /**
+     * Returns the current {@link com.bumptech.glide.RequestManager} or null if none exists.
+     */
+    public RequestManager getRequestManager() {
+        return requestManager;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        lifecycle.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lifecycle.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        lifecycle.onDestroy();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        // If an activity is re-created, onTrimMemory may be called before a manager is ever set.
+        // See #329.
+        if (requestManager != null) {
+            requestManager.onTrimMemory(level);
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        // If an activity is re-created, onLowMemory may be called before a manager is ever set.
+        // See #329.
+        if (requestManager != null) {
+            requestManager.onLowMemory();
+        }
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyRequestFactory.java;<<<<<<< MINE
+    /**
+     * Returns a Volley request for the given image url. The given future should be set as a
+     * listener or called when the request completes.
+     */
+    Request<byte[]> create(String url, VolleyRequestFuture<InputStream> future, Priority priority,
+        Map<String, String> headers);
+=======
+  /**
+   * Returns a Volley request for the given image url. The given future should be put as a
+   * listener or called when the request completes.
+   */
+
+  Request<byte[]> create(String url, DataCallback<? super InputStream> callback,
+      Priority priority, Map<String, String> headers);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/androidTest/java/com/bumptech/glide/RequestManagerTest.java;<<<<<<< MINE
+    private RequestManager manager;
+    private ConnectivityMonitor connectivityMonitor;
+    private RequestTracker requestTracker;
+    private ConnectivityListener connectivityListener;
+    private RequestManager.DefaultOptions options;
+    private Lifecycle lifecycle = mock(Lifecycle.class);
+    private RequestManagerTreeNode treeNode = mock(RequestManagerTreeNode.class);
+
+    @Before
+    public void setUp() {
+        connectivityMonitor = mock(ConnectivityMonitor.class);
+        ConnectivityMonitorFactory factory = mock(ConnectivityMonitorFactory.class);
+        when(factory.build(any(Context.class), any(ConnectivityMonitor.ConnectivityListener.class)))
+                .thenAnswer(new Answer<ConnectivityMonitor>() {
+                    @Override
+                    public ConnectivityMonitor answer(InvocationOnMock invocation) throws Throwable {
+                        connectivityListener = (ConnectivityListener) invocation.getArguments()[1];
+                        return connectivityMonitor;
+                    }
+                });
+        requestTracker = mock(RequestTracker.class);
+        manager =
+            new RequestManager(Robolectric.application, lifecycle, treeNode, requestTracker, factory);
+        options = mock(RequestManager.DefaultOptions.class);
+        manager.setDefaultOptions(options);
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsWhenUsingGenericModelLoaderAndDataClass() {
+        Float model = 1f;
+        ModelLoader<Float, InputStream> modelLoader = mock(ModelLoader.class);
+        GenericTranscodeRequest<Float, InputStream, Bitmap> builder = manager.using(modelLoader, InputStream.class)
+                .load(model)
+                .as(Bitmap.class);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsWhenUsingImageStreamModelLoader() {
+        String model = "fake";
+        StreamModelLoader<String> modelLoader = mock(StreamModelLoader.class);
+        DrawableTypeRequest<String> builder = manager.using(modelLoader)
+                .load(model);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsWhenUsingByteArrayLoader() {
+        byte[] model = new byte[] { 1, 4, 65, 2};
+        StreamByteArrayLoader loader = mock(StreamByteArrayLoader.class);
+        DrawableTypeRequest<byte[]> builder = manager.using(loader)
+                .load(model);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsWhenUsingVideoFileDescriptorModelLoader() {
+        String model = "fake";
+        FileDescriptorModelLoader<String> modelLoader = mock(FileDescriptorModelLoader.class);
+        DrawableTypeRequest<String> builder = manager.using(modelLoader)
+                .load(model);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadString() {
+        String model = "fake";
+        DrawableTypeRequest<String> builder = manager.load(model);
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadUri() {
+        Uri uri = Uri.EMPTY;
+        DrawableTypeRequest<Uri> builder = manager.load(uri);
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadMediaStoreUri() {
+        Uri uri = Uri.EMPTY;
+        DrawableTypeRequest<Uri> builder = manager.loadFromMediaStore(uri, "image/jpeg", 123L, 0);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadResourceId() {
+        int id = 123;
+        DrawableTypeRequest<Integer> builder = manager.load(id);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadGenericFromImage() {
+        ModelLoaderFactory<Double, InputStream> factory = mock(ModelLoaderFactory.class);
+        when(factory.build(any(Context.class), any(GenericLoaderFactory.class))).thenReturn(mock(ModelLoader.class));
+        Glide.get(Robolectric.application).register(Double.class, InputStream.class, factory);
+        Double model = 2.2;
+        DrawableTypeRequest<Double> builder = manager.load(model);
+
+        verify(options).apply(eq(builder));
+        Glide.get(Robolectric.application).unregister(Double.class, InputStream.class);
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadUrl() throws MalformedURLException {
+        URL url = new URL("http://www.google.com");
+        DrawableTypeRequest<URL> builder = manager.load(url);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadFromImageByteWithId() {
+        byte[] model = new byte[] { 1, 2, 4 };
+        DrawableTypeRequest<byte[]> builder = manager.load(model, "fakeId");
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadFromImageBytes() {
+        byte[] model = new byte[] { 5, 9, 23 };
+        DrawableTypeRequest<byte[]> builder = manager.load(model);
+
+        verify(options).apply(eq(builder));
+    }
+
+    @Test
+    public void testAppliesDefaultOptionsToLoadGenericFromVideo() {
+        ModelLoaderFactory<Float, InputStream> factory = mock(ModelLoaderFactory.class);
+        when(factory.build(any(Context.class), any(GenericLoaderFactory.class))).thenReturn(mock(ModelLoader.class));
+        Glide.get(Robolectric.application).register(Float.class, InputStream.class, factory);
+        Float model = 23.2f;
+        DrawableTypeRequest<Float> builder = manager.load(model);
+
+        verify(options).apply(eq(builder));
+        Glide.get(Robolectric.application).unregister(Float.class, InputStream.class);
+    }
+=======
+  @Mock Lifecycle lifecycle = mock(Lifecycle.class);
+  @Mock RequestManagerTreeNode treeNode = mock(RequestManagerTreeNode.class);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/androidTest/java/com/bumptech/glide/load/data/HttpUrlFetcherTest.java;<<<<<<< MINE
+    private HttpURLConnection urlConnection;
+    private HttpUrlFetcher fetcher;
+    private GlideUrl glideUrl;
+    private InputStream stream;
+
+    @Before
+    public void setUp() throws IOException {
+        urlConnection =  mock(HttpURLConnection.class);
+        URL url = new URL("http://www.google.com");
+        HttpUrlFetcher.HttpUrlConnectionFactory connectionFactory = mock(HttpUrlFetcher.HttpUrlConnectionFactory.class);
+        when(connectionFactory.build(eq(url))).thenReturn(urlConnection);
+
+        glideUrl = mock(GlideUrl.class);
+        when(glideUrl.toURL()).thenReturn(url);
+        fetcher = new HttpUrlFetcher(glideUrl, connectionFactory);
+        stream = mock(InputStream.class);
+        when(urlConnection.getInputStream()).thenReturn(stream);
+        when(urlConnection.getResponseCode()).thenReturn(200);
+    }
+
+    @Test
+    public void testReturnsModelAsString() {
+        final String expected = "fakeId";
+        when(glideUrl.getCacheKey()).thenReturn(expected);
+        assertEquals(expected, fetcher.getId());
+    }
+
+    @Test
+    public void testSetsReadTimeout() throws Exception {
+        fetcher.loadData(Priority.HIGH);
+        verify(urlConnection).setReadTimeout(eq(2500));
+    }
+
+    @Test
+    public void testSetsConnectTimeout() throws Exception {
+        fetcher.loadData(Priority.IMMEDIATE);
+        verify(urlConnection).setConnectTimeout(eq(2500));
+    }
+
+    @Test
+    public void testReturnsNullIfCancelledBeforeConnects() throws Exception {
+        InputStream notExpected = new ByteArrayInputStream(new byte[0]);
+        when(urlConnection.getInputStream()).thenReturn(notExpected);
+
+        fetcher.cancel();
+        assertNull(fetcher.loadData(Priority.LOW));
+    }
+
+    @Test
+    public void testDisconnectsUrlOnCleanup() throws Exception {
+        fetcher.loadData(Priority.HIGH);
+        fetcher.cleanup();
+
+        verify(urlConnection).disconnect();
+    }
+
+    @Test
+    public void testDoesNotThrowIfCleanupCalledBeforeStarted() {
+        fetcher.cleanup();
+    }
+
+    @Test
+    public void testDoesNotThrowIfCancelCalledBeforeStart() {
+        fetcher.cancel();
+    }
+
+    @Test
+    public void testCancelDoesNotDisconnectIfAlreadyConnected() throws Exception {
+        fetcher.loadData(Priority.HIGH);
+        fetcher.cancel();
+
+        verify(urlConnection, never()).disconnect();
+    }
+
+    @Test
+    public void testClosesStreamInCleanupIfNotNull() throws Exception {
+        fetcher.loadData(Priority.HIGH);
+        fetcher.cleanup();
+
+        verify(stream).close();
+    }
+
+    @Test
+    public void testClosesStreamBeforeDisconnectingConnection() throws Exception {
+        fetcher.loadData(Priority.NORMAL);
+        fetcher.cleanup();
+
+        InOrder order = inOrder(stream, urlConnection);
+        order.verify(stream).close();
+        order.verify(urlConnection).disconnect();
+    }
+=======
+  @Mock HttpURLConnection urlConnection;
+  @Mock HttpUrlFetcher.HttpUrlConnectionFactory connectionFactory;
+  @Mock GlideUrl glideUrl;
+  @Mock InputStream stream;
+  @Mock DataFetcher.DataCallback<InputStream> callback;
+
+  private static final int TIMEOUT_MS = 100;
+  private HttpUrlFetcher fetcher;
+
+  @Before
+  public void setUp() throws IOException {
+    MockitoAnnotations.initMocks(this);
+    URL url = new URL("http://www.google.com");
+
+    when(connectionFactory.build(eq(url))).thenReturn(urlConnection);
+    when(urlConnection.getInputStream()).thenReturn(stream);
+    when(urlConnection.getResponseCode()).thenReturn(200);
+    when(glideUrl.toURL()).thenReturn(url);
+
+    fetcher = new HttpUrlFetcher(glideUrl, TIMEOUT_MS, connectionFactory);
+  }
+
+  @Test
+  public void testSetsReadTimeout() throws IOException {
+    fetcher.loadData(Priority.HIGH, callback);
+    verify(urlConnection).setReadTimeout(eq(TIMEOUT_MS));
+  }
+
+  @Test
+  public void testSetsConnectTimeout() throws IOException {
+    fetcher.loadData(Priority.IMMEDIATE, callback);
+    verify(urlConnection).setConnectTimeout(eq(TIMEOUT_MS));
+  }
+
+  @Test
+  public void testReturnsNullIfCancelledBeforeConnects() throws IOException {
+    InputStream notExpected = new ByteArrayInputStream(new byte[0]);
+    when(urlConnection.getInputStream()).thenReturn(notExpected);
+
+    fetcher.cancel();
+    fetcher.loadData(Priority.LOW, callback);
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testDisconnectsUrlOnCleanup() throws IOException {
+    fetcher.loadData(Priority.HIGH, callback);
+    fetcher.cleanup();
+
+    verify(urlConnection).disconnect();
+  }
+
+  @Test
+  public void testDoesNotThrowIfCleanupCalledBeforeStarted() {
+    fetcher.cleanup();
+  }
+
+  @Test
+  public void testDoesNotThrowIfCancelCalledBeforeStart() {
+    fetcher.cancel();
+  }
+
+  @Test
+  public void testCancelDoesNotDisconnectIfAlreadyConnected()
+      throws IOException {
+    fetcher.loadData(Priority.HIGH, callback);
+    fetcher.cancel();
+
+    verify(urlConnection, never()).disconnect();
+  }
+
+  @Test
+  public void testClosesStreamInCleanupIfNotNull() throws IOException {
+    fetcher.loadData(Priority.HIGH, callback);
+    fetcher.cleanup();
+
+    verify(stream).close();
+  }
+
+  @Test
+  public void testClosesStreamBeforeDisconnectingConnection() throws IOException {
+    fetcher.loadData(Priority.NORMAL, callback);
+    fetcher.cleanup();
+
+    InOrder order = inOrder(stream, urlConnection);
+    order.verify(stream).close();
+    order.verify(urlConnection).disconnect();
+  }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/resource/bitmap/BitmapTransformation.java;<<<<<<< MINE
+    /**
+     * Transforms the given {@link android.graphics.Bitmap} based on the given dimensions and returns the transformed
+     * result.
+     *
+     * <p>
+     *   The provided Bitmap, toTransform, should not be recycled or returned to the pool. Glide will automatically
+     *   recycle and/or reuse toTransform if the transformation returns a different Bitmap. Similarly implementations
+     *   should never recycle or return Bitmaps that are returned as the result of this method. Recycling or returning
+     *   the provided and/or the returned Bitmap to the pool will lead to a variety of runtime exceptions and drawing
+     *   errors. See #408 for an example. If the implementation obtains and discards intermediate Bitmaps, they may
+     *   safely be returned to the BitmapPool and/or recycled.
+     * </p>
+     *
+     * <p>
+     *     outWidth and outHeight will never be {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL}, this
+     *     class converts them to be the size of the Bitmap we're going to transform before calling this method.
+     * </p>
+     *
+     * @param pool A {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} that can be used to obtain and
+     *             return intermediate {@link Bitmap}s used in this transformation. For every
+     *             {@link android.graphics.Bitmap} obtained from the pool during this transformation, a
+     *             {@link android.graphics.Bitmap} must also be returned.
+     * @param toTransform The {@link android.graphics.Bitmap} to transform.
+     * @param outWidth The ideal width of the transformed bitmap (the transformed width does not need to match exactly).
+     * @param outHeight The ideal height of the transformed bitmap (the transformed heightdoes not need to match
+     *                  exactly).
+     */
+    protected abstract Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight);
+=======
+  /**
+   * Transforms the given {@link android.graphics.Bitmap} based on the given dimensions and returns
+   * the transformed result.
+   *
+   * <p> outWidth and outHeight will never be
+   * {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL},
+   * this class converts them to be the size of the Bitmap we're going to transform before calling
+   * this method. </p>
+   *
+   * @param pool        A {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} that can
+   *                    be used to obtain and return intermediate {@link Bitmap}s used in this
+   *                    transformation. For every {@link android.graphics.Bitmap} obtained from the
+   *                    pool during this transformation, a {@link android.graphics.Bitmap} must also
+   *                    be returned.
+   * @param toTransform The {@link android.graphics.Bitmap} to transform.
+   * @param outWidth    The ideal width of the transformed bitmap (the transformed width does not
+   *                    need to match exactly).
+   * @param outHeight   The ideal height of the transformed bitmap (the transformed heightdoes not
+   *                    need to match exactly).
+   */
+  protected abstract Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth,
+      int outHeight);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/cache/DiskCache.java;<<<<<<< MINE
+    /**
+     * Write to a key in the cache. {@link Writer} is used so that the cache implementation can perform actions after
+     * the write finishes, like commit (via atomic file rename).
+     *
+     * @param key The key to write to.
+     * @param writer An interface that will write data given an OutputStream for the key.
+     */
+    void put(Key key, Writer writer);
+
+    /**
+     * Remove the key and value from the cache.
+     *
+     * @param key The key to remove.
+     */
+    void delete(Key key);
+
+    /**
+     * Clear the cache.
+     */
+    void clear();
+=======
+  /**
+   * Get the cache for the value at the given key.
+   *
+   * <p> Note - This is potentially dangerous, someone may write a new value to the file at any
+   * point in time and we won't know about it. </p>
+   *
+   * @param key The key in the cache.
+   * @return An InputStream representing the data at key at the time get is called.
+   */
+  File get(Key key);
+
+  /**
+   * Write to a key in the cache. {@link Writer} is used so that the cache implementation can
+   * perform actions after the write finishes, like commit (via atomic file rename).
+   *
+   * @param key    The key to write to.
+   * @param writer An interface that will write data given an OutputStream for the key.
+   */
+  void put(Key key, Writer writer);
+
+  /**
+   * Remove the key and value from the cache.
+   *
+   * @param key The key to remove.
+   */
+  void delete(Key key);
+
+  /**
+   * Clear the cache.
+   */
+  void clear();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/EngineKey.java;<<<<<<< MINE
+    private static final String EMPTY_LOG_STRING = "";
+    private final String id;
+    private final int width;
+    private final int height;
+    private final ResourceDecoder cacheDecoder;
+    private final ResourceDecoder decoder;
+    private final Transformation transformation;
+    private final ResourceEncoder encoder;
+    private final ResourceTranscoder transcoder;
+    private final Encoder sourceEncoder;
+    private final Key signature;
+    private String stringKey;
+    private int hashCode;
+    private Key originalKey;
+
+    public EngineKey(String id, Key signature, int width, int height, ResourceDecoder cacheDecoder,
+            ResourceDecoder decoder, Transformation transformation, ResourceEncoder encoder,
+            ResourceTranscoder transcoder, Encoder sourceEncoder) {
+        this.id = id;
+        this.signature = signature;
+        this.width = width;
+        this.height = height;
+        this.cacheDecoder = cacheDecoder;
+        this.decoder = decoder;
+        this.transformation = transformation;
+        this.encoder = encoder;
+        this.transcoder = transcoder;
+        this.sourceEncoder = sourceEncoder;
+    }
+
+    public Key getOriginalKey() {
+        if (originalKey == null) {
+            originalKey = new OriginalKey(id, signature);
+        }
+        return originalKey;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EngineKey engineKey = (EngineKey) o;
+
+        if (!id.equals(engineKey.id)) {
+            return false;
+        } else if (!signature.equals(engineKey.signature)) {
+            return false;
+        } else if (height != engineKey.height) {
+            return false;
+        } else if (width != engineKey.width) {
+            return false;
+        } else if (transformation == null ^ engineKey.transformation == null) {
+            return false;
+        } else if (transformation != null && !transformation.getId().equals(engineKey.transformation.getId())) {
+            return false;
+        } else if (decoder == null ^ engineKey.decoder == null) {
+            return false;
+        } else if (decoder != null && !decoder.getId().equals(engineKey.decoder.getId())) {
+            return false;
+        } else if (cacheDecoder == null ^ engineKey.cacheDecoder == null) {
+            return false;
+        } else if (cacheDecoder != null && !cacheDecoder.getId().equals(engineKey.cacheDecoder.getId())) {
+            return false;
+        } else if (encoder == null ^ engineKey.encoder == null) {
+            return false;
+        } else if (encoder != null && !encoder.getId().equals(engineKey.encoder.getId())) {
+            return false;
+        } else if (transcoder == null ^ engineKey.transcoder == null) {
+            return false;
+        } else if (transcoder != null && !transcoder.getId().equals(engineKey.transcoder.getId())) {
+            return false;
+        } else if (sourceEncoder == null ^ engineKey.sourceEncoder == null) {
+            return false;
+        } else if (sourceEncoder != null && !sourceEncoder.getId().equals(engineKey.sourceEncoder.getId())) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        if (hashCode == 0) {
+            hashCode = id.hashCode();
+            hashCode = 31 * hashCode + signature.hashCode();
+            hashCode = 31 * hashCode + width;
+            hashCode = 31 * hashCode + height;
+            hashCode = 31 * hashCode + (cacheDecoder   != null ? cacheDecoder  .getId().hashCode() : 0);
+            hashCode = 31 * hashCode + (decoder        != null ? decoder       .getId().hashCode() : 0);
+            hashCode = 31 * hashCode + (transformation != null ? transformation.getId().hashCode() : 0);
+            hashCode = 31 * hashCode + (encoder        != null ? encoder       .getId().hashCode() : 0);
+            hashCode = 31 * hashCode + (transcoder     != null ? transcoder    .getId().hashCode() : 0);
+            hashCode = 31 * hashCode + (sourceEncoder  != null ? sourceEncoder .getId().hashCode() : 0);
+        }
+        return hashCode;
+    }
+
+    @Override
+    public String toString() {
+        if (stringKey == null) {
+            stringKey = new StringBuilder()
+                .append("EngineKey{")
+                .append(id)
+                .append('+')
+                .append(signature)
+                .append("+[")
+                .append(width)
+                .append('x')
+                .append(height)
+                .append("]+")
+                .append('\'')
+                .append(cacheDecoder   != null ? cacheDecoder  .getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('+')
+                .append('\'')
+                .append(decoder        != null ? decoder       .getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('+')
+                .append('\'')
+                .append(transformation != null ? transformation.getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('+')
+                .append('\'')
+                .append(encoder        != null ? encoder       .getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('+')
+                .append('\'')
+                .append(transcoder     != null ? transcoder    .getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('+')
+                .append('\'')
+                .append(sourceEncoder  != null ? sourceEncoder .getId() : EMPTY_LOG_STRING)
+                .append('\'')
+                .append('}')
+                .toString();
+        }
+        return stringKey;
+    }
+
+    @Override
+    public void updateDiskCacheKey(MessageDigest messageDigest) throws UnsupportedEncodingException {
+        byte[] dimensions = ByteBuffer.allocate(8)
+                .putInt(width)
+                .putInt(height)
+                .array();
+        signature.updateDiskCacheKey(messageDigest);
+        messageDigest.update(id.getBytes(STRING_CHARSET_NAME));
+        messageDigest.update(dimensions);
+        messageDigest.update((cacheDecoder   != null ? cacheDecoder  .getId() : "").getBytes(STRING_CHARSET_NAME));
+        messageDigest.update((decoder        != null ? decoder       .getId() : "").getBytes(STRING_CHARSET_NAME));
+        messageDigest.update((transformation != null ? transformation.getId() : "").getBytes(STRING_CHARSET_NAME));
+        messageDigest.update((encoder        != null ? encoder       .getId() : "").getBytes(STRING_CHARSET_NAME));
+        // The Transcoder is not included in the disk cache key because its result is not cached.
+        messageDigest.update((sourceEncoder  != null ? sourceEncoder .getId() : "").getBytes(STRING_CHARSET_NAME));
+    }
+=======
+  private final Object model;
+  private final int width;
+  private final int height;
+  private final Class<?> resourceClass;
+  private final Class<?> transcodeClass;
+  private final Key signature;
+  private final Map<Class<?>, Transformation<?>> transformations;
+  private final Options options;
+  private int hashCode;
+
+  public EngineKey(Object model, Key signature, int width, int height,
+      Map<Class<?>, Transformation<?>> transformations, Class<?> resourceClass,
+      Class<?> transcodeClass, Options options) {
+    this.model = Preconditions.checkNotNull(model);
+    this.signature = Preconditions.checkNotNull(signature, "Signature must not be null");
+    this.width = width;
+    this.height = height;
+    this.transformations = Preconditions.checkNotNull(transformations);
+    this.resourceClass =
+        Preconditions.checkNotNull(resourceClass, "Resource class must not be null");
+    this.transcodeClass =
+        Preconditions.checkNotNull(transcodeClass, "Transcode class must not be null");
+    this.options = Preconditions.checkNotNull(options);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof EngineKey) {
+      EngineKey other = (EngineKey) o;
+      return model.equals(other.model)
+          && signature.equals(other.signature)
+          && height == other.height
+          && width == other.width
+          && transformations.equals(other.transformations)
+          && resourceClass.equals(other.resourceClass)
+          && transcodeClass.equals(other.transcodeClass)
+          && options.equals(other.options);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    if (hashCode == 0) {
+      hashCode = model.hashCode();
+      hashCode = 31 * hashCode + signature.hashCode();
+      hashCode = 31 * hashCode + width;
+      hashCode = 31 * hashCode + height;
+      hashCode = 31 * hashCode + transformations.hashCode();
+      hashCode = 31 * hashCode + resourceClass.hashCode();
+      hashCode = 31 * hashCode + transcodeClass.hashCode();
+      hashCode = 31 * hashCode + options.hashCode();
+    }
+    return hashCode;
+  }
+
+  @Override
+  public String toString() {
+    return "EngineKey{"
+        + "model=" + model
+        + ", width=" + width
+        + ", height=" + height
+        + ", resourceClass=" + resourceClass
+        + ", transcodeClass=" + transcodeClass
+        + ", signature=" + signature
+        + ", hashCode=" + hashCode
+        + ", transformations=" + transformations
+        + ", options=" + options
+        + '}';
+  }
+
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    throw new UnsupportedOperationException();
+  }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_3b20004_63678dd/rev_3b20004-63678dd/java/src/com/pubnub/api/Pubnub.java;<<<<<<< MINE
+=======
+    /**
+     * Send a message to a channel.
+     *
+     * @param args
+     *            Hashtable containing channel name, message.
+     * @param callback
+     *            object of sub class of Callback class
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Methods
+     *             accepting Hashtable as arguments have been deprecated.
+     */
+    @Deprecated
+    @Override
+    public void publish(Hashtable args, Callback callback) {
+        super.publish(args, callback);
+    }
+
+    /**
+     * Send a message to a channel.
+     *
+     * @param args
+     *            Hashtable containing channel name, message, callback
+     * @deprecated As of version 3.5.2 . Will be removed in 3.6.0 . Methods
+     *             accepting Hashtable as arguments have been deprecated.
+     *
+     */
+    @Deprecated
+    @Override
+    public void publish(Hashtable args) {
+        super.publish(args);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param count
+     *            Upper limit on number of messages to be returned
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, long start, long end, int count, boolean reverse, Callback callback)}
+     */
+    @Deprecated
+    @Override
+    public void detailedHistory(final String channel, long start, long end,
+                                int count, boolean reverse, final Callback callback) {
+        super.detailedHistory(channel, start, end, count, reverse, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param count
+     *            Upper limit on number of messages to be returned
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     */
+    public void history(final String channel, long start, long end, int count,
+                        boolean reverse, final Callback callback) {
+        super.detailedHistory(channel, start, end, count, reverse, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, long start, boolean reverse, Callback callback)}
+     */
+    @Deprecated
+    @Override
+    public void detailedHistory(String channel, long start, boolean reverse,
+                                Callback callback) {
+        super.detailedHistory(channel, start, reverse, callback);
+    }
+
+    /**
+     *
+     * Read history for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     */
+    public void history(String channel, long start, boolean reverse,
+                        Callback callback) {
+        super.detailedHistory(channel, start, reverse, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, long start, long end, Callback callback)}
+     */
+    @Deprecated
+    @Override
+    public void detailedHistory(String channel, long start, long end,
+                                Callback callback) {
+        super.detailedHistory(channel, start, end, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param callback
+     *            Callback
+     */
+
+    public void history(String channel, long start, long end, Callback callback) {
+        super.detailedHistory(channel, start, end, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, long start, long end, boolean reverse, Callback callback)}
+     */
+    @Deprecated
+    @Override
+    public void detailedHistory(String channel, long start, long end,
+                                boolean reverse, Callback callback) {
+        super.detailedHistory(channel, start, end, reverse, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param start
+     *            Start time
+     * @param end
+     *            End time
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     */
+    public void history(String channel, long start, long end, boolean reverse,
+                        Callback callback) {
+        super.detailedHistory(channel, start, end, reverse, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param count
+     *            Upper limit on number of messages to be returned
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, int count, boolean reverse, Callback callback)}
+     */
+    @Deprecated
+    @Override
+    public void detailedHistory(String channel, int count, boolean reverse,
+                                Callback callback) {
+        super.detailedHistory(channel, count, reverse, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param count
+     *            Upper limit on number of messages to be returned
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     */
+    public void history(String channel, int count, boolean reverse,
+                        Callback callback) {
+        super.detailedHistory(channel, count, reverse, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, boolean reverse, Callback callback)}
+     */
+    @Deprecated
+    public void detailedHistory(String channel, boolean reverse,
+                                Callback callback) {
+        super.detailedHistory(channel, reverse, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param reverse
+     *            True if messages need to be in reverse order
+     * @param callback
+     *            Callback
+     */
+
+    public void history(String channel, boolean reverse, Callback callback) {
+        super.detailedHistory(channel, reverse, callback);
+    }
+
+    /**
+     *
+     * Read DetailedHistory for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param count
+     *            Maximum number of messages
+     * @param callback
+     *            Callback object
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Replaced
+     *             by
+     *             {@link #history(String channel, int count, Callback callback)}
+     */
+    @Deprecated
+    public void detailedHistory(String channel, int count, Callback callback) {
+        super.detailedHistory(channel, count, callback);
+    }
+
+    /**
+     *
+     * Read History for a channel.
+     *
+     * @param channel
+     *            Channel name for which detailed history is required
+     * @param count
+     *            Maximum number of messages
+     * @param callback
+     *            Callback object
+     */
+    @Override
+    public void history(String channel, int count, Callback callback) {
+        super.detailedHistory(channel, count, callback);
+    }
+
+    /**
+     * Unsubscribe/Disconnect from channel.
+     *
+     * @param args
+     *            Hashtable containing channel name.
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Methods
+     *             accepting Hashtable as arguments have been deprecated.
+     */
+    @Deprecated
+    public void unsubscribe(Hashtable args) {
+        String[] channelList = (String[]) args.get("channels");
+        if (channelList == null) {
+            channelList = new String[] { (String) args.get("channel") };
+        }
+        unsubscribe(channelList);
+    }
+
+    /**
+     *
+     * Listen for a message on a channel.
+     *
+     * @param args
+     *            Hashtable containing channel name
+     * @param callback
+     *            Callback
+     * @exception PubnubException
+     *                Throws PubnubException if Callback is null
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 .
+     */
+    @Deprecated
+    public void subscribe(Hashtable args, Callback callback)
+    throws PubnubException {
+        args.put("callback", callback);
+        super.subscribe(args);
+    }
+
+    /**
+     *
+     * Listen for a message on a channel.
+     *
+     * @param args
+     *            Hashtable containing channel name, callback
+     * @exception PubnubException
+     *                Throws PubnubException if Callback is null
+     * @deprecated as of version 3.5.2 and will be removed with 3.6.0 . Methods
+     *             accepting Hashtable as arguments have been deprecated.
+     */
+    @Deprecated
+    public void subscribe(Hashtable args) throws PubnubException {
+        super.subscribe(args);
+    }
+
+    private String pamSign(String key, String data) throws PubnubException {
+        Mac sha256_HMAC;
+
+        try {
+            sha256_HMAC = Mac.getInstance("HmacSHA256");
+            SecretKeySpec secret_key = new SecretKeySpec(key.getBytes(),
+                    "HmacSHA256");
+            sha256_HMAC.init(secret_key);
+            byte[] hmacData = sha256_HMAC.doFinal(data.getBytes("UTF-8"));
+            return new String(Base64Encoder.encode(hmacData)).replace('+', '-')
+                   .replace('/', '_');
+        } catch (InvalidKeyException e1) {
+            throw new PubnubException(getErrorObject(PubnubError.PNERROBJ_ULSSIGN_ERROR, 1, "Invalid Key : " + e1.toString()));
+        } catch (NoSuchAlgorithmException e1) {
+            throw new PubnubException(getErrorObject(PubnubError.PNERROBJ_ULSSIGN_ERROR, 2, "Invalid Algorithm : " + e1.toString()));
+        } catch (IllegalStateException e1) {
+            throw new PubnubException(getErrorObject(PubnubError.PNERROBJ_ULSSIGN_ERROR, 3, "Invalid State : " + e1.toString()));
+        } catch (UnsupportedEncodingException e1) {
+            throw new PubnubException(getErrorObject(PubnubError.PNERROBJ_ULSSIGN_ERROR, 4, "Unsupported encoding : " + e1.toString()));
+        }
+    }
+
+    /** Grant r/w access based on channel and auth key
+     * @param channel
+     * @param auth_key
+     * @param read
+     * @param write
+     * @param callback
+     */
+    public void pamGrant(final String channel, String auth_key, boolean read,
+                         boolean write, final Callback callback) {
+        pamGrant(channel, auth_key, read, write, -1, callback);
+    }
+
+    /** Grant r/w access based on channel and auth key
+     * @param channel
+     * @param auth_key
+     * @param read
+     * @param write
+     * @param callback
+     */
+    public void pamGrant(final String channel, String auth_key, boolean read,
+                         boolean write, int ttl, final Callback callback) {
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String w = (write) ? "1" : "0";
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "grant" + "\n" + "auth=" + urlEncode(auth_key) + "&" + "channel="
+                            + urlEncode(channel) + "&" + "r=" + r + "&" + "timestamp=" + timestamp
+                            + ((ttl > -1)?"&" + "ttl=" + ttl:"")
+                            + "&" + "w=" + w;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+
+        parameters.put("w", w);
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("channel", urlEncode(channel));
+        parameters.put("auth", urlEncode(auth_key));
+        if (ttl > 0) parameters.put("ttl", String.valueOf(ttl));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                JSONObject jso;
+                try {
+                    jso = new JSONObject(response);
+                } catch (JSONException e) {
+                    handleError(hreq, getErrorObject(
+                                    PNERROBJ_INVALID_JSON, 4,
+                                    response));
+                    return;
+                }
+                callback.successCallback(channel, jso);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                callback.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+    }
+
+    /** ULS Audit
+     * @param callback
+     */
+    public void pamAudit(final Callback callback) {
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback("",
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 2));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n"
+                            + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback("",
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                JSONObject jso;
+                try {
+                    jso = new JSONObject(response);
+                } catch (JSONException e) {
+                    handleError(hreq, getErrorObject(
+                                    PNERROBJ_INVALID_JSON, 5,
+                                    response));
+                    return;
+                }
+                callback.successCallback("", jso);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                callback.errorCallback("", error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+    }
+
+    /** ULS audit by channel
+     * @param channel
+     * @param callback
+     */
+    public void pamAudit(final String channel,
+                         final Callback callback) {
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING , 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "channel="
+                            + urlEncode(channel) + "&" + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", urlEncode(channel));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                JSONObject jso;
+                try {
+                    jso = new JSONObject(response);
+                } catch (JSONException e) {
+                    handleError(hreq, getErrorObject(
+                                    PNERROBJ_INVALID_JSON, 6,
+                                    response));
+                    return;
+                }
+                callback.successCallback(channel, jso);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                callback.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+    }
+
+    /** ULS audit by channel and auth key
+     * @param channel
+     * @param auth_key
+     * @param callback
+     */
+    public void pamAudit(final String channel, String auth_key,
+                         final Callback callback) {
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 4));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "auth=" + urlEncode(auth_key) + "&" + "channel="
+                            + urlEncode(channel) + "&" + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", urlEncode(channel));
+        parameters.put("auth", urlEncode(auth_key));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                JSONObject jso;
+                try {
+                    jso = new JSONObject(response);
+                } catch (JSONException e) {
+                    handleError(hreq, PubnubError.getErrorObject(
+                                    PubnubError.PNERROBJ_INVALID_JSON, 2,
+                                    response));
+                    return;
+                }
+                callback.successCallback(channel, jso);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                callback.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+    }
+
+    /** ULS revoke by channel and auth key
+     * @param channel
+     * @param auth_key
+     * @param callback
+     */
+    public void pamRevoke(String channel, String auth_key, Callback callback) {
+        pamGrant(channel, auth_key, false, false, callback);
+    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53490c3_d5a696c/rev_53490c3-d5a696c/java/srcPubnubApi/com/pubnub/api/PubnubError.java;<<<<<<< MINE
+    public static final int                PNERR_HTTP_RC_ERROR                        =       128;
+    /**
+     * Pubnub server or intermediate server returned HTTP 404 unauthorized status code
+     * 
+     */
+    public static final int         PNERR_NOT_FOUND                         =       129;
+=======
+    static final int                PNERR_HTTP_RC_ERROR                        =       128;
+
+    /**
+     * Subscribe Timeout .
+     */
+    static final int                PNERR_HTTP_SUBSCRIBE_TIMEOUT               =       129;
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_35c7f03_449a6c6/rev_35c7f03-449a6c6/java/srcPubnubApi/com/pubnub/api/PubnubUtilCore.java;<<<<<<< MINE
+    
+    /**
+     * Returns string keys in a hashtable as delimited string
+     *
+     * @param ht
+     *            , Hashtable
+     * @param delimiter
+     *            , String
+     * @return , string array with hash keys string
+     */
+    public static String hashTableKeysToDelimitedString(
+        Hashtable ht, String delimiter) {
+
+        return hashTableKeysToDelimitedString(ht, delimiter, null);
+
+    }
+
+=======
+    
+    /**
+     * Returns string keys in a hashtable as delimited string
+     *
+     * @param ht
+     *            , Hashtable
+     * @param delimiter
+     *            , String
+     * @return , string array with hash keys string
+     */
+    public static String hashTableKeysToDelimitedString(
+        Hashtable ht, String delimiter) {
+
+        return hashTableKeysToDelimitedString(ht, delimiter, null);
+
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+=======
+    /**
+     * Unsubscribe/Disconnect from channel.
+     *
+     * @param channel channel name as String.
+     */
+    public void unsubscribe(String channel) {
+        unsubscribe(channel, null);
+    }
+
+    
+    /**
+     * Unsubscribe/Disconnect from channel.
+     *
+     * @param channel channel name as String.
+     */
+    public void unsubscribe(String channel, Callback callback) {
+        unsubscribe(new String[]{channel}, callback);
+    }
+    
+    /**
+     * Unsubscribe/Disconnect from channel.
+     *
+     * @param args Hashtable containing channel name.
+     */
+    protected void unsubscribe(Hashtable args) {
+        String[] channelList = (String[]) args.get("channels");
+        if (channelList == null) {
+            channelList = new String[]{(String) args.get("channel")};
+        }
+        unsubscribe(channelList);
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                + "audit" + "\n" + "auth=" + PubnubUtil.urlEncode(auth_key) + "&" + "channel="
+                + PubnubUtil.urlEncode(channel) + "&" + "pnsdk=" + PubnubUtil.urlEncode(getUserAgent()) + "&" + "timestamp=" + timestamp;
+=======
+    /**
+     * Unsubscribe from presence channel.
+     *
+     * @param channel channel name as String.
+     * @param callback Callback
+     */
+    public void unsubscribePresence(String channel, Callback callback) {
+        unsubscribe(new String[]{channel + PRESENCE_SUFFIX}, callback);
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d/java/src1/com/pubnub/api/PubnubUtil.java;<<<<<<< MINE
+=======
+
+    /**
+     * Takes source and delimiter string as inputs and returns splitted string
+     * in form of tokens in String array
+     *
+     * @param source
+     *            , input String
+     * @param delimiter
+     *            , delimiter to split on
+     * @return String[] , tokens in and array
+     */
+
+    public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d/java/examples/eclipse_project_console/src1/com/pubnub/api/PubnubUtil.java;<<<<<<< MINE
+=======
+
+    /**
+     * Takes source and delimiter string as inputs and returns splitted string
+     * in form of tokens in String array
+     *
+     * @param source
+     *            , input String
+     * @param delimiter
+     *            , delimiter to split on
+     * @return String[] , tokens in and array
+     */
+
+    public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d/j2me/src1/com/pubnub/api/PubnubUtil.java;<<<<<<< MINE
+=======
+    
+
+    
+    /**
+     * Takes source and delimiter string as inputs and returns splitted string
+     * in form of tokens in String array
+     *
+     * @param source
+     *            , input String
+     * @param delimiter
+     *            , delimiter to split on
+     * @return String[] , tokens in and array
+     */
+    public static String[] splitString(String source, String delimiter) {
+        System.out.println("[" + delimiter + "] : " + source );
+        int delimiterCount = 0;
+        int index = 0;
+        String tmpStr = source;
+
+        String[] splittedList;
+
+        while ((index = tmpStr.indexOf(delimiter)) != -1) {
+
+            tmpStr = tmpStr.substring(index + delimiter.length());
+            delimiterCount++;
+        }
+
+        splittedList = new String[delimiterCount + 1];
+
+        int counter = 0;
+        tmpStr = source;
+        System.out.println("Delimiter Count : " + delimiterCount);
+        do {
+            int nextIndex = tmpStr.indexOf(delimiter, index + 1);
+            
+            System.out.println("Next Index : " + nextIndex);
+            
+            if (nextIndex != -1) {
+                System.out.println(tmpStr);
+                System.out.println(index);
+                System.out.println(index + delimiter.length() + " : " + nextIndex);
+                splittedList[counter++] = tmpStr.substring(index + delimiter.length(), nextIndex);
+                tmpStr = tmpStr.substring(nextIndex);
+
+            } else {
+                splittedList[counter++] = tmpStr.substring(index + delimiter.length());
+                tmpStr = tmpStr.substring(index + 1);
+            }
+        } while ((index = tmpStr.indexOf(delimiter)) != -1);
+
+        return splittedList;
+    }
+
+    /**
+     * Takes String[] of tokens, and String delimiter as input and returns
+     * joined String
+     *
+     * @param sourceArray
+     *            , input tokens in String array
+     * @param delimiter
+     *            , delimiter to join on
+     * @return String , string of tokens joined by delimiter
+     */
+    public static String joinString(String[] sourceArray, String delimiter) {
+        if (sourceArray == null || delimiter == null || sourceArray.length <= 0) {
+            return "";
+        }
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < sourceArray.length - 1; i++) {
+            sb.append(sourceArray[i]).append(delimiter);
+        }
+        sb.append(sourceArray[sourceArray.length - 1]);
+
+        return sb.toString();
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d/scala/scala-pubnub-tests/java/src1/com/pubnub/api/PubnubUtil.java;<<<<<<< MINE
+=======
+
+    /**
+     * Takes source and delimiter string as inputs and returns splitted string
+     * in form of tokens in String array
+     *
+     * @param source
+     *            , input String
+     * @param delimiter
+     *            , delimiter to split on
+     * @return String[] , tokens in and array
+     */
+
+    public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/endpoints/channel_groups/ListAllChannelGroup.java;<<<<<<< MINE
+=======
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/PubNubError.java;<<<<<<< MINE
+        static final PubNubError PNERROBJ_TIMEOUT = new PubNubError(PNERR_TIMEOUT, "Timeout Occurred");
+=======
+        /**
+         * Group missing
+         *
+         */
+        public static final int PNERR_GROUP_MISSING = 136;
+
+        /**
+         * Auth Keys missing
+         *
+         */
+        public static final int PNERR_AUTH_KEYS_MISSING = 137;
+
+        /**
+         * Subscribe Key missing
+         *
+         */
+        public static final int PNERR_SUBSCRIBE_KEY_MISSING = 138;
+
+        /**
+         * Publish Key missing
+         *
+         */
+        public static final int PNERR_PUBLISH_KEY_MISSING = 139;
+
+        /**
+         * State missing
+         *
+         */
+        public static final int PNERR_STATE_MISSING = 140;
+
+        /**
+         * Channel and Group missing
+         *
+         */
+        public static final int PNERR_CHANNEL_AND_GROUP_MISSING = 141;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/PubNubError.java;<<<<<<< MINE
+        static final PubNubError PNERROBJ_INTERNAL_ERROR = new PubNubError(PNERR_INTERNAL_ERROR, "Internal Error");
+=======
+        /**
+         * Message missing
+         *
+         */
+        public static final int PNERR_MESSAGE_MISSING = 142;
+
+        /**
+         * Push TYpe missing
+         *
+         */
+        public static final int PNERR_PUSH_TYPE_MISSING = 143;
+
+        /**
+         * Device ID missing
+         *
+         */
+        public static final int PNERR_DEVICE_ID_MISSING = 144;
+
+    // Error Objects
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_12807a7_fb36f85/rev_12807a7-fb36f85/library/src/main/java/com/google/android/exoplayer/hls/HlsPlaylistParser.java;<<<<<<< MINE
+=======
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_12807a7_fb36f85/rev_12807a7-fb36f85/library/src/main/java/com/google/android/exoplayer/hls/HlsMediaPlaylist.java;<<<<<<< MINE
+=======
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+  public static final int MSG_SET_VPX_SURFACE_VIEW = 2;
+=======
+  /**
+   * The type of a message that can be passed to an instance of this class via
+   * {@link ExoPlayer#sendMessage} or {@link ExoPlayer#blockingSendMessage}. The message object
+   * should be the target {@link VpxOutputBufferRenderer}, or null.
+   */
+  public static final int MSG_SET_OUTPUT_BUFFER_RENDERER = 2;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975/library/src/main/java/com/google/android/exoplayer/util/ParsableByteArray.java;<<<<<<< MINE
+=======
+  /**
+   * Reads a line of text. A line is considered to be terminated by any one of a line feed ('\n'), a
+   * carriage return ('\r'), or a carriage return followed immediately by a line feed. Platform
+   * default's charset used.
+   *
+   * @return A String containing the contents of the line, not including any line-termination
+   *    characters, or null if the end of the stream has been reached.
+   */
+  public String readLine() {
+    if (bytesLeft() == 0) {
+      return null;
+    }
+    int lineLimit = position;
+    while (lineLimit < limit && data[lineLimit] != '\n' && data[lineLimit] != '\r') {
+      lineLimit++;
+    }
+    String line = new String(data, position, lineLimit - position);
+    position = lineLimit;
+    if (position == limit) {
+      return line;
+    }
+    if (data[position] == '\n') {
+      position++;
+      if (position == limit) {
+        return line;
+      }
+    }
+    if (data[position] == '\r') {
+      position++;
+    }
+    return line;
+  }
+
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/source/MediaPeriod.java;<<<<<<< MINE
+=======
+  // SequenceableLoader interface. Overridden to provide more specific documentation.
+
+  /**
+   * Returns the next load time, or {@link C#TIME_END_OF_SOURCE} if loading has finished.
+   * <p>
+   * This method should only be called after the period has been prepared. It may be called when no
+   * tracks are selected.
+   */
+  @Override
+  long getNextLoadPositionUs();
+
+  /**
+   * Attempts to continue loading.
+   * <p>
+   * This method may be called both during and after the period has been prepared.
+   * <p>
+   * A period may call {@link Callback#onContinueLoadingRequested(SequenceableLoader)} on the
+   * {@link Callback} passed to {@link #prepare(Callback)} to request that this method be called
+   * when the period is permitted to continue loading data. A period may do this both during and
+   * after preparation.
+   *
+   * @param positionUs The current playback position.
+   * @return True if progress was made, meaning that {@link #getNextLoadPositionUs()} will return
+   *     a different value than prior to the call. False otherwise.
+   */
+  @Override
+  boolean continueLoading(long positionUs);
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader.java;<<<<<<< MINE
+
+=======
+>>>>>>> YOURS

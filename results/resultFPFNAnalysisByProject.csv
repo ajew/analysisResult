@@ -1,0 +1,9 @@
+project;mergeScenarios;fpOrderingMergeScenarios;fpRenamingMergeScenarios;fnDuplicationMergeScenarios;fnImportMergeScenarios;textualConfUnmerge;textualConfSsmerge;fpOrderingConf;fpRenamingConf;fnDuplicationMissed;fnImportMissed;fpRenamingConfDup;fpConsLines;fpSpacing;fpConsSpac;fpRenamingConfDupMergeScenarios;fpConsLinesMergeScenarios;fpSpacingMergeScenarios;fpConsSpacMergeScenarios;fnNewArtRefOldOneMergeScnarios;fnNewArtRefOldOneConf;fnInitializationBlocks;fnInitializationBlocksMergeScnarios;minfpam;minfpamScenarios;fnAcidental;fnAcidentalScenarios;crosscutingConflicts;crosscutingScenarios;equalConfs
+glide;75;4;5;1;0;183;162;13;60;14;0;9;1;14;0;1;1;3;0;1;48;0;0;88;4;84;6;47;5;7
+java;111;6;5;0;0;294;48;78;27;0;0;1;13;64;2;1;5;10;2;0;0;0;0;21;9;186;15;84;10;16
+grpc-java;47;1;0;0;0;34;0;8;0;0;0;0;0;17;0;0;0;1;0;0;0;0;0;0;0;26;3;15;3;0
+netty-socketio;99;3;2;0;0;8;2;5;2;0;0;0;0;1;0;0;0;1;0;0;0;0;0;0;0;2;1;0;0;0
+ExoPlayer;244;12;7;0;0;439;59;127;15;0;0;0;8;147;0;0;5;9;0;1;4;0;0;41;14;259;13;173;11;38
+okio;215;0;1;0;0;2;1;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;2;1;1;1;0
+coreNLP;14;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;1;1;1;0
+retrolambda;24;1;0;0;0;9;0;4;0;0;0;0;0;4;0;0;0;1;0;0;0;0;0;0;0;5;1;5;1;0

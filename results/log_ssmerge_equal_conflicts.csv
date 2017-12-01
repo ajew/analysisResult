@@ -1,0 +1,1526 @@
+file;ssmergeConf;linedbasedConf
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/samples/flickr/src/com/bumptech/glide/samples/flickr/FlickrSearchActivity.java;<<<<<<< MINE
+=======
+        final Glide glide = Glide.get();
+        if (!glide.isImageManagerSet()) {
+            File cacheDir = ImageManager.getPhotoCacheDir(this, CACHE_NAME);
+
+            DiskCache diskCache = DiskLruCacheWrapper.get(cacheDir, 50 * 1024 * 1024);
+
+            // When we can recycle bitmaps, the smaller our cache is, the more quickly our scrolling will become smooth
+            // so prefer large bitmap pool and a small cache.
+            final int safeMemCacheSize = ImageManager.getSafeMemoryCacheSize(this);
+            glide.setImageManager(new ImageManager.Builder(this)
+                    .setBitmapCompressQuality(70)
+                    .setMemoryCache(new LruMemoryCache(
+                            Build.VERSION.SDK_INT >= 11 ? safeMemCacheSize / 2 : safeMemCacheSize))
+                    .setBitmapPool(new LruBitmapPool(
+                            Build.VERSION.SDK_INT >= 11 ? Math.round(safeMemCacheSize * 1.5f) : safeMemCacheSize))
+                    .setDiskCache(diskCache));
+        }
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        glide.register(URL.class, new VolleyUrlLoader.Factory(requestQueue));
+
+>>>>>>> YOURS;<<<<<<< MINE
+=======
+        final Glide glide = Glide.get();
+        if (!glide.isImageManagerSet()) {
+            File cacheDir = ImageManager.getPhotoCacheDir(this, CACHE_NAME);
+
+            DiskCache diskCache = DiskLruCacheWrapper.get(cacheDir, 50 * 1024 * 1024);
+
+            // When we can recycle bitmaps, the smaller our cache is, the more quickly our scrolling will become smooth
+            // so prefer large bitmap pool and a small cache.
+            final int safeMemCacheSize = ImageManager.getSafeMemoryCacheSize(this);
+            glide.setImageManager(new ImageManager.Builder(this)
+                    .setBitmapCompressQuality(70)
+                    .setMemoryCache(new LruMemoryCache(
+                            Build.VERSION.SDK_INT >= 11 ? safeMemCacheSize / 2 : safeMemCacheSize))
+                    .setBitmapPool(new LruBitmapPool(
+                            Build.VERSION.SDK_INT >= 11 ? Math.round(safeMemCacheSize * 1.5f) : safeMemCacheSize))
+                    .setDiskCache(diskCache));
+        }
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        glide.register(URL.class, new VolleyUrlLoader.Factory(requestQueue));
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/cache/DiskLruCacheWrapper.java;<<<<<<< MINE
+            final DiskLruCache.Snapshot snapshot = diskLruCache.get(safeKey);
+=======
+            final DiskLruCache.Snapshot snapshot = getDiskCache().get(key);
+>>>>>>> YOURS;<<<<<<< MINE
+            final DiskLruCache.Snapshot snapshot = diskLruCache.get(safeKey);
+=======
+            final DiskLruCache.Snapshot snapshot = getDiskCache().get(key);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/cache/DiskLruCacheWrapper.java;<<<<<<< MINE
+            DiskLruCache.Editor editor = diskLruCache.edit(safeKey);
+=======
+            DiskLruCache.Editor editor = getDiskCache().edit(key);
+>>>>>>> YOURS;<<<<<<< MINE
+            DiskLruCache.Editor editor = diskLruCache.edit(safeKey);
+=======
+            DiskLruCache.Editor editor = getDiskCache().edit(key);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/cache/DiskLruCacheWrapper.java;<<<<<<< MINE
+            diskLruCache.remove(safeKey);
+=======
+            getDiskCache().remove(key);
+>>>>>>> YOURS;<<<<<<< MINE
+            diskLruCache.remove(safeKey);
+=======
+            getDiskCache().remove(key);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+            if (isCancelled) {
+                return;
+            }
+=======
+            if (isCancelled) {
+                return;
+            }
+            isCancelled = true;
+>>>>>>> YOURS;<<<<<<< MINE
+            if (isCancelled) {
+                return;
+            }
+=======
+            if (isCancelled) {
+                return;
+            }
+            isCancelled = true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+                    try {
+                        Bitmap result = decodeIfNotFound();
+                        finishResize(result, false);
+                    } catch (Exception e) {
+                        handleException(e);
+                    }
+=======
+
+                    streamLoader.loadStream(new StreamLoader.StreamReadyCallback() {
+                        @Override
+                        public void onStreamReady(final InputStream is) {
+                            if (isCancelled) {
+                                return;
+                            }
+
+                            //this callback might be called on some other thread,
+                            //we want to do resizing on our thread, especially if we're called
+                            //back on the main thread, so we will resubmit
+                            future = executor.submit(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        final Bitmap result = resizeIfNotFound(is, downsampler, transformation);
+                                        finishResize(result, false);
+                                    } catch (Exception e) {
+                                        handleException(e);
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onException(Exception e) {
+                            handleException(e);
+                        }
+                    });
+>>>>>>> YOURS;<<<<<<< MINE
+                    try {
+                        Bitmap result = decodeIfNotFound();
+                        finishResize(result, false);
+                    } catch (Exception e) {
+                        handleException(e);
+                    }
+=======
+
+                    streamLoader.loadStream(new StreamLoader.StreamReadyCallback() {
+                        @Override
+                        public void onStreamReady(final InputStream is) {
+                            if (isCancelled) {
+                                return;
+                            }
+
+                            //this callback might be called on some other thread,
+                            //we want to do resizing on our thread, especially if we're called
+                            //back on the main thread, so we will resubmit
+                            future = executor.submit(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        final Bitmap result = resizeIfNotFound(is, downsampler, transformation);
+                                        finishResize(result, false);
+                                    } catch (Exception e) {
+                                        handleException(e);
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onException(Exception e) {
+                            handleException(e);
+                        }
+                    });
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_42a30b8_b55a454/rev_42a30b8-b55a454/java/src1/com/pubnub/api/SubscribeWorker.java;<<<<<<< MINE
+                        && httpclient.checkResponseSuccess(hresp
+                                                           .getStatusCode())) {
+=======
+                        && HttpUtil.checkResponseSuccess(hresp
+                                .getStatusCode())) {
+>>>>>>> YOURS;<<<<<<< MINE
+                        && httpclient.checkResponseSuccess(hresp
+                                                           .getStatusCode())) {
+=======
+                        && HttpUtil.checkResponseSuccess(hresp
+                                .getStatusCode())) {
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/GlideBuilder.java;<<<<<<< MINE
+        if (diskCacheFactory == null) {
+            diskCacheFactory = new InternalCacheDiskCacheFactory(context);
+        }
+=======
+    if (memoryCache == null) {
+      memoryCache = new LruResourceCache(memorySizeCalculator.getMemoryCacheSize());
+    }
+>>>>>>> YOURS;<<<<<<< MINE
+        if (diskCacheFactory == null) {
+            diskCacheFactory = new InternalCacheDiskCacheFactory(context);
+        }
+=======
+    if (memoryCache == null) {
+      memoryCache = new LruResourceCache(memorySizeCalculator.getMemoryCacheSize());
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_898b867_7d20684/rev_898b867-7d20684/android/examples/PubnubExample/src/com/pubnub/examples/pubnubExample/MainActivity.java;<<<<<<< MINE
+
+        case R.id.option16:
+            setWindowInterval();
+            return true;
+=======
+
+        case R.id.option16:
+            acquirePartialWakeLock();
+            return true;
+
+        case R.id.option17:
+            releasePartialWakeLock();
+            return true;
+
+        case R.id.option18:
+            checkWakeLockStatus();
+            return true;
+>>>>>>> YOURS;<<<<<<< MINE
+
+        case R.id.option16:
+            setWindowInterval();
+            return true;
+=======
+
+        case R.id.option16:
+            acquirePartialWakeLock();
+            return true;
+
+        case R.id.option17:
+            releasePartialWakeLock();
+            return true;
+
+        case R.id.option18:
+            checkWakeLockStatus();
+            return true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53490c3_d5a696c/rev_53490c3-d5a696c/java/src1/com/pubnub/api/HttpClientCore.java;<<<<<<< MINE
+        } catch (SocketTimeoutException ste) {
+        	throw ste;
+        }
+        catch (IOException e) {
+=======
+        }
+        catch (SocketTimeoutException e) {
+            throw e;
+        }
+        catch (IOException e) {
+>>>>>>> YOURS;<<<<<<< MINE
+        } catch (SocketTimeoutException ste) {
+        	throw ste;
+        }
+        catch (IOException e) {
+=======
+        }
+        catch (SocketTimeoutException e) {
+            throw e;
+        }
+        catch (IOException e) {
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_8e4119c_6dbe265/rev_8e4119c-6dbe265/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+        String channelString = subscriptions.getChannelString();
+        String[] channelsArray = subscriptions.getChannelNames();
+        if (channelsArray.length <= 0) {
+            subscribeManager.resetHttpManager();
+            return;
+		}
+=======
+        String channelString = channelSubscriptions.getItemString();
+        String groupString = channelGroupSubscriptions.getItemString();
+        String[] channelsArray = channelSubscriptions.getItemNames();
+        String[] groupsArray = channelGroupSubscriptions.getItemNames();
+>>>>>>> YOURS;<<<<<<< MINE
+        String channelString = subscriptions.getChannelString();
+        String[] channelsArray = subscriptions.getChannelNames();
+        if (channelsArray.length <= 0) {
+            subscribeManager.resetHttpManager();
+            return;
+		}
+=======
+        String channelString = channelSubscriptions.getItemString();
+        String groupString = channelGroupSubscriptions.getItemString();
+        String[] channelsArray = channelSubscriptions.getItemNames();
+        String[] groupsArray = channelGroupSubscriptions.getItemNames();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_c2d55ac_4efc0ab/rev_c2d55ac-4efc0ab/demo/src/main/java/com/google/android/exoplayer/demo/simple/SimplePlayerActivity.java;<<<<<<< MINE
+      case DemoUtil.TYPE_DASH_VOD:
+        return new DashVodRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+      case DemoUtil.TYPE_HLS:
+        return new HlsRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+=======
+      case DemoUtil.TYPE_DASH:
+        return new DashRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+>>>>>>> YOURS;<<<<<<< MINE
+      case DemoUtil.TYPE_DASH_VOD:
+        return new DashVodRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+      case DemoUtil.TYPE_HLS:
+        return new HlsRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+=======
+      case DemoUtil.TYPE_DASH:
+        return new DashRendererBuilder(this, userAgent, contentUri.toString(), contentId);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_5a3340d_1554db1/rev_5a3340d-1554db1/demo/src/main/java/com/google/android/exoplayer/demo/full/FullPlayerActivity.java;<<<<<<< MINE
+            new WidevineTestMediaDrmCallback(contentId), debugTextView, audioCapabilities);
+=======
+            new WidevineTestMediaDrmCallback(contentId), debugTextView);
+      case DemoUtil.TYPE_HLS:
+        return new HlsRendererBuilder(userAgent, contentUri.toString(), contentId);
+>>>>>>> YOURS;<<<<<<< MINE
+            new WidevineTestMediaDrmCallback(contentId), debugTextView, audioCapabilities);
+=======
+            new WidevineTestMediaDrmCallback(contentId), debugTextView);
+      case DemoUtil.TYPE_HLS:
+        return new HlsRendererBuilder(userAgent, contentUri.toString(), contentId);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_99b438e_cc830d6/rev_99b438e-cc830d6/library/src/main/java/com/google/android/exoplayer/audio/AudioTrack.java;<<<<<<< MINE
+=======
+    if (size == 0) {
+      result |= RESULT_BUFFER_CONSUMED;
+      return result;
+    }
+
+>>>>>>> YOURS;<<<<<<< MINE
+=======
+    if (size == 0) {
+      result |= RESULT_BUFFER_CONSUMED;
+      return result;
+    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_d906e40_2128ceb/rev_d906e40-2128ceb/library/src/main/java/com/google/android/exoplayer/audio/AudioTrack.java;<<<<<<< MINE
+        if (bytesWritten >= 0) {
+=======
+        if (bytesWritten > 0) {
+>>>>>>> YOURS;<<<<<<< MINE
+        if (bytesWritten >= 0) {
+=======
+        if (bytesWritten > 0) {
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_d906e40_2128ceb/rev_d906e40-2128ceb/library/src/main/java/com/google/android/exoplayer/audio/AudioTrack.java;<<<<<<< MINE
+    if (bytesWritten < 0) {
+      throw new WriteException(bytesWritten);
+    }
+
+    temporaryBufferSize -= bytesWritten;
+    submittedBytes += bytesWritten;
+    if (temporaryBufferSize == 0) {
+      result |= RESULT_BUFFER_CONSUMED;
+=======
+    if (bytesWritten < 0) {
+        Log.w(TAG, "AudioTrack.write returned error code: " + bytesWritten);
+        result |= RESULT_BUFFER_CONSUMED;
+    } else {
+        temporaryBufferSize -= bytesWritten;
+        submittedBytes += bytesWritten;
+        if (temporaryBufferSize == 0) {
+            result |= RESULT_BUFFER_CONSUMED;
+        }
+>>>>>>> YOURS;<<<<<<< MINE
+    if (bytesWritten < 0) {
+      throw new WriteException(bytesWritten);
+    }
+
+    temporaryBufferSize -= bytesWritten;
+    submittedBytes += bytesWritten;
+    if (temporaryBufferSize == 0) {
+      result |= RESULT_BUFFER_CONSUMED;
+=======
+    if (bytesWritten < 0) {
+        Log.w(TAG, "AudioTrack.write returned error code: " + bytesWritten);
+        result |= RESULT_BUFFER_CONSUMED;
+    } else {
+        temporaryBufferSize -= bytesWritten;
+        submittedBytes += bytesWritten;
+        if (temporaryBufferSize == 0) {
+            result |= RESULT_BUFFER_CONSUMED;
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamGrant(channel, auth_key, read, write, ttl, callback, false);
+=======
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String w = (write) ? "1" : "0";
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n" ;
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel=" + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "r=" + r + "&" + "timestamp=" + timestamp
+                            + ((ttl >= -1)?"&" + "ttl=" + ttl:"")
+                            + "&" + "w=" + w;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+
+        parameters.put("w", w);
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("channel", channel);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 4);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamGrant(channel, auth_key, read, write, ttl, callback, false);
+=======
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String w = (write) ? "1" : "0";
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n" ;
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel=" + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "r=" + r + "&" + "timestamp=" + timestamp
+                            + ((ttl >= -1)?"&" + "ttl=" + ttl:"")
+                            + "&" + "w=" + w;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+
+        parameters.put("w", w);
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("channel", channel);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 4);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamGrantChannelGroup(group, auth_key, read, management, ttl, callback, false);
+=======
+        String signature;
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String m = (management) ? "1" : "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "m=" + m + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "r=" + r + "&"
+                + "timestamp=" + timestamp
+                + ((ttl >= -1)?"&" + "ttl=" + ttl:"");
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("m", m);
+        parameters.put("channel-group", group);
+
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 4);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamGrantChannelGroup(group, auth_key, read, management, ttl, callback, false);
+=======
+        String signature;
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String m = (management) ? "1" : "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "m=" + m + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "r=" + r + "&"
+                + "timestamp=" + timestamp
+                + ((ttl >= -1)?"&" + "ttl=" + ttl:"");
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("m", m);
+        parameters.put("channel-group", group);
+
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 4);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamAudit(null, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback("",
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 2));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                            + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback("",
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback("", response, "payload", cb, 5 );
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback("", error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamAudit(null, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback("",
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 2));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                            + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback("",
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback("", response, "payload", cb, 5 );
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback("", error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamAudit(channel, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING , 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "channel="
+                            + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", channel);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 6);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamAudit(channel, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING , 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "channel="
+                            + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", channel);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 6);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamAudit(channel, auth_key, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 4));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "auth=" + PubnubUtil.pamEncode(auth_key) + "&" + "channel="
+                            + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", channel);
+        parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 2);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamAudit(channel, auth_key, callback, false);
+=======
+
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 4));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n"
+                            + "audit" + "\n" + "auth=" + PubnubUtil.pamEncode(auth_key) + "&" + "channel="
+                            + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "timestamp=" + timestamp;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel", channel);
+        parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 2);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/src1/com/pubnub/api/PubnubCoreShared.java;<<<<<<< MINE
+        _pamAuditChannelGroup(group, auth_key, callback, false);
+=======
+        String signature;
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "audit" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + auth_key + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel-group", group);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = {getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 6);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS;<<<<<<< MINE
+        _pamAuditChannelGroup(group, auth_key, callback, false);
+=======
+        String signature;
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "audit" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + auth_key + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel-group", group);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = {getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 6);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/pubsub/Publish.java;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/pubsub/Publish.java;<<<<<<< MINE
+        if (pubnub.getConfiguration().getPublishKey()==null || pubnub.getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_PUBLISH_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getPublishKey() == null || this.getPubnub().getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_PUBLISH_KEY_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+        if (pubnub.getConfiguration().getPublishKey()==null || pubnub.getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_PUBLISH_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getPublishKey() == null || this.getPubnub().getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_PUBLISH_KEY_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/push/RemoveAllPushChannelsForDevice.java;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/push/ListPushProvisions.java;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroup.java;<<<<<<< MINE
+    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_GROUP_MISSING).build();
+=======
+    protected void validateParams() throws PubNubException {
+        if (channelGroup == null || channelGroup.isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_GROUP_MISSING).build();
+=======
+    protected void validateParams() throws PubNubException {
+        if (channelGroup == null || channelGroup.isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa/src/main/java/com/pubnub/api/endpoints/presence/WhereNow.java;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS;<<<<<<< MINE
+        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+=======
+        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_284b7e7_e6132ed/rev_284b7e7-e6132ed/library/src/androidTest/java/com/google/android/exoplayer/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = WebvttCueParser.parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = WebvttCueParser.parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_284b7e7_e6132ed/rev_284b7e7-e6132ed/library/src/androidTest/java/com/google/android/exoplayer/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_9ab6c96_8e1f14c/rev_9ab6c96-8e1f14c/library/src/androidTest/java/com/google/android/exoplayer/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = WebvttCueParser.parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = WebvttCueParser.parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_9ab6c96_8e1f14c/rev_9ab6c96-8e1f14c/library/src/androidTest/java/com/google/android/exoplayer/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaSource.java;<<<<<<< MINE
+      long periodDurationUs = playlist.hasEndTag ? (playlist.startTimeUs + playlist.durationUs)
+          : C.TIME_UNSET;
+=======
+      // TODO: fix windowPositionInPeriodUs when playlist is empty.
+>>>>>>> YOURS;<<<<<<< MINE
+      long periodDurationUs = playlist.hasEndTag ? (playlist.startTimeUs + playlist.durationUs)
+          : C.TIME_UNSET;
+=======
+      // TODO: fix windowPositionInPeriodUs when playlist is empty.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaSource.java;<<<<<<< MINE
+      if (windowDefaultStartPositionUs == C.TIME_UNSET) {
+        windowDefaultStartPositionUs = segments.isEmpty() ? 0
+            : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      }
+      timeline = new SinglePeriodTimeline(periodDurationUs, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);
+=======
+      long windowDefaultStartPositionUs = segments.isEmpty() ? 0
+          : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      timeline = new SinglePeriodTimeline(C.TIME_UNSET, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);
+>>>>>>> YOURS;<<<<<<< MINE
+      if (windowDefaultStartPositionUs == C.TIME_UNSET) {
+        windowDefaultStartPositionUs = segments.isEmpty() ? 0
+            : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      }
+      timeline = new SinglePeriodTimeline(periodDurationUs, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);
+=======
+      long windowDefaultStartPositionUs = segments.isEmpty() ? 0
+          : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      timeline = new SinglePeriodTimeline(C.TIME_UNSET, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaSource.java;<<<<<<< MINE
+      if (windowDefaultStartPositionUs == C.TIME_UNSET) {
+        windowDefaultStartPositionUs = 0;
+      }
+      timeline = new SinglePeriodTimeline(playlist.startTimeUs + playlist.durationUs,
+          playlist.durationUs, playlist.startTimeUs, windowDefaultStartPositionUs, true, false);
+=======
+      timeline = new SinglePeriodTimeline(playlist.startTimeUs + playlist.durationUs,
+          playlist.durationUs, playlist.startTimeUs, 0, true, false);
+>>>>>>> YOURS;<<<<<<< MINE
+      if (windowDefaultStartPositionUs == C.TIME_UNSET) {
+        windowDefaultStartPositionUs = 0;
+      }
+      timeline = new SinglePeriodTimeline(playlist.startTimeUs + playlist.durationUs,
+          playlist.durationUs, playlist.startTimeUs, windowDefaultStartPositionUs, true, false);
+=======
+      timeline = new SinglePeriodTimeline(playlist.startTimeUs + playlist.durationUs,
+          playlist.durationUs, playlist.startTimeUs, 0, true, false);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_edae29d_0468a80/rev_edae29d-0468a80/library/src/main/java/com/google/android/exoplayer2/ui/SubtitlePainter.java;<<<<<<< MINE
+
+    int windowColor = cue.windowColorSet ? cue.windowColor : style.windowColor;
+
+    if (!applyEmbeddedStyles) {
+=======
+    if (!applyEmbeddedStyles && !textIsEmpty) {
+>>>>>>> YOURS;<<<<<<< MINE
+
+    int windowColor = cue.windowColorSet ? cue.windowColor : style.windowColor;
+
+    if (!applyEmbeddedStyles) {
+=======
+    if (!applyEmbeddedStyles && !textIsEmpty) {
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_edae29d_0468a80/rev_edae29d-0468a80/library/src/main/java/com/google/android/exoplayer2/ui/SubtitlePainter.java;<<<<<<< MINE
+    if (areCharSequencesEqual(this.cueText, cueText)
+        && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+        && this.cueLine == cue.line
+        && this.cueLineType == cue.lineType
+        && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+        && this.cuePosition == cue.position
+        && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+        && this.cueSize == cue.size
+        && this.applyEmbeddedStyles == applyEmbeddedStyles
+        && this.foregroundColor == style.foregroundColor
+        && this.backgroundColor == style.backgroundColor
+        && this.windowColor == windowColor
+        && this.edgeType == style.edgeType
+        && this.edgeColor == style.edgeColor
+        && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+        && this.textSizePx == textSizePx
+        && this.bottomPaddingFraction == bottomPaddingFraction
+        && this.parentLeft == cueBoxLeft
+        && this.parentTop == cueBoxTop
+        && this.parentRight == cueBoxRight
+        && this.parentBottom == cueBoxBottom) {
+=======
+    if (((cue.bitmap != null && cue.bitmap == cueBitmap) ||
+     (!textIsEmpty && areCharSequencesEqual(this.cueText, cueText)))
+     && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+     && this.cueLine == cue.line
+     && this.cueLineType == cue.lineType
+     && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+     && this.cuePosition == cue.position
+     && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+     && this.cueSize == cue.size
+     && this.applyEmbeddedStyles == applyEmbeddedStyles
+     && this.foregroundColor == style.foregroundColor
+     && this.backgroundColor == style.backgroundColor
+     && this.windowColor == style.windowColor
+     && this.edgeType == style.edgeType
+     && this.edgeColor == style.edgeColor
+     && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+     && this.textSizePx == textSizePx
+     && this.bottomPaddingFraction == bottomPaddingFraction
+     && this.parentLeft == cueBoxLeft
+     && this.parentTop == cueBoxTop
+     && this.parentRight == cueBoxRight
+     && this.parentBottom == cueBoxBottom) {
+>>>>>>> YOURS;<<<<<<< MINE
+    if (areCharSequencesEqual(this.cueText, cueText)
+        && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+        && this.cueLine == cue.line
+        && this.cueLineType == cue.lineType
+        && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+        && this.cuePosition == cue.position
+        && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+        && this.cueSize == cue.size
+        && this.applyEmbeddedStyles == applyEmbeddedStyles
+        && this.foregroundColor == style.foregroundColor
+        && this.backgroundColor == style.backgroundColor
+        && this.windowColor == windowColor
+        && this.edgeType == style.edgeType
+        && this.edgeColor == style.edgeColor
+        && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+        && this.textSizePx == textSizePx
+        && this.bottomPaddingFraction == bottomPaddingFraction
+        && this.parentLeft == cueBoxLeft
+        && this.parentTop == cueBoxTop
+        && this.parentRight == cueBoxRight
+        && this.parentBottom == cueBoxBottom) {
+=======
+    if (((cue.bitmap != null && cue.bitmap == cueBitmap) ||
+     (!textIsEmpty && areCharSequencesEqual(this.cueText, cueText)))
+     && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+     && this.cueLine == cue.line
+     && this.cueLineType == cue.lineType
+     && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+     && this.cuePosition == cue.position
+     && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+     && this.cueSize == cue.size
+     && this.applyEmbeddedStyles == applyEmbeddedStyles
+     && this.foregroundColor == style.foregroundColor
+     && this.backgroundColor == style.backgroundColor
+     && this.windowColor == style.windowColor
+     && this.edgeType == style.edgeType
+     && this.edgeColor == style.edgeColor
+     && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+     && this.textSizePx == textSizePx
+     && this.bottomPaddingFraction == bottomPaddingFraction
+     && this.parentLeft == cueBoxLeft
+     && this.parentTop == cueBoxTop
+     && this.parentRight == cueBoxRight
+     && this.parentBottom == cueBoxBottom) {
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_c3fa6d8_2cf8553/rev_c3fa6d8-2cf8553/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_c3fa6d8_2cf8553/rev_c3fa6d8-2cf8553/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_c3fa6d8_2cf8553/rev_c3fa6d8-2cf8553/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_c3fa6d8_2cf8553/rev_c3fa6d8-2cf8553/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_7761cdc_6577013/rev_7761cdc-6577013/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_7761cdc_6577013/rev_7761cdc-6577013/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_7761cdc_6577013/rev_7761cdc-6577013/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_7761cdc_6577013/rev_7761cdc-6577013/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_6577013_b4fb8c3/rev_6577013-b4fb8c3/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_6577013_b4fb8c3/rev_6577013-b4fb8c3/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_6577013_b4fb8c3/rev_6577013-b4fb8c3/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_6577013_b4fb8c3/rev_6577013-b4fb8c3/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_78e0545_402c985/rev_78e0545-402c985/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_78e0545_402c985/rev_78e0545-402c985/library/core/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_78e0545_402c985/rev_78e0545-402c985/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    text = parseCueText(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_78e0545_402c985/rev_78e0545-402c985/library/src/androidTest/java/com/google/android/exoplayer2/text/webvtt/WebvttCueParserTest.java;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS;<<<<<<< MINE
+=======
+    assertEquals(">>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+    return new HlsMasterPlaylist(null, Collections.<String>emptyList(), variant, emptyList,
+        emptyList, null, null);
+=======
+    return new HlsMasterPlaylist(null, variant, emptyList, emptyList, null, null);
+>>>>>>> YOURS;<<<<<<< MINE
+    return new HlsMasterPlaylist(null, Collections.<String>emptyList(), variant, emptyList,
+        emptyList, null, null);
+=======
+    return new HlsMasterPlaylist(null, variant, emptyList, emptyList, null, null);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/mediacodec/MediaCodecInfo.java;<<<<<<< MINE
+    return new MediaCodecInfo(name, null, null, false, false);
+=======
+    return new MediaCodecInfo(name, null, null, false);
+>>>>>>> YOURS;<<<<<<< MINE
+    return new MediaCodecInfo(name, null, null, false, false);
+=======
+    return new MediaCodecInfo(name, null, null, false);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/mediacodec/MediaCodecInfo.java;<<<<<<< MINE
+    return new MediaCodecInfo(name, mimeType, capabilities, false, false);
+=======
+    return new MediaCodecInfo(name, mimeType, capabilities, false);
+>>>>>>> YOURS;<<<<<<< MINE
+    return new MediaCodecInfo(name, mimeType, capabilities, false, false);
+=======
+    return new MediaCodecInfo(name, mimeType, capabilities, false);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+        && getMaxInputSize(newFormat) <= codecMaxValues.inputSize;
+=======
+        && newFormat.maxInputSize <= codecMaxValues.inputSize;
+>>>>>>> YOURS;<<<<<<< MINE
+        && getMaxInputSize(newFormat) <= codecMaxValues.inputSize;
+=======
+        && newFormat.maxInputSize <= codecMaxValues.inputSize;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+    int returnValue = 0;
+    bitOffset += numBits;
+    while (bitOffset > 8) {
+      bitOffset -= 8;
+      returnValue |= (data[byteOffset++] & 0xFF) << bitOffset;
+    }
+    returnValue |= (data[byteOffset] & 0xFF) >> 8 - bitOffset;
+    returnValue &= 0xFFFFFFFF >>> (32 - numBits);
+    if (bitOffset == 8) {
+      bitOffset = 0;
+=======
+    returnValue |= (data[byteOffset] & 0xFF) >> 8 - bitOffset;
+    returnValue &= 0xFFFFFFFF >>> (32 - numBits);
+    if (bitOffset == 8) {
+      bitOffset = 0;
+>>>>>>> YOURS;<<<<<<< MINE
+    int returnValue = 0;
+    bitOffset += numBits;
+    while (bitOffset > 8) {
+      bitOffset -= 8;
+      returnValue |= (data[byteOffset++] & 0xFF) << bitOffset;
+    }
+    returnValue |= (data[byteOffset] & 0xFF) >> 8 - bitOffset;
+    returnValue &= 0xFFFFFFFF >>> (32 - numBits);
+    if (bitOffset == 8) {
+      bitOffset = 0;
+=======
+    returnValue |= (data[byteOffset] & 0xFF) >> 8 - bitOffset;
+    returnValue &= 0xFFFFFFFF >>> (32 - numBits);
+    if (bitOffset == 8) {
+      bitOffset = 0;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    playedPaint = new Paint();
+=======
+    playedPaint = new Paint();
+    scrubberPaint = new Paint();
+>>>>>>> YOURS;<<<<<<< MINE
+    playedPaint = new Paint();
+=======
+    playedPaint = new Paint();
+    scrubberPaint = new Paint();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();
+    playedAdMarkerPaint = new Paint();
+    scrubberPaint = new Paint();
+    scrubberPaint.setAntiAlias(true);
+=======
+    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();
+>>>>>>> YOURS;<<<<<<< MINE
+    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();
+    playedAdMarkerPaint = new Paint();
+    scrubberPaint = new Paint();
+    scrubberPaint.setAntiAlias(true);
+=======
+    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+        int playedAdMarkerColor = a.getInt(R.styleable.DefaultTimeBar_played_ad_marker_color,
+            getDefaultPlayedAdMarkerColor(adMarkerColor));
+        playedPaint.setColor(playedColor);
+        scrubberPaint.setColor(scrubberColor);
+=======
+        playedPaint.setColor(playedColor);
+        scrubberPaint.setColor(scrubberColor);
+>>>>>>> YOURS;<<<<<<< MINE
+        int playedAdMarkerColor = a.getInt(R.styleable.DefaultTimeBar_played_ad_marker_color,
+            getDefaultPlayedAdMarkerColor(adMarkerColor));
+        playedPaint.setColor(playedColor);
+        scrubberPaint.setColor(scrubberColor);
+=======
+        playedPaint.setColor(playedColor);
+        scrubberPaint.setColor(scrubberColor);
+>>>>>>> YOURS

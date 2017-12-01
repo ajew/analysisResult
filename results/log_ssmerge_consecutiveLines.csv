@@ -1,0 +1,1403 @@
+revision;file;methodsignature;leftbody;basebody;rightbody
+/home/arthur/analysis/projects/java/revisions/rev_42a30b8_b55a454/rev_42a30b8-b55a454;/java/src1/com/pubnub/api/SubscribeWorker;process(HttpRequest);                        && httpclient.checkResponseSuccess(hresp
+                                                           .getStatusCode())) {;                        && httpclient.checkResponseSuccess(hresp
+                                .getStatusCode())) {;                        && HttpUtil.checkResponseSuccess(hresp
+                                .getStatusCode())) {
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/flickr/src/main/java/com/bumptech/glide/samples/flickr/FlickrPhotoGrid;onCreateView(LayoutInflater,ViewGroup,Bundle);    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        photoSize = args.getInt(IMAGE_SIZE_KEY);
+        thumbnail = args.getBoolean(THUMBNAIL_KEY);
+
+        fullRequest = Glide.with(this)
+                .from(Photo.class)
+                .centerCrop()
+                .crossFade(R.anim.fade_in, 150);
+
+        thumbnailRequest = Glide.with(this)
+                .from(Photo.class)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .crossFade(R.anim.fade_in, 150)
+                .override(Api.SQUARE_THUMB_SIZE, Api.SQUARE_THUMB_SIZE);
+
+        preloadRequest = thumbnail ? thumbnailRequest.clone().priority(Priority.HIGH) : fullRequest;
+
+        final View result = inflater.inflate(R.layout.flickr_photo_grid, container, false);
+
+        grid = (GridView) result.findViewById(R.id.images);
+        grid.setColumnWidth(photoSize);
+        adapter = new PhotoAdapter();
+        grid.setAdapter(adapter);
+
+        final FixedPreloadSizeProvider<Photo> preloadSizeProvider =
+                new FixedPreloadSizeProvider<Photo>(photoSize, photoSize);
+        final ListPreloader<Photo> preloader =
+                new ListPreloader<Photo>(adapter, preloadSizeProvider, args.getInt(PRELOAD_KEY));
+        grid.setOnScrollListener(preloader);
+
+        if (currentPhotos != null) {
+            adapter.setPhotos(currentPhotos);
+        }
+
+        if (savedInstanceState != null) {
+            int index = savedInstanceState.getInt(STATE_POSITION_INDEX);
+            grid.setSelection(index);
+        };    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        photoSize = args.getInt(IMAGE_SIZE_KEY);
+        thumbnail = args.getBoolean(THUMBNAIL_KEY);
+
+        fullRequest = Glide.with(this)
+                .from(Photo.class)
+                .centerCrop()
+                .crossFade(R.anim.fade_in, 150);
+
+        thumbnailRequest = Glide.with(this)
+                .from(Photo.class)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .override(Api.SQUARE_THUMB_SIZE, Api.SQUARE_THUMB_SIZE);
+
+        preloadRequest = thumbnail ? thumbnailRequest.clone().priority(Priority.HIGH) : fullRequest;
+
+        final View result = inflater.inflate(R.layout.flickr_photo_grid, container, false);
+
+        grid = (GridView) result.findViewById(R.id.images);
+        grid.setColumnWidth(photoSize);
+        adapter = new PhotoAdapter();
+        grid.setAdapter(adapter);
+
+        final FixedPreloadSizeProvider<Photo> preloadSizeProvider =
+                new FixedPreloadSizeProvider<Photo>(photoSize, photoSize);
+        final ListPreloader<Photo> preloader =
+                new ListPreloader<Photo>(adapter, preloadSizeProvider, args.getInt(PRELOAD_KEY));
+        grid.setOnScrollListener(preloader);
+
+        if (currentPhotos != null) {
+            adapter.setPhotos(currentPhotos);
+        }
+
+        if (savedInstanceState != null) {
+            int index = savedInstanceState.getInt(STATE_POSITION_INDEX);
+            grid.setSelection(index);
+        };  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    Bundle args = getArguments();
+    photoSize = args.getInt(IMAGE_SIZE_KEY);
+    thumbnail = args.getBoolean(THUMBNAIL_KEY);
+
+    fullRequest = Glide.with(this)
+        .asDrawable()
+        .transition(withCrossFade(R.anim.fade_in, 150))
+        .apply(centerCropTransform(getActivity()));
+
+    thumbnailRequest = Glide.with(this)
+        .asDrawable()
+        .transition(withCrossFade(R.anim.fade_in, 150))
+        .apply(diskCacheStrategyOf(DiskCacheStrategy.DATA)
+            .centerCrop(getActivity())
+            .override(Api.SQUARE_THUMB_SIZE, Api.SQUARE_THUMB_SIZE));
+
+    preloadRequest =
+        thumbnail ? thumbnailRequest.clone().apply(priorityOf(Priority.HIGH)) : fullRequest;
+
+    final View result = inflater.inflate(R.layout.flickr_photo_grid, container, false);
+
+    grid = (GridView) result.findViewById(R.id.images);
+    grid.setColumnWidth(photoSize);
+    adapter = new PhotoAdapter();
+    grid.setAdapter(adapter);
+
+    final FixedPreloadSizeProvider<Photo> preloadSizeProvider =
+        new FixedPreloadSizeProvider<Photo>(photoSize, photoSize);
+    final ListPreloader<Photo> preloader = new ListPreloader<Photo>(Glide.with(this), adapter,
+        preloadSizeProvider, args.getInt(PRELOAD_KEY));
+    grid.setOnScrollListener(preloader);
+/home/arthur/analysis/projects/java/revisions/rev_5580ad1_497fd11/rev_5580ad1-497fd11;/java/examples/src/com/pubnub/examples/PubnubPushSampleCode;main(String[]);        Options options = new Options();
+        String publish_key = "demo-36";
+        String subscribe_key = "demo-36";
+        boolean nativ = false;
+        boolean gcm = false;
+        boolean apns = false;
+
+        String channel = "demo";
+
+        String origin = "gcm-beta";
+
+        String auth_key = "";
+
+        CommandLine cmd = null;
+
+        options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("publish_key").
+                withType(String.class).withDescription("Publish Key ( default: 'demo-36' )").create());
+
+        options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("subscribe_key").
+                withType(String.class).withDescription("Subscribe Key ( default: 'demo-36' )").create());
+
+        options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("origin").
+                withType(String.class).withDescription("Origin ( Ex. pubsub )").create());
+
+        options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("auth_key").
+                withType(String.class).withDescription("Auth Key").create());
+
+        options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("channel").
+                withType(String.class).withDescription("Secret Key ( default: 'my_channel' )").create());
+
+        options.addOption(OptionBuilder.withLongOpt("apns").withDescription("APNS message").create());
+
+        options.addOption(OptionBuilder.withLongOpt("gcm").withDescription("GCM message").create());
+
+        options.addOption(OptionBuilder.withLongOpt("native").withDescription("Native message").create());
+
+        CommandLineParser parser = new BasicParser();
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException e1) {
+            usage(options);
+            return;
+        }
+
+        if (cmd.hasOption("publish_key")) {
+            try {
+                publish_key = cmd.getOptionValue("publish_key");
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("subscribe_key")) {
+            try {
+                subscribe_key = cmd.getOptionValue("subscribe_key");
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("origin")) {
+            try {
+                origin = cmd.getOptionValue("origin");
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("channel")) {
+            try {
+                channel = cmd.getOptionValue("channel");
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("auth_key")) {
+            try {
+                auth_key = cmd.getOptionValue("auth_key");
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("apns")) {
+            try {
+                apns = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+        if (cmd.hasOption("gcm")) {
+            try {
+                gcm = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+
+        if (cmd.hasOption("native")) {
+            try {
+                nativ = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                usage(options);
+                return;
+            }
+        }
+
+
+        final Pubnub pubnub = new Pubnub(publish_key, subscribe_key);
+        pubnub.setAuthKey(auth_key);
+        pubnub.setCacheBusting(false);
+        pubnub.setOrigin(origin);
+
+        // Create APNS message
+
+        PnApnsMessage apnsMessage = new PnApnsMessage();
+        apnsMessage.setApsAlert("Game update 49ers touchdown");
+        apnsMessage.setApsBadge(2);
+
+        try {
+            apnsMessage.put("teams", new JSONArray().put("49ers").put("raiders"));
+            apnsMessage.put("score", new JSONArray().put(7).put(0));
+        } catch (JSONException e1) {
+
+        }
+
+        // Create GCM Message
+
+        PnGcmMessage gcmMessage = new PnGcmMessage();
+
+        JSONObject jso = new JSONObject();
+        try {
+            jso.put("summary", "Game update 49ers touchdown");
+            jso.put("lastplay", "5yd run up the middle");
+        } catch (JSONException e) {
+
+        }
+
+        gcmMessage.setData(jso);
+
+
+        Callback callback = new Callback() {
+            @Override
+            public void successCallback(String channel, Object response) {
+                System.out.println(response);
+                pubnub.shutdown();
+            }
+
+            @Override
+            public void errorCallback(String channel, PubnubError error) {
+                System.out.println(error);
+                pubnub.shutdown();
+            }
+        };
+
+        PubnubSender sender = new PubnubSender(channel, pubnub, callback);
+
+        PnMessage message = null;
+
+        if (apns && gcm) {
+            message = new PnMessage(sender, apnsMessage, gcmMessage);
+        } else if (apns) {
+            message = new PnMessage(sender, apnsMessage);
+        } else if (gcm) {
+            message = new PnMessage(sender, gcmMessage);
+        }
+        if (message == null) message = new PnMessage(sender);
+        if (nativ) {
+            try {
+                message.put("test", "hi");
+            } catch (JSONException e1) {
+
+            }
+        }
+
+        try {
+            message.publish();
+        } catch (PubnubSenderMissingException e) {
+            System.out.println("Set Sender");
+        };		Options options = new Options();
+		String publish_key = "demo-36";
+		String subscribe_key = "demo-36";
+		boolean nativ = false;
+		boolean gcm = false;
+		boolean apns = false;
+		
+		String channel = "my_channel";
+		
+		String origin = "pubsub";
+		
+		String auth_key = "";
+		
+		CommandLine cmd = null;
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("publish_key").
+				withType(String.class).withDescription("Publish Key ( default: 'demo-36' )").create());
+
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("subscribe_key").
+				withType(String.class).withDescription("Subscribe Key ( default: 'demo-36' )").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("origin").
+				withType(String.class).withDescription("Origin ( Ex. pubsub )").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("auth_key").
+				withType(String.class).withDescription("Auth Key").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("channel").
+				withType(String.class).withDescription("Secret Key ( default: 'my_channel' )").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("apns").withDescription("APNS message").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("gcm").withDescription("GCM message").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("native").withDescription("Native message").create());
+		
+		CommandLineParser parser = new BasicParser();
+		try {
+			cmd = parser.parse( options, args);
+		} catch (ParseException e1) {
+			usage(options);return;
+		}
+		
+		if (cmd.hasOption("publish_key")) {
+			try {
+				publish_key = cmd.getOptionValue("publish_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("subscribe_key")) {
+			try {
+				subscribe_key = cmd.getOptionValue("subscribe_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("origin")) {
+			try {
+				origin = cmd.getOptionValue("origin");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("channel")) {
+			try {
+				channel = cmd.getOptionValue("channel");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("auth_key")) {
+			try {
+				auth_key = cmd.getOptionValue("auth_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("apns")) {
+			try {
+				apns = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+
+		if (cmd.hasOption("gcm")) {
+			try {
+				gcm = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+
+		
+		if (cmd.hasOption("native")) {
+			try {
+				nativ = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		
+		final Pubnub pubnub = new Pubnub(publish_key, subscribe_key);
+		pubnub.setAuthKey(auth_key);
+		pubnub.setCacheBusting(false);
+		pubnub.setOrigin(origin);
+		
+		// Create APNS message
+		
+		PnApnsMessage apnsMessage = new PnApnsMessage();
+		apnsMessage.setApsAlert("Game update 49ers touchdown");
+		apnsMessage.setApsBadge(2);
+		
+		try {
+			apnsMessage.put("teams", new JSONArray().put("49ers").put("raiders"));
+			apnsMessage.put("score", new JSONArray().put(7).put(0));
+		} catch (JSONException e1) {
+
+		}
+		
+		// Create GCM Message	
+		
+		PnGcmMessage gcmMessage = new PnGcmMessage();
+		
+		JSONObject jso = new JSONObject();
+		try {
+			jso.put("summary", "Game update 49ers touchdown");
+			jso.put("lastplay", "5yd run up the middle");
+		} catch (JSONException e) {
+
+		}
+
+		gcmMessage.setData(jso);
+		
+		
+		Callback callback = new Callback() {
+			@Override
+			public void successCallback(String channel, Object response) {
+				System.out.println(response);
+				pubnub.shutdown();
+			}
+			@Override
+			public void errorCallback(String channel, PubnubError error) {
+				System.out.println(error);
+				pubnub.shutdown();
+			}			
+		};
+		
+		PubnubSender sender = new PubnubSender(channel, pubnub, callback);
+		
+		PnMessage message = null;
+		
+		if (apns && gcm) {
+			message = new PnMessage(sender, apnsMessage, gcmMessage);
+		} else if (apns) {
+			message = new PnMessage(sender, apnsMessage);
+		} else if (gcm) {
+			message = new PnMessage(sender, gcmMessage);
+		}
+		if (message == null) message = new PnMessage(sender);
+		if (nativ) {
+			try {
+				message.put("test","hi");
+			} catch (JSONException e1) {
+
+			}
+		}
+		
+		try {
+			message.publish();
+		} catch (PubnubSenderMissingException e) {
+			System.out.println("Set Sender");
+		}
+		;		Options options = new Options();
+		String publish_key = "demo-36";
+		String subscribe_key = "demo-36";
+		boolean nativ = false;
+		boolean gcm = false;
+		boolean apns = false;
+		
+		String channel = "my_channel";
+		
+		String origin = "pubsub";
+		
+		String auth_key = "";
+		
+		CommandLine cmd = null;
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("publish_key").
+				withType(String.class).withDescription("Publish Key ( default: 'demo-36' )").create());
+
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("subscribe_key").
+				withType(String.class).withDescription("Subscribe Key ( default: 'demo-36' )").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("origin").
+				withType(String.class).withDescription("Origin ( Ex. pubsub )").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("auth_key").
+				withType(String.class).withDescription("Auth Key").create());
+		
+		options.addOption(OptionBuilder.hasArg().withArgName("String").withLongOpt("channel").
+				withType(String.class).withDescription("Channel ( default: 'my_channel' )").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("apns").withDescription("APNS message").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("gcm").withDescription("GCM message").create());
+		
+		options.addOption(OptionBuilder.withLongOpt("native").withDescription("Native message").create());
+		
+		CommandLineParser parser = new BasicParser();
+		try {
+			cmd = parser.parse( options, args);
+		} catch (ParseException e1) {
+			usage(options);return;
+		}
+		
+		if (cmd.hasOption("publish_key")) {
+			try {
+				publish_key = cmd.getOptionValue("publish_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("subscribe_key")) {
+			try {
+				subscribe_key = cmd.getOptionValue("subscribe_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("origin")) {
+			try {
+				origin = cmd.getOptionValue("origin");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("channel")) {
+			try {
+				channel = cmd.getOptionValue("channel");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("auth_key")) {
+			try {
+				auth_key = cmd.getOptionValue("auth_key");
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		if (cmd.hasOption("apns")) {
+			try {
+				apns = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+
+		if (cmd.hasOption("gcm")) {
+			try {
+				gcm = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+
+		
+		if (cmd.hasOption("native")) {
+			try {
+				nativ = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				usage(options);return;
+			}
+		}
+		
+		
+		final Pubnub pubnub = new Pubnub(publish_key, subscribe_key);
+		pubnub.setAuthKey(auth_key);
+		pubnub.setCacheBusting(false);
+		pubnub.setOrigin(origin);
+		
+		// Create APNS message
+		
+		PnApnsMessage apnsMessage = new PnApnsMessage();
+		apnsMessage.setApsAlert("Game update 49ers touchdown");
+		apnsMessage.setApsBadge(2);
+		
+		try {
+			apnsMessage.put("teams", new JSONArray().put("49ers").put("raiders"));
+			apnsMessage.put("score", new JSONArray().put(7).put(0));
+		} catch (JSONException e1) {
+
+		}
+		
+		// Create GCM Message	
+		
+		PnGcmMessage gcmMessage = new PnGcmMessage();
+		
+		JSONObject jso = new JSONObject();
+		try {
+			jso.put("summary", "Game update 49ers touchdown");
+			jso.put("lastplay", "5yd run up the middle");
+		} catch (JSONException e) {
+
+		}
+
+		gcmMessage.setData(jso);
+		
+		
+		Callback callback = new Callback() {
+			@Override
+			public void successCallback(String channel, Object response) {
+				System.out.println(response);
+				pubnub.shutdown();
+			}
+			@Override
+			public void errorCallback(String channel, PubnubError error) {
+				System.out.println(error);
+				pubnub.shutdown();
+			}			
+		};
+		
+		PubnubSender sender = new PubnubSender(channel, pubnub, callback);
+		
+		PnMessage message = null;
+		
+		if (apns && gcm) {
+			message = new PnMessage(sender, apnsMessage, gcmMessage);
+		} else if (apns) {
+			message = new PnMessage(sender, apnsMessage);
+		} else if (gcm) {
+			message = new PnMessage(sender, gcmMessage);
+		}
+		if (message == null) message = new PnMessage(sender);
+		if (nativ) {
+			try {
+				message.put("test","hi");
+			} catch (JSONException e1) {
+
+			}
+		}
+		
+		try {
+			message.publish();
+		} catch (PubnubSenderMissingException e) {
+			System.out.println("Set Sender");
+		}
+		
+/home/arthur/analysis/projects/java/revisions/rev_5580ad1_497fd11/rev_5580ad1-497fd11;/android/examples/PubnubExample/src/com/pubnub/examples/pubnubExample10/MainActivity;gcmAddChannel();                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (TextUtils.isEmpty(REG_ID)) {
+                            Toast.makeText(getApplicationContext(),
+                                    "GCM Registration id not set. Register to GCM and try again.",
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        String channel = edChannelName.getText().toString();
+                        pubnub.enablePushNotificationsOnChannel(channel, REG_ID, new Callback() {
+                            @Override
+                            public void successCallback(String channel,
+                                                        Object message) {
+                                notifyUser("GCM ADD : " + message);
+                            }
+
+                            @Override
+                            public void errorCallback(String channel,
+                                                      PubnubError error) {
+                                notifyUser("GCM ADD : " + error);
+                            }
+                        });
+                    }
+                });;            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            	   		
+        		if (TextUtils.isEmpty(REG_ID)) {
+        		      Toast.makeText(getApplicationContext(),
+        			          "GCM Registration id not set. Register to GCM and try again.",
+        			          Toast.LENGTH_LONG).show();
+        		      return ;
+        		}
+                String channel = edChannelName.getText().toString();
+				pubnub.disablePushNotificationsOnChannel(channel, REG_ID, new Callback() {
+				    @Override
+				    public void successCallback(String channel,
+				    Object message) {
+				        notifyUser("GCM ADD : " + message);
+				    }
+				    @Override
+				    public void errorCallback(String channel,
+				    PubnubError error) {
+				        notifyUser("GCM ADD : " + error);
+				    }
+				});
+            }
+        });;            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            	   		
+        		if (TextUtils.isEmpty(REG_ID)) {
+        		      Toast.makeText(getApplicationContext(),
+        			          "GCM Registration id not set. Register to GCM and try again.",
+        			          Toast.LENGTH_LONG).show();
+        		      return ;
+        		}
+                String channel = edChannelName.getText().toString();
+				pubnub.enablePushNotificationsOnChannel(channel, REG_ID, new Callback() {
+				    @Override
+				    public void successCallback(String channel,
+				    Object message) {
+				        notifyUser("GCM ADD : " + message);
+				    }
+				    @Override
+				    public void errorCallback(String channel,
+				    PubnubError error) {
+				        notifyUser("GCM ADD : " + error);
+				    }
+				});
+            }
+        });
+/home/arthur/analysis/projects/java/revisions/rev_8e4119c_6dbe265/rev_8e4119c-6dbe265;/java/srcPubnubApi/com/pubnub/api/PubnubCore;_subscribe_base(boolean,boolean,Worker);        String channelString = subscriptions.getChannelString();
+        String[] channelsArray = subscriptions.getChannelNames();
+        if (channelsArray.length <= 0) {
+            subscribeManager.resetHttpManager();
+            return;
+		};        String channelString = subscriptions.getChannelString();
+        String[] channelsArray = subscriptions.getChannelNames();
+        if (channelsArray.length <= 0)
+            return;;        String channelString = channelSubscriptions.getItemString();
+        String groupString = channelGroupSubscriptions.getItemString();
+        String[] channelsArray = channelSubscriptions.getItemNames();
+        String[] groupsArray = channelGroupSubscriptions.getItemNames();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_5a3340d_1554db1/rev_5a3340d-1554db1;/demo/src/main/java/com/google/android/exoplayer/demo/full/FullPlayerActivity;getRendererBuilder();            new WidevineTestMediaDrmCallback(contentId), debugTextView, audioCapabilities);;            new WidevineTestMediaDrmCallback(contentId), debugTextView);;            new WidevineTestMediaDrmCallback(contentId), debugTextView);
+      case DemoUtil.TYPE_HLS:
+        return new HlsRendererBuilder(userAgent, contentUri.toString(), contentId);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_d906e40_2128ceb/rev_d906e40-2128ceb;/library/src/main/java/com/google/android/exoplayer/audio/AudioTrack;handleBuffer(ByteBuffer,int,int,long);    if (bytesWritten < 0) {
+      throw new WriteException(bytesWritten);
+    }
+
+    temporaryBufferSize -= bytesWritten;
+    submittedBytes += bytesWritten;
+    if (temporaryBufferSize == 0) {
+      result |= RESULT_BUFFER_CONSUMED;;    temporaryBufferSize -= bytesWritten;
+    submittedBytes += bytesWritten;
+    if (temporaryBufferSize == 0) {
+      result |= RESULT_BUFFER_CONSUMED;;    if (bytesWritten < 0) {
+        Log.w(TAG, "AudioTrack.write returned error code: " + bytesWritten);
+        result |= RESULT_BUFFER_CONSUMED;
+    } else {
+        temporaryBufferSize -= bytesWritten;
+        submittedBytes += bytesWritten;
+        if (temporaryBufferSize == 0) {
+            result |= RESULT_BUFFER_CONSUMED;
+        }
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9;/java/src1/com/pubnub/api/PubnubCoreShared;pamGrant(String,String,boolean,boolean,int,Callback);        _pamGrant(channel, auth_key, read, write, ttl, callback, false);;        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String w = (write) ? "1" : "0";
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n" ;
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.urlEncode(auth_key) + "&"  ;
+
+        sign_input += "channel=" + PubnubUtil.urlEncode(channel) + "&" + "pnsdk=" + PubnubUtil.urlEncode(getUserAgent()) + "&" + "r=" + r + "&" + "timestamp=" + timestamp
+                            + ((ttl >= -1)?"&" + "ttl=" + ttl:"")
+                            + "&" + "w=" + w;
+
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+
+        parameters.put("w", w);
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("channel", channel);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 4);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);;        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String w = (write) ? "1" : "0";
+
+        String signature = "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(channel,
+                                   getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n" ;
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel=" + PubnubUtil.pamEncode(channel) + "&" + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&" + "r=" + r + "&" + "timestamp=" + timestamp
+                            + ((ttl >= -1)?"&" + "ttl=" + ttl:"")
+                            + "&" + "w=" + w;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(channel,
+                                   e1.getPubnubError());
+            return;
+        }
+
+
+        parameters.put("w", w);
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("channel", channel);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                                   this.SUBSCRIBE_KEY
+                                 };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+        new ResponseHandler() {
+            public void handleResponse(HttpRequest hreq, String response) {
+                invokeCallback(channel, response, "payload", cb, 4);
+            }
+
+            public void handleError(HttpRequest hreq, PubnubError error) {
+                cb.errorCallback(channel, error);
+                return;
+            }
+        });
+
+        _request(hreq, nonSubscribeManager);
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9;/java/src1/com/pubnub/api/PubnubCoreShared;pamGrantChannelGroup(String,String,boolean,boolean,int,Callback);        _pamGrantChannelGroup(group, auth_key, read, management, ttl, callback, false);;        String signature;
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String m = (management) ? "1" : "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.urlEncode(auth_key) + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.urlEncode(group) + "&"
+                + "m=" + m + "&"
+                + "pnsdk=" + PubnubUtil.urlEncode(getUserAgent()) + "&"
+                + "r=" + r + "&"
+                + "timestamp=" + timestamp
+                + ((ttl >= -1)?"&" + "ttl=" + ttl:"");
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("m", m);
+        parameters.put("channel-group", group);
+
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 4);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);;        String signature;
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+
+        String r = (read) ? "1" : "0";
+        String m = (management) ? "1" : "0";
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 1));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "grant" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + PubnubUtil.pamEncode(auth_key) + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "m=" + m + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "r=" + r + "&"
+                + "timestamp=" + timestamp
+                + ((ttl >= -1)?"&" + "ttl=" + ttl:"");
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("r", r);
+        parameters.put("m", m);
+        parameters.put("channel-group", group);
+
+        if (ttl >= -1) parameters.put("ttl", String.valueOf(ttl));
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = { getPubnubUrl(), "v1", "auth", "grant", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 4);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9;/java/src1/com/pubnub/api/PubnubCoreShared;pamAuditChannelGroup(String,String,Callback);        _pamAuditChannelGroup(group, auth_key, callback, false);;        String signature;
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "audit" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + auth_key + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.urlEncode(group) + "&"
+                + "pnsdk=" + PubnubUtil.urlEncode(getUserAgent()) + "&"
+                + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel-group", group);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = {getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 6);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);;        String signature;
+        final Callback cb = getWrappedCallback(callback);
+
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+        parameters.remove("auth");
+
+        int timestamp = (int) ((new Date().getTime()) / 1000);
+
+        if (this.SECRET_KEY.length() == 0) {
+            callback.errorCallback(group, getErrorObject(PNERROBJ_SECRET_KEY_MISSING, 3));
+            return;
+        }
+
+        String sign_input = this.SUBSCRIBE_KEY + "\n" + this.PUBLISH_KEY + "\n" + "audit" + "\n";
+
+        if (auth_key != null && auth_key.length() > 0)
+            sign_input += "auth=" + auth_key + "&"  ;
+
+        sign_input += "channel-group=" + PubnubUtil.pamEncode(group) + "&"
+                + "pnsdk=" + PubnubUtil.pamEncode(getUserAgent()) + "&"
+                + "timestamp=" + timestamp;
+
+        try {
+            signature = pamSign(this.SECRET_KEY, sign_input);
+        } catch (PubnubException e1) {
+            callback.errorCallback(group, e1.getPubnubError());
+            return;
+        }
+
+        parameters.put("timestamp", String.valueOf(timestamp));
+        parameters.put("signature", signature);
+        parameters.put("channel-group", group);
+
+        if (auth_key != null && auth_key.length() > 0 ) parameters.put("auth", auth_key);
+
+        String[] urlComponents = {getPubnubUrl(), "v1", "auth", "audit", "sub-key",
+                this.SUBSCRIBE_KEY
+        };
+
+        HttpRequest hreq = new HttpRequest(urlComponents, parameters,
+                new ResponseHandler() {
+                    public void handleResponse(HttpRequest hreq, String response) {
+                        invokeCallback(group, response, "payload", cb, 6);
+                    }
+
+                    public void handleError(HttpRequest hreq, PubnubError error) {
+                        cb.errorCallback(group, error);
+                    }
+                });
+
+        _request(hreq, nonSubscribeManager);
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/pubsub/Publish;validateParams();        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/pubsub/Publish;validateParams();        if (pubnub.getConfiguration().getPublishKey()==null || pubnub.getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_PUBLISH_KEY_MISSING).build();;        if (pubnub.getConfiguration().getPublishKey()==null || pubnub.getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_PUBLISH_KEY_MISSING).build();;        if (this.getPubnub().getConfiguration().getPublishKey() == null || this.getPubnub().getConfiguration().getPublishKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_PUBLISH_KEY_MISSING).build();
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/push/RemoveAllPushChannelsForDevice;validateParams();        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/push/ListPushProvisions;validateParams();        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroup;validateParams();    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_GROUP_MISSING).build();;    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();;    protected void validateParams() throws PubNubException {
+        if (channelGroup == null || channelGroup.isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/presence/WhereNow;validateParams();        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (pubnub.getConfiguration().getSubscribeKey()==null || pubnub.getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();;        if (this.getPubnub().getConfiguration().getSubscribeKey() == null || this.getPubnub().getConfiguration().getSubscribeKey().isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_SUBSCRIBE_KEY_MISSING).build();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38;/library/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaSource;onPrimaryPlaylistRefreshed(HlsMediaPlaylist);      long periodDurationUs = playlist.hasEndTag ? (playlist.startTimeUs + playlist.durationUs)
+          : C.TIME_UNSET;;      // TODO: fix windowPositionInPeriodUs when playlist is empty.
+      long windowPositionInPeriodUs = playlist.startTimeUs;;      // TODO: fix windowPositionInPeriodUs when playlist is empty.
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38;/library/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaSource;onPrimaryPlaylistRefreshed(HlsMediaPlaylist);      if (windowDefaultStartPositionUs == C.TIME_UNSET) {
+        windowDefaultStartPositionUs = segments.isEmpty() ? 0
+            : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      }
+      timeline = new SinglePeriodTimeline(periodDurationUs, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);;      long windowDefaultStartPositionUs = segments.isEmpty() ? 0
+          : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      timeline = new SinglePeriodTimeline(C.TIME_UNSET, playlist.durationUs,
+          windowPositionInPeriodUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);;      long windowDefaultStartPositionUs = segments.isEmpty() ? 0
+          : segments.get(Math.max(0, segments.size() - 3)).relativeStartTimeUs;
+      timeline = new SinglePeriodTimeline(C.TIME_UNSET, playlist.durationUs,
+          playlist.startTimeUs, windowDefaultStartPositionUs, true, !playlist.hasEndTag);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_edae29d_0468a80/rev_edae29d-0468a80;/library/src/main/java/com/google/android/exoplayer2/ui/SubtitlePainter;draw(Cue,boolean,CaptionStyleCompat,float,float,Canvas,int,int,int,int);
+    int windowColor = cue.windowColorSet ? cue.windowColor : style.windowColor;
+
+    if (!applyEmbeddedStyles) {;    if (!applyEmbeddedStyles) {;    if (!applyEmbeddedStyles && !textIsEmpty) {
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_edae29d_0468a80/rev_edae29d-0468a80;/library/src/main/java/com/google/android/exoplayer2/ui/SubtitlePainter;draw(Cue,boolean,CaptionStyleCompat,float,float,Canvas,int,int,int,int);    if (areCharSequencesEqual(this.cueText, cueText)
+        && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+        && this.cueLine == cue.line
+        && this.cueLineType == cue.lineType
+        && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+        && this.cuePosition == cue.position
+        && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+        && this.cueSize == cue.size
+        && this.applyEmbeddedStyles == applyEmbeddedStyles
+        && this.foregroundColor == style.foregroundColor
+        && this.backgroundColor == style.backgroundColor
+        && this.windowColor == windowColor
+        && this.edgeType == style.edgeType
+        && this.edgeColor == style.edgeColor
+        && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+        && this.textSizePx == textSizePx
+        && this.bottomPaddingFraction == bottomPaddingFraction
+        && this.parentLeft == cueBoxLeft
+        && this.parentTop == cueBoxTop
+        && this.parentRight == cueBoxRight
+        && this.parentBottom == cueBoxBottom) {;    if (areCharSequencesEqual(this.cueText, cueText)
+        && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+        && this.cueLine == cue.line
+        && this.cueLineType == cue.lineType
+        && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+        && this.cuePosition == cue.position
+        && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+        && this.cueSize == cue.size
+        && this.applyEmbeddedStyles == applyEmbeddedStyles
+        && this.foregroundColor == style.foregroundColor
+        && this.backgroundColor == style.backgroundColor
+        && this.windowColor == style.windowColor
+        && this.edgeType == style.edgeType
+        && this.edgeColor == style.edgeColor
+        && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+        && this.textSizePx == textSizePx
+        && this.bottomPaddingFraction == bottomPaddingFraction
+        && this.parentLeft == cueBoxLeft
+        && this.parentTop == cueBoxTop
+        && this.parentRight == cueBoxRight
+        && this.parentBottom == cueBoxBottom) {;    if (((cue.bitmap != null && cue.bitmap == cueBitmap) ||
+     (!textIsEmpty && areCharSequencesEqual(this.cueText, cueText)))
+     && Util.areEqual(this.cueTextAlignment, cue.textAlignment)
+     && this.cueLine == cue.line
+     && this.cueLineType == cue.lineType
+     && Util.areEqual(this.cueLineAnchor, cue.lineAnchor)
+     && this.cuePosition == cue.position
+     && Util.areEqual(this.cuePositionAnchor, cue.positionAnchor)
+     && this.cueSize == cue.size
+     && this.applyEmbeddedStyles == applyEmbeddedStyles
+     && this.foregroundColor == style.foregroundColor
+     && this.backgroundColor == style.backgroundColor
+     && this.windowColor == style.windowColor
+     && this.edgeType == style.edgeType
+     && this.edgeColor == style.edgeColor
+     && Util.areEqual(this.textPaint.getTypeface(), style.typeface)
+     && this.textSizePx == textSizePx
+     && this.bottomPaddingFraction == bottomPaddingFraction
+     && this.parentLeft == cueBoxLeft
+     && this.parentTop == cueBoxTop
+     && this.parentRight == cueBoxRight
+     && this.parentBottom == cueBoxBottom) {
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_edae29d_0468a80/rev_edae29d-0468a80;/library/src/main/java/com/google/android/exoplayer2/ui/SubtitlePainter;draw(Cue,boolean,CaptionStyleCompat,float,float,Canvas,int,int,int,int);    int parentWidth = parentRight - parentLeft;
+    int parentHeight = parentBottom - parentTop;
+
+    textPaint.setTextSize(textSizePx);
+    int textPaddingX = (int) (textSizePx * INNER_PADDING_RATIO + 0.5f);
+
+    int availableWidth = parentWidth - textPaddingX * 2;
+    if (cueSize != Cue.DIMEN_UNSET) {
+      availableWidth = (int) (availableWidth * cueSize);
+    }
+    if (availableWidth <= 0) {
+      Log.w(TAG, "Skipped drawing subtitle cue (insufficient space)");
+      return;
+    }
+
+    Alignment textAlignment = cueTextAlignment == null ? Alignment.ALIGN_CENTER : cueTextAlignment;
+    textLayout = new StaticLayout(cueText, textPaint, availableWidth, textAlignment, spacingMult,
+        spacingAdd, true);
+    int textHeight = textLayout.getHeight();
+    int textWidth = 0;
+    int lineCount = textLayout.getLineCount();
+    for (int i = 0; i < lineCount; i++) {
+      textWidth = Math.max((int) Math.ceil(textLayout.getLineWidth(i)), textWidth);
+    }
+    if (cueSize != Cue.DIMEN_UNSET && textWidth < availableWidth) {
+      textWidth = availableWidth;
+    }
+    textWidth += textPaddingX * 2;
+
+    int textLeft;
+    int textRight;
+    if (cuePosition != Cue.DIMEN_UNSET) {
+      int anchorPosition = Math.round(parentWidth * cuePosition) + parentLeft;
+      textLeft = cuePositionAnchor == Cue.ANCHOR_TYPE_END ? anchorPosition - textWidth
+          : cuePositionAnchor == Cue.ANCHOR_TYPE_MIDDLE ? (anchorPosition * 2 - textWidth) / 2
+          : anchorPosition;
+      textLeft = Math.max(textLeft, parentLeft);
+      textRight = Math.min(textLeft + textWidth, parentRight);
+    } else {
+      textLeft = (parentWidth - textWidth) / 2;
+      textRight = textLeft + textWidth;
+    }
+
+    int textTop;
+    if (cueLine != Cue.DIMEN_UNSET) {
+      int anchorPosition;
+      if (cueLineType == Cue.LINE_TYPE_FRACTION) {
+        anchorPosition = Math.round(parentHeight * cueLine) + parentTop;
+      } else {
+        // cueLineType == Cue.LINE_TYPE_NUMBER
+        int firstLineHeight = textLayout.getLineBottom(0) - textLayout.getLineTop(0);
+        if (cueLine >= 0) {
+          anchorPosition = Math.round(cueLine * firstLineHeight) + parentTop;
+        } else {
+          anchorPosition = Math.round((cueLine + 1) * firstLineHeight) + parentBottom;
+        }
+      }
+      textTop = cueLineAnchor == Cue.ANCHOR_TYPE_END ? anchorPosition - textHeight
+          : cueLineAnchor == Cue.ANCHOR_TYPE_MIDDLE ? (anchorPosition * 2 - textHeight) / 2
+          : anchorPosition;
+      if (textTop + textHeight > parentBottom) {
+        textTop = parentBottom - textHeight;
+      } else if (textTop < parentTop) {
+        textTop = parentTop;
+      }
+    } else {
+      textTop = parentBottom - textHeight - (int) (parentHeight * bottomPaddingFraction);
+    }
+
+    textWidth = textRight - textLeft;
+
+    // Update the derived drawing variables.
+    this.textLayout = new StaticLayout(cueText, textPaint, textWidth, textAlignment, spacingMult,
+        spacingAdd, true);
+    this.textLeft = textLeft;
+    this.textTop = textTop;
+    this.textPaddingX = textPaddingX;;    int parentWidth = parentRight - parentLeft;
+    int parentHeight = parentBottom - parentTop;
+
+    textPaint.setTextSize(textSizePx);
+    int textPaddingX = (int) (textSizePx * INNER_PADDING_RATIO + 0.5f);
+
+    int availableWidth = parentWidth - textPaddingX * 2;
+    if (cueSize != Cue.DIMEN_UNSET) {
+      availableWidth = (int) (availableWidth * cueSize);
+    }
+    if (availableWidth <= 0) {
+      Log.w(TAG, "Skipped drawing subtitle cue (insufficient space)");
+      return;
+    }
+
+    Alignment textAlignment = cueTextAlignment == null ? Alignment.ALIGN_CENTER : cueTextAlignment;
+    textLayout = new StaticLayout(cueText, textPaint, availableWidth, textAlignment, spacingMult,
+        spacingAdd, true);
+    int textHeight = textLayout.getHeight();
+    int textWidth = 0;
+    int lineCount = textLayout.getLineCount();
+    for (int i = 0; i < lineCount; i++) {
+      textWidth = Math.max((int) Math.ceil(textLayout.getLineWidth(i)), textWidth);
+    }
+    if (cueSize != Cue.DIMEN_UNSET && textWidth < availableWidth) {
+      textWidth = availableWidth;
+    }
+    textWidth += textPaddingX * 2;
+
+    int textLeft;
+    int textRight;
+    if (cuePosition != Cue.DIMEN_UNSET) {
+      int anchorPosition = Math.round(parentWidth * cuePosition) + parentLeft;
+      textLeft = cuePositionAnchor == Cue.ANCHOR_TYPE_END ? anchorPosition - textWidth
+          : cuePositionAnchor == Cue.ANCHOR_TYPE_MIDDLE ? (anchorPosition * 2 - textWidth) / 2
+          : anchorPosition;
+      textLeft = Math.max(textLeft, parentLeft);
+      textRight = Math.min(textLeft + textWidth, parentRight);
+    } else {
+      textLeft = (parentWidth - textWidth) / 2;
+      textRight = textLeft + textWidth;
+    }
+
+    int textTop;
+    if (cueLine != Cue.DIMEN_UNSET) {
+      int anchorPosition;
+      if (cueLineType == Cue.LINE_TYPE_FRACTION) {
+        anchorPosition = Math.round(parentHeight * cueLine) + parentTop;
+      } else {
+        // cueLineType == Cue.LINE_TYPE_NUMBER
+        int firstLineHeight = textLayout.getLineBottom(0) - textLayout.getLineTop(0);
+        if (cueLine >= 0) {
+          anchorPosition = Math.round(cueLine * firstLineHeight) + parentTop;
+        } else {
+          anchorPosition = Math.round(cueLine * firstLineHeight) + parentBottom;
+        }
+      }
+      textTop = cueLineAnchor == Cue.ANCHOR_TYPE_END ? anchorPosition - textHeight
+          : cueLineAnchor == Cue.ANCHOR_TYPE_MIDDLE ? (anchorPosition * 2 - textHeight) / 2
+          : anchorPosition;
+      if (textTop + textHeight > parentBottom) {
+        textTop = parentBottom - textHeight;
+      } else if (textTop < parentTop) {
+        textTop = parentTop;
+      }
+    } else {
+      textTop = parentBottom - textHeight - (int) (parentHeight * bottomPaddingFraction);
+    }
+
+    textWidth = textRight - textLeft;
+
+    // Update the derived drawing variables.
+    this.textLayout = new StaticLayout(cueText, textPaint, textWidth, textAlignment, spacingMult,
+        spacingAdd, true);
+    this.textLeft = textLeft;
+    this.textTop = textTop;
+    this.textPaddingX = textPaddingX;;    if (this.cueBitmap != null)
+      setupBitmapLayout();
+    else
+      setupTextLayout();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;DefaultTimeBar(Context,AttributeSet);    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();
+    playedAdMarkerPaint = new Paint();
+    scrubberPaint = new Paint();
+    scrubberPaint.setAntiAlias(true);;    scrubberPaint = new Paint();
+    adMarkerPaint = new Paint();;    unplayedPaint = new Paint();
+    adMarkerPaint = new Paint();

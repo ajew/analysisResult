@@ -1,0 +1,8 @@
+revision;file;renamedMethod;invokers
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/svg/src/main/java/com/bumptech/svgsample/app/MainActivity;loadNet();;MainActivity.java => private void reload(){
+  Log.w(TAG,"reloading");
+  ((TextView)findViewById(R.id.button)).setText(getString(R.string.scaleType,imageViewRes.getScaleType()));
+  loadRes();
+  loadNet();
+}
+

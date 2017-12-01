@@ -1,0 +1,2910 @@
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity.java;<<<<<<< MINE
+=======
+        searchLoading = findViewById(R.id.search_loading);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity.java;<<<<<<< MINE
+=======
+        searchLoading.setVisibility(View.VISIBLE);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/api/Api.java;<<<<<<< MINE
+        Log.d("API: searching");
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/library/src/com/bumptech/glide/Glide.java;<<<<<<< MINE
+=======
+    /**
+     * Get the singleton.
+     *
+     * @return the singleton
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/library/src/com/bumptech/glide/Glide.java;<<<<<<< MINE
+=======
+     *
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_347118b_a55e201/rev_347118b-a55e201/library/src/com/bumptech/glide/presenter/target/ImageViewTarget.java;<<<<<<< MINE
+        view.setImageDrawable(placeholder);
+=======
+        imageView.setImageDrawable(placeholder);
+    }
+
+    @Override
+    public void getSize(SizeReadyCallback cb) {
+        sizeDeterminer.getSize(cb);
+    }
+
+    @Override
+    public void startAnimation(Animation animation) {
+        imageView.clearAnimation();
+
+        imageView.startAnimation(animation);
+    }
+
+    @Override
+    public void setImagePresenter(ImagePresenter imagePresenter) {
+        this.imagePresenter = imagePresenter;
+    }
+
+    @Override
+    public ImagePresenter getImagePresenter() {
+        return imagePresenter;
+    }
+
+    @Override
+    public int hashCode() {
+        return imageView.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (!(o instanceof ImageViewTarget)) {
+            return false;
+        }
+        ImageViewTarget other = (ImageViewTarget) o;
+        return imageView.equals(other.imageView);
+    }
+
+    private static class SizeDeterminer {
+        private final View view;
+        private SizeReadyCallback cb;
+        private SizeDeterminerLayoutListener layoutListener;
+
+        private void checkCurrentDimens() {
+            if (cb == null) return;
+
+            boolean calledCallback = true;
+            LayoutParams layoutParams = view.getLayoutParams();
+            if (isViewSizeValid()) {
+                cb.onSizeReady(view.getWidth(), view.getHeight());
+            } else if (isLayoutParamsSizeValid()) {
+                cb.onSizeReady(layoutParams.width, layoutParams.height);
+            } else {
+                calledCallback = false;
+            }
+
+            if (calledCallback) {
+                cb = null;
+                // Keep a reference to the layout listener and remove it here
+                // rather than having the observer remove itself because the observer
+                // we add the listener to will be almost immediately merged into
+                // another observer and will therefore never be alive. If we instead
+                // keep a reference to the listener and remove it here, we get the
+                // current view tree observer and should succeed.
+                ViewTreeObserver observer = view.getViewTreeObserver();
+                if (observer.isAlive()) {
+                    observer.removeGlobalOnLayoutListener(layoutListener);
+                }
+            }
+        }
+
+        public SizeDeterminer(View view) {
+            this.view = view;
+        }
+
+        public void getSize(SizeReadyCallback cb) {
+            this.cb = null;
+            LayoutParams layoutParams = view.getLayoutParams();
+            if (isViewSizeValid()) {
+                cb.onSizeReady(view.getWidth(), view.getHeight());
+            } else if (isLayoutParamsSizeValid()) {
+                cb.onSizeReady(layoutParams.width, layoutParams.height);
+            } else if (isUsingWrapContent()) {
+                WindowManager windowManager =
+                        (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+                Display display = windowManager.getDefaultDisplay();
+                final int width = display.getWidth();
+                final int height = display.getHeight();
+                if (Log.isLoggable(TAG, Log.WARN)) {
+                    Log.w(TAG, "Trying to load image into ImageView using WRAP_CONTENT, defaulting to screen" +
+                            " dimensions: [" + width + "x" + height + "]. Give the view an actual width and height " +
+                            " for better performance.");
+                }
+                cb.onSizeReady(display.getWidth(), display.getHeight());
+            } else {
+                this.cb = cb;
+                final ViewTreeObserver observer = view.getViewTreeObserver();
+                layoutListener = new SizeDeterminerLayoutListener(this);
+                observer.addOnGlobalLayoutListener(layoutListener);
+            }
+        }
+
+        private boolean isViewSizeValid() {
+            return view.getWidth() > 0 && view.getHeight() > 0;
+        }
+
+        private boolean isUsingWrapContent() {
+            final LayoutParams layoutParams = view.getLayoutParams();
+            return layoutParams != null && (layoutParams.width == LayoutParams.WRAP_CONTENT
+                    || layoutParams.height == LayoutParams.WRAP_CONTENT);
+        }
+
+        private boolean isLayoutParamsSizeValid() {
+            final LayoutParams layoutParams = view.getLayoutParams();
+            return layoutParams != null && (layoutParams.width > 0 && layoutParams.height > 0);
+        }
+
+        private static class SizeDeterminerLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
+            private final WeakReference<SizeDeterminer> sizeDeterminerRef;
+
+            public SizeDeterminerLayoutListener(SizeDeterminer sizeDeterminer) {
+                sizeDeterminerRef = new WeakReference<SizeDeterminer>(sizeDeterminer);
+            }
+
+            @Override
+            public void onGlobalLayout() {
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "OnGlobalLayoutListener called listener=" + this);
+                }
+                SizeDeterminer sizeDeterminer = sizeDeterminerRef.get();
+                if (sizeDeterminer != null) {
+                    sizeDeterminer.checkCurrentDimens();
+                }
+            }
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_347118b_a55e201/rev_347118b-a55e201/library/src/com/bumptech/glide/resize/load/Downsampler.java;<<<<<<< MINE
+        final Bitmap rotated = TransformationUtils.rotateImageExif(downsampled, pool, orientation);
+=======
+        if (downsampled == null) {
+            throw new IllegalArgumentException("Unable to decode image sample size: " + sampleSize + " inWidth: "
+                    + inWidth + " inHeight: " + inHeight);
+        }
+        final Bitmap rotated = ImageResizer.rotateImageExif(downsampled, pool, orientation);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                job.addCallback(cb);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+            } else {
+                job.addCallback(cb);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                // Note: this is potentially dangerous. The runner asynchronously asks our jobs map for a job
+                // matching our key after posting a runnable to the main thread and as a result, the job it gets back
+                // may not be this job. We protect against this for cancellation by not delivering failures from
+                // cancelled runners, so new jobs will not receive errors from cancelled jobs. However, new jobs may
+                // receive results from old runners if the old runner was cancelled, but completed successfully anyway
+                // because it received the cancellation too late.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                    if (isCancelled) {
+                        return;
+                    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_42a30b8_b55a454/rev_42a30b8-b55a454/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+                disconnectAndResubscribe();
+=======
+                disconnectAndResubscribe(error);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyUrlLoader.java;<<<<<<< MINE
+    /**
+     * Constructor for a new Factory that runs requests using the given {@link RequestQueue}.
+     */
+    public Factory(RequestQueue requestQueue) {
+      this.requestQueue = requestQueue;
+=======
+        @Override
+        public ModelLoader<GlideUrl, InputStream> build(Context context, GenericLoaderFactory factories) {
+            return new VolleyUrlLoader(requestQueue, requestFactory);
+        }
+
+        @Override
+        public void teardown() {
+            // Do nothing, this instance doesn't own the request queue.
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyStreamFetcher.java;<<<<<<< MINE
+  private final RequestQueue requestQueue;
+  private final GlideUrl url;
+  private VolleyRequestFuture<InputStream> requestFuture;
+
+  @SuppressWarnings("unused")
+  public VolleyStreamFetcher(RequestQueue requestQueue, GlideUrl url) {
+    this(requestQueue, url, null);
+  }
+
+  public VolleyStreamFetcher(RequestQueue requestQueue, GlideUrl url,
+      VolleyRequestFuture<InputStream> requestFuture) {
+    this.requestQueue = requestQueue;
+    this.url = url;
+    this.requestFuture = requestFuture;
+    if (requestFuture == null) {
+      this.requestFuture = VolleyRequestFuture.newFuture();
+    }
+  }
+
+  @Override
+  public InputStream loadData(Priority priority) throws Exception {
+    // Make sure the string url safely encodes non ascii characters.
+    String stringUrl = url.toURL().toString();
+    GlideRequest request =
+        new GlideRequest(stringUrl, requestFuture, glideToVolleyPriority(priority));
+
+    requestFuture.setRequest(requestQueue.add(request));
+
+    return requestFuture.get();
+  }
+
+  @Override
+  public void cleanup() {
+    // Do nothing.
+  }
+
+  @Override
+  public String getId() {
+    return url.toString();
+  }
+
+  @Override
+  public void cancel() {
+    VolleyRequestFuture<InputStream> localFuture = requestFuture;
+    if (localFuture != null) {
+      localFuture.cancel(true);
+    }
+  }
+
+  @Override
+  public Class<InputStream> getDataClass() {
+    return InputStream.class;
+  }
+
+  @Override
+  public DataSource getDataSource() {
+    return DataSource.REMOTE;
+  }
+
+  private static Request.Priority glideToVolleyPriority(Priority priority) {
+    switch (priority) {
+      case LOW:
+        return Request.Priority.LOW;
+      case HIGH:
+        return Request.Priority.HIGH;
+      case IMMEDIATE:
+        return Request.Priority.IMMEDIATE;
+      default:
+        return Request.Priority.NORMAL;
+
+    }
+  }
+
+  private static class GlideRequest extends Request<byte[]> {
+    private final VolleyRequestFuture<InputStream> future;
+    private Priority priority;
+
+    public GlideRequest(String url, VolleyRequestFuture<InputStream> future, Priority priority) {
+      super(Method.GET, url, future);
+      this.future = future;
+      this.priority = priority;
+=======
+    public static final VolleyRequestFactory DEFAULT_REQUEST_FACTORY = new VolleyRequestFactory() {
+
+        @Override
+        public Request<byte[]> create(
+                    String url, VolleyRequestFuture<InputStream> future,
+                    Request.Priority priority) {
+            return new GlideRequest(url, future, priority);
+        }
+
+    };
+
+    private final RequestQueue requestQueue;
+    private final VolleyRequestFactory requestFactory;
+    private final GlideUrl url;
+    private VolleyRequestFuture<InputStream> requestFuture;
+
+    @SuppressWarnings("unused")
+    public VolleyStreamFetcher(RequestQueue requestQueue, GlideUrl url) {
+        this(requestQueue, url,  null);
+    }
+
+    public VolleyStreamFetcher(RequestQueue requestQueue, GlideUrl url,
+            VolleyRequestFuture<InputStream> requestFuture) {
+        this(requestQueue, url, requestFuture, DEFAULT_REQUEST_FACTORY);
+    }
+
+    public VolleyStreamFetcher(RequestQueue requestQueue, GlideUrl url,
+            VolleyRequestFuture<InputStream> requestFuture, VolleyRequestFactory requestFactory) {
+        this.requestQueue = requestQueue;
+        this.url = url;
+        this.requestFactory = requestFactory;
+        this.requestFuture = requestFuture;
+        if (requestFuture == null) {
+            this.requestFuture = VolleyRequestFuture.newFuture();
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyStreamFetcher.java;<<<<<<< MINE
+    protected void deliverResponse(byte[] response) {
+      future.onResponse(new ByteArrayInputStream(response));
+=======
+    public void cancel() {
+        VolleyRequestFuture<InputStream> localFuture = requestFuture;
+        if (localFuture != null) {
+            localFuture.cancel(true);
+        }
+    }
+
+    private static Request.Priority glideToVolleyPriority(Priority priority) {
+        switch (priority) {
+            case LOW:
+                return Request.Priority.LOW;
+            case HIGH:
+                return Request.Priority.HIGH;
+            case IMMEDIATE:
+                return Request.Priority.IMMEDIATE;
+            default:
+                return Request.Priority.NORMAL;
+
+        }
+    }
+
+    private static class GlideRequest extends Request<byte[]> {
+        private final VolleyRequestFuture<InputStream> future;
+        private final Priority priority;
+
+        public GlideRequest(String url, VolleyRequestFuture<InputStream> future, Priority priority) {
+            super(Method.GET, url, future);
+            this.future = future;
+            this.priority = priority;
+        }
+
+        @Override
+        public Priority getPriority() {
+            return priority;
+        }
+
+        @Override
+        protected Response<byte[]> parseNetworkResponse(NetworkResponse response) {
+            return Response.success(response.data, HttpHeaderParser.parseCacheHeaders(response));
+        }
+
+        @Override
+        protected void deliverResponse(byte[] response) {
+            future.onResponse(new ByteArrayInputStream(response));
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/samples/flickr/src/main/java/com/bumptech/glide/samples/flickr/FlickrPhotoGrid.java;<<<<<<< MINE
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        photoSize = args.getInt(IMAGE_SIZE_KEY);
+        thumbnail = args.getBoolean(THUMBNAIL_KEY);
+
+        fullRequest = Glide.with(this)
+                .from(Photo.class)
+                .centerCrop()
+                .crossFade(R.anim.fade_in, 150);
+
+        thumbnailRequest = Glide.with(this)
+                .from(Photo.class)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .crossFade(R.anim.fade_in, 150)
+                .override(Api.SQUARE_THUMB_SIZE, Api.SQUARE_THUMB_SIZE);
+
+        preloadRequest = thumbnail ? thumbnailRequest.clone().priority(Priority.HIGH) : fullRequest;
+
+        final View result = inflater.inflate(R.layout.flickr_photo_grid, container, false);
+
+        grid = (GridView) result.findViewById(R.id.images);
+        grid.setColumnWidth(photoSize);
+        adapter = new PhotoAdapter();
+        grid.setAdapter(adapter);
+
+        final FixedPreloadSizeProvider<Photo> preloadSizeProvider =
+                new FixedPreloadSizeProvider<Photo>(photoSize, photoSize);
+        final ListPreloader<Photo> preloader =
+                new ListPreloader<Photo>(adapter, preloadSizeProvider, args.getInt(PRELOAD_KEY));
+        grid.setOnScrollListener(preloader);
+=======
+  @Override
+  public void onPhotosUpdated(List<Photo> photos) {
+    currentPhotos = photos;
+    if (adapter != null) {
+      adapter.setPhotos(currentPhotos);
+    }
+  }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/integration/okhttp/src/main/java/com/bumptech/glide/integration/okhttp/OkHttpStreamFetcher.java;<<<<<<< MINE
+    @Override
+    public InputStream loadData(Priority priority) throws Exception {
+        Request.Builder requestBuilder = new Request.Builder()
+                .url(url.toStringUrl());
+
+        boolean isUserAgentSet = false;
+        for (Map.Entry<String, String> headerEntry : url.getHeaders().entrySet()) {
+            String key = headerEntry.getKey();
+            requestBuilder.addHeader(key, headerEntry.getValue());
+            isUserAgentSet |= USER_AGENT_HEADER.equalsIgnoreCase(key);
+        }
+        if (!isUserAgentSet) {
+            requestBuilder.addHeader(USER_AGENT_HEADER, DEFAULT_USER_AGENT);
+        }
+        Request request = requestBuilder.build();
+
+        Response response = client.newCall(request).execute();
+        responseBody = response.body();
+        if (!response.isSuccessful()) {
+            throw new IOException("Request failed with code: " + response.code());
+        }
+
+        long contentLength = responseBody.contentLength();
+        stream = ContentLengthInputStream.obtain(responseBody.byteStream(), contentLength);
+        return stream;
+    }
+=======
+    client.newCall(request).enqueue(new com.squareup.okhttp.Callback() {
+      @Override
+      public void onFailure(Request request, IOException e) {
+        if (Logs.isEnabled(Log.DEBUG)) {
+          Logs.log(Log.DEBUG, "OkHttp failed to obtain result", e);
+        }
+        callback.onDataReady(null);
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/integration/volley/src/androidTest/java/com/bumptech/glide/integration/volley/VolleyStreamFetcherServerTest.java;<<<<<<< MINE
+    @Before
+    public void setUp() throws IOException {
+        requestQueue = Volley.newRequestQueue(Robolectric.application);
+        mockWebServer = new MockWebServer();
+        mockWebServer.play();
+    }
+
+    @After
+    public void tearDown() throws IOException {
+        mockWebServer.shutdown();
+        requestQueue.stop();
+    }
+
+    @Test
+    public void testReturnsInputStreamOnStatusOk() throws Exception {
+        String expected = "fakedata";
+        mockWebServer.enqueue(new MockResponse()
+                .setBody(expected)
+                .setResponseCode(200));
+        DataFetcher<InputStream> fetcher = getFetcher();
+        InputStream is = fetcher.loadData(Priority.HIGH);
+        assertEquals(expected, TestUtil.isToString(is));
+    }
+
+    @Test
+    public void testHandlesRedirect301s() throws Exception {
+        String expected = "fakedata";
+        mockWebServer.enqueue(new MockResponse()
+            .setResponseCode(301)
+            .setHeader("Location", mockWebServer.getUrl("/redirect")));
+        mockWebServer.enqueue(new MockResponse()
+            .setResponseCode(200)
+            .setBody(expected));
+        InputStream is = getFetcher().loadData(Priority.LOW);
+        assertEquals(expected, TestUtil.isToString(is));
+    }
+
+    @Test
+    public void testHandlesRedirect302s() throws Exception {
+        String expected = "fakedata";
+        mockWebServer.enqueue(new MockResponse()
+            .setResponseCode(302)
+            .setHeader("Location", mockWebServer.getUrl("/redirect")));
+        mockWebServer.enqueue(new MockResponse()
+            .setResponseCode(200)
+            .setBody(expected));
+        InputStream is = getFetcher().loadData(Priority.LOW);
+        assertEquals(expected, TestUtil.isToString(is));
+    }
+
+    @Test
+    public void testHandlesUpToFiveRedirects() throws Exception {
+        int numRedirects = 4;
+        String expected = "redirectedData";
+        String redirectBase = "/redirect";
+        for (int i = 0; i < numRedirects; i++) {
+            mockWebServer.enqueue(new MockResponse()
+                    .setResponseCode(301)
+                    .setHeader("Location", mockWebServer.getUrl(redirectBase + i)));
+        }
+        mockWebServer.enqueue(new MockResponse()
+            .setResponseCode(200).setBody(expected));
+
+        InputStream is = getFetcher().loadData(Priority.NORMAL);
+        assertEquals(expected, TestUtil.isToString(is));
+
+        assertThat(mockWebServer.takeRequest().getPath()).contains(DEFAULT_PATH);
+        for (int i = 0; i < numRedirects; i++) {
+            assertThat(mockWebServer.takeRequest().getPath()).contains(redirectBase + i);
+        }
+    }
+
+    @Test
+    public void testThrowsIfRedirectLocationIsEmpty() throws Exception {
+        for (int i = 0; i < 2; i++) {
+            mockWebServer.enqueue(new MockResponse().setResponseCode(301));
+        }
+
+        try {
+            getFetcher().loadData(Priority.NORMAL);
+            fail("Didn't get expected IOException");
+        } catch (ExecutionException e) {
+            assertThat(e.getCause()).isInstanceOf(VolleyError.class);
+        }
+    }
+
+    @Test
+    public void testThrowsIfStatusCodeIsNegativeOne() throws Exception {
+        mockWebServer.enqueue(new MockResponse().setResponseCode(-1));
+        try {
+            getFetcher().loadData(Priority.LOW);
+            fail("Failed to get expected exception");
+        } catch (ExecutionException e) {
+            assertThat(e.getCause()).isInstanceOf(NoConnectionError.class);
+        }
+    }
+
+    @Test
+    public void testThrowsAfterTooManyRedirects() throws Exception {
+        for (int i = 0; i < 20; i++) {
+            mockWebServer.enqueue(new MockResponse()
+                    .setResponseCode(301)
+                    .setHeader("Location", mockWebServer.getUrl("/redirect" + i)));
+        }
+        try {
+            getFetcher().loadData(Priority.NORMAL);
+            fail("Failed to get expected exception");
+        } catch (ExecutionException e) {
+            assertThat(e.getCause()).isInstanceOf(NoConnectionError.class);
+            assertThat(e.getCause().getCause()).isInstanceOf(ProtocolException.class);
+        }
+    }
+
+
+    @Test
+    public void testThrowsIfStatusCodeIs500() throws Exception {
+        mockWebServer.enqueue(new MockResponse().setResponseCode(500).setBody("error"));
+        try {
+            getFetcher().loadData(Priority.NORMAL);
+            fail("Failed to get expected exception");
+        } catch (ExecutionException e) {
+            assertThat(e.getCause()).isInstanceOf(ServerError.class);
+        }
+    }
+
+    @Test
+    public void testThrowsIfStatusCodeIs400() throws Exception {
+        mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody("error"));
+        try {
+            getFetcher().loadData(Priority.LOW);
+            fail("Failed to get expected exception");
+        } catch (ExecutionException e) {
+            assertThat(e.getCause()).isInstanceOf(ServerError.class);
+        }
+    }
+
+    @Test
+    public void testAppliesHeadersInGlideUrl() throws Exception {
+      mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+      String headerField = "field";
+      String headerValue = "value";
+      Map<String, String> headersMap = new HashMap<String, String>();
+      headersMap.put(headerField, headerValue);
+      Headers headers = mock(Headers.class);
+      when(headers.getHeaders()).thenReturn(headersMap);
+
+      getFetcher(headers).loadData(Priority.HIGH);
+
+      assertThat(mockWebServer.takeRequest().getHeader(headerField)).isEqualTo(headerValue);
+    }
+
+    private DataFetcher<InputStream> getFetcher() {
+      return getFetcher(Headers.NONE);
+    }
+
+    private DataFetcher<InputStream> getFetcher(Headers headers) {
+        URL url = mockWebServer.getUrl(DEFAULT_PATH);
+        VolleyRequestFuture<InputStream> requestFuture = new VolleyRequestFuture<InputStream>() {
+            @Override
+            public InputStream get() throws InterruptedException, ExecutionException {
+                for (int i = 0; i < 251 && !isDone(); i++) {
+                    Thread.sleep(10);
+                    Robolectric.runUiThreadTasks();
+                }
+                if (!isDone()) {
+                    fail("Failed to get response from Volley in time");
+                }
+                return super.get();
+            }
+        };
+        return new VolleyStreamFetcher(requestQueue, new GlideUrl(url.toString(), headers), requestFuture);
+    }
+
+    /** A shadow clock that doesn't rely on running on an Android thread with a Looper. */
+    @Implements(SystemClock.class)
+    public static class FakeSystemClock extends ShadowSystemClock {
+
+        @Implementation
+        public static long elapsedRealtime() {
+            // The default is to return something using the main looper, which doesn't exist on Volley's threads.
+            return System.currentTimeMillis();
+        }
+=======
+  private MockWebServer mockWebServer;
+  private RequestQueue requestQueue;
+  private ArgumentCaptor<InputStream> streamCaptor;
+  private CountDownLatch waitForResponseLatch;
+
+  @Before
+  public void setUp() throws IOException {
+    MockitoAnnotations.initMocks(this);
+
+    waitForResponseLatch = new CountDownLatch(1);
+    doAnswer(new Answer<Void>() {
+      @Override
+      public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+        waitForResponseLatch.countDown();
+        return null;
+      }
+    }).when(callback).onDataReady(any(InputStream.class));
+    requestQueue = Volley.newRequestQueue(RuntimeEnvironment.application);
+    mockWebServer = new MockWebServer();
+    mockWebServer.play();
+
+    streamCaptor = ArgumentCaptor.forClass(InputStream.class);
+  }
+
+  @After
+  public void tearDown() throws IOException {
+    mockWebServer.shutdown();
+    requestQueue.stop();
+  }
+
+  @Test
+  public void testReturnsInputStreamOnStatusOk() throws Exception {
+    String expected = "fakedata";
+    mockWebServer.enqueue(new MockResponse().setBody(expected).setResponseCode(200));
+    DataFetcher<InputStream> fetcher = getFetcher();
+    fetcher.loadData(Priority.HIGH, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(streamCaptor.capture());
+    assertStreamOf(expected, streamCaptor.getValue());
+  }
+
+  @Test
+  public void testHandlesRedirect301s() throws Exception {
+    String expected = "fakedata";
+    mockWebServer.enqueue(new MockResponse().setResponseCode(301)
+        .setHeader("Location", mockWebServer.getUrl("/redirect")));
+    mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(expected));
+    getFetcher().loadData(Priority.LOW, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(streamCaptor.capture());
+    assertStreamOf(expected, streamCaptor.getValue());
+  }
+
+  @Test
+  public void testHandlesRedirect302s() throws Exception {
+    String expected = "fakedata";
+    mockWebServer.enqueue(new MockResponse().setResponseCode(302)
+        .setHeader("Location", mockWebServer.getUrl("/redirect")));
+    mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(expected));
+    getFetcher().loadData(Priority.LOW, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(streamCaptor.capture());
+    assertStreamOf(expected, streamCaptor.getValue());
+  }
+
+  @Test
+  public void testHandlesUpToFiveRedirects() throws Exception {
+    int numRedirects = 4;
+    String expected = "redirectedData";
+    String redirectBase = "/redirect";
+    for (int i = 0; i < numRedirects; i++) {
+      mockWebServer.enqueue(new MockResponse().setResponseCode(301)
+          .setHeader("Location", mockWebServer.getUrl(redirectBase + i)));
+    }
+    mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(expected));
+
+    getFetcher().loadData(Priority.NORMAL, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(streamCaptor.capture());
+    assertStreamOf(expected, streamCaptor.getValue());
+
+    assertThat(mockWebServer.takeRequest().getPath()).contains(DEFAULT_PATH);
+    for (int i = 0; i < numRedirects; i++) {
+      assertThat(mockWebServer.takeRequest().getPath()).contains(redirectBase + i);
+    }
+  }
+
+  @Test
+  public void testReturnsNullIfRedirectLocationIsEmpty() throws Exception {
+    for (int i = 0; i < 2; i++) {
+      mockWebServer.enqueue(new MockResponse().setResponseCode(301));
+    }
+
+    getFetcher().loadData(Priority.NORMAL, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testReturnsNullIfStatusCodeIsNegativeOne() throws Exception {
+    mockWebServer.enqueue(new MockResponse().setResponseCode(-1));
+    getFetcher().loadData(Priority.LOW, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testReturnsNullAfterTooManyRedirects() throws Exception {
+    for (int i = 0; i < 20; i++) {
+      mockWebServer.enqueue(new MockResponse().setResponseCode(301)
+          .setHeader("Location", mockWebServer.getUrl("/redirect" + i)));
+    }
+    getFetcher().loadData(Priority.NORMAL, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testReturnsNullIfStatusCodeIs500() throws Exception {
+    mockWebServer.enqueue(new MockResponse().setResponseCode(500).setBody("error"));
+    getFetcher().loadData(Priority.NORMAL, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testReturnsNullIfStatusCodeIs400() throws Exception {
+    mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody("error"));
+    getFetcher().loadData(Priority.LOW, callback);
+    waitForResponseLatch.await();
+    verify(callback).onDataReady(isNull(InputStream.class));
+  }
+
+  @Test
+  public void testAppliesHeadersInGlideUrl() throws Exception {
+    mockWebServer.enqueue(new MockResponse().setResponseCode(200));
+    String headerField = "field";
+    String headerValue = "value";
+    Map<String, String> headersMap = new HashMap<String, String>();
+    headersMap.put(headerField, headerValue);
+    Headers headers = mock(Headers.class);
+    when(headers.getHeaders()).thenReturn(headersMap);
+
+    getFetcher(headers).loadData(Priority.HIGH, callback);
+    waitForResponseLatch.await();
+
+    assertThat(mockWebServer.takeRequest().getHeader(headerField)).isEqualTo(headerValue);
+  }
+
+  private DataFetcher<InputStream> getFetcher() {
+    return getFetcher(Headers.NONE);
+  }
+
+  private DataFetcher<InputStream> getFetcher(Headers headers) {
+    URL url = mockWebServer.getUrl(DEFAULT_PATH);
+    return new VolleyStreamFetcher(requestQueue, new GlideUrl(url.toString(), headers));
+  }
+
+  /**
+   * A shadow clock that doesn't rely on running on an Android thread with a Looper.
+   */
+  @Implements(SystemClock.class)
+  public static class FakeSystemClock extends ShadowSystemClock {
+
+    @Implementation
+    public static long elapsedRealtime() {
+      // The default is to return something using the main looper, which doesn't exist on
+      // Volley's threads.
+      return System.currentTimeMillis();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyStreamFetcher.java;<<<<<<< MINE
+    public void cancel() {
+        VolleyRequestFuture<InputStream> localFuture = requestFuture;
+        if (localFuture != null) {
+            localFuture.cancel(true);
+        }
+    }
+
+    private static Request.Priority glideToVolleyPriority(Priority priority) {
+        switch (priority) {
+            case LOW:
+                return Request.Priority.LOW;
+            case HIGH:
+                return Request.Priority.HIGH;
+            case IMMEDIATE:
+                return Request.Priority.IMMEDIATE;
+            default:
+                return Request.Priority.NORMAL;
+
+        }
+    }
+
+    private static class GlideRequest extends Request<byte[]> {
+        private final VolleyRequestFuture<InputStream> future;
+        private final Priority priority;
+        private final Map<String, String> headers;
+
+        public GlideRequest(String url, VolleyRequestFuture<InputStream> future, Priority priority) {
+          this(url, future, priority, Collections.<String, String>emptyMap());
+        }
+
+        public GlideRequest(String url, VolleyRequestFuture<InputStream> future, Priority priority,
+                  Map<String, String> headers) {
+              super(Method.GET, url, future);
+              this.future = future;
+              this.priority = priority;
+          this.headers = headers;
+        }
+
+        @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+          return headers;
+        }
+
+        @Override
+        public Priority getPriority() {
+            return priority;
+        }
+
+        @Override
+        protected Response<byte[]> parseNetworkResponse(NetworkResponse response) {
+            return Response.success(response.data, HttpHeaderParser.parseCacheHeaders(response));
+        }
+
+        @Override
+        protected void deliverResponse(byte[] response) {
+            future.onResponse(new ByteArrayInputStream(response));
+        }
+=======
+    protected void deliverResponse(byte[] response) {
+      // Do nothing.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/androidTest/java/com/bumptech/glide/manager/RequestManagerRetrieverTest.java;<<<<<<< MINE
+        @Override
+        public void addFragmentWithTag(String tag, RequestManager manager) {
+            SupportRequestManagerFragment fragment = new SupportRequestManagerFragment();
+            fragment.setRequestManager(manager);
+            controller.get().getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(fragment, RequestManagerRetriever.FRAGMENT_TAG)
+                    .commitAllowingStateLoss();
+            controller.get().getSupportFragmentManager().executePendingTransactions();
+        }
+=======
+    assertTrue(fragment.isDetached());
+    retriever.get(fragment);
+  }
+
+  @Test
+  public void testSupportCanGetRequestManagerFromDetachedFragment() {
+    helpTestSupportCanGetRequestManagerFromDetachedFragment();
+  }
+
+  @Test
+  public void testSupportCanGetRequestManagerFromDetachedFragment_PreJellyBeanMr1() {
+    Util.setSdkVersionInt(Build.VERSION_CODES.JELLY_BEAN);
+    helpTestSupportCanGetRequestManagerFromDetachedFragment();
+  }
+
+  private void helpTestSupportCanGetRequestManagerFromDetachedFragment() {
+    FragmentActivity activity =
+        Robolectric.buildActivity(FragmentActivity.class).create().start().resume().get();
+    Fragment fragment = new Fragment();
+    activity.getSupportFragmentManager().beginTransaction().add(fragment, PARENT_TAG)
+        .detach(fragment).commit();
+    activity.getSupportFragmentManager().executePendingTransactions();
+
+    assertTrue(fragment.isDetached());
+    retriever.get(fragment);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testThrowsIfFragmentNotAttached() {
+    android.app.Fragment fragment = new android.app.Fragment();
+    retriever.get(fragment);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testThrowsIfSupportFragmentNotAttached() {
+    Fragment fragment = new Fragment();
+    retriever.get(fragment);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testThrowsIfActivityDestroyed() {
+    DefaultRetrieverHarness harness = new DefaultRetrieverHarness();
+    harness.getController().pause().stop().destroy();
+    harness.doGet();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testThrowsIfFragmentActivityDestroyed() {
+    SupportRetrieverHarness harness = new SupportRetrieverHarness();
+    harness.getController().pause().stop().destroy();
+    harness.doGet();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testThrowsIfGivenNullContext() {
+    retriever.get((Context) null);
+  }
+
+  @Test
+  public void testChecksIfContextIsFragmentActivity() {
+    SupportRetrieverHarness harness = new SupportRetrieverHarness();
+    RequestManager requestManager = harness.doGet();
+
+    assertEquals(requestManager, retriever.get((Context) harness.getController().get()));
+  }
+
+  @Test
+  public void testChecksIfContextIsActivity() {
+    DefaultRetrieverHarness harness = new DefaultRetrieverHarness();
+    RequestManager requestManager = harness.doGet();
+
+    assertEquals(requestManager, retriever.get((Context) harness.getController().get()));
+  }
+
+  @Test
+  public void testHandlesContextWrappersForActivities() {
+    DefaultRetrieverHarness harness = new DefaultRetrieverHarness();
+    RequestManager requestManager = harness.doGet();
+    ContextWrapper contextWrapper = new ContextWrapper((Context) harness.getController().get());
+
+    assertEquals(requestManager, retriever.get(contextWrapper));
+  }
+
+  @Test
+  public void testHandlesContextWrappersForApplication() {
+    ContextWrapper contextWrapper = new ContextWrapper(RuntimeEnvironment.application);
+    RequestManager requestManager = retriever.get(RuntimeEnvironment.application);
+
+    assertEquals(requestManager, retriever.get(contextWrapper));
+  }
+
+  @Test
+  public void testReturnsNonNullManagerIfGivenApplicationContext() {
+    assertNotNull(retriever.get(RuntimeEnvironment.application));
+  }
+
+  @Test
+  public void testApplicationRequestManagerIsNotPausedWhenRetrieved() {
+    RequestManager manager = retriever.get(RuntimeEnvironment.application);
+    assertFalse(manager.isPaused());
+  }
+
+  @Test
+  public void testApplicationRequestManagerIsNotReResumedAfterFirstRetrieval() {
+    RequestManager manager = retriever.get(RuntimeEnvironment.application);
+    manager.pauseRequests();
+    manager = retriever.get(RuntimeEnvironment.application);
+    assertTrue(manager.isPaused());
+  }
+
+  @Test
+  public void testDoesNotThrowWhenGetWithContextCalledFromBackgroundThread()
+      throws InterruptedException {
+    testInBackground(new BackgroundUtil.BackgroundTester() {
+      @Override
+      public void runTest() throws Exception {
+        retriever.get(RuntimeEnvironment.application);
+      }
+    });
+  }
+
+  // See Issue #117: https://github.com/bumptech/glide/issues/117.
+  @Test
+  public void testCanCallGetInOnAttachToWindowInFragmentInViewPager() {
+    // Robolectric by default runs messages posted to the main looper synchronously, the
+    // framework does not. We post
+    // to the main thread here to work around an issue caused by a recursive method call so we
+    // need (and reasonably
+    // expect) our message to not run immediately
+    Shadows.shadowOf(Looper.getMainLooper()).pause();
+    Robolectric.buildActivity(Issue117Activity.class).create().start().resume().visible();
+  }
+
+  @Test
+  public void testDoesNotThrowIfAskedToGetManagerForActivityPreHoneycomb() {
+    Util.setSdkVersionInt(Build.VERSION_CODES.GINGERBREAD_MR1);
+    Activity activity = mock(Activity.class);
+    when(activity.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+    when(activity.getFragmentManager()).thenThrow(new NoSuchMethodError());
+
+    assertNotNull(retriever.get(activity));
+  }
+
+  @Test
+  public void testDoesNotThrowIfAskedToGetManagerForActivityPreJellYBeanMr1() {
+    Util.setSdkVersionInt(Build.VERSION_CODES.JELLY_BEAN);
+    Activity activity = Robolectric.buildActivity(Activity.class).create().start().resume().get();
+    Activity spyActivity = Mockito.spy(activity);
+    when(spyActivity.isDestroyed()).thenThrow(new NoSuchMethodError());
+
+    assertNotNull(retriever.get(spyActivity));
+  }
+
+  @Test
+  public void testDoesNotThrowIfAskedToGetManagerForFragmentPreHoneyCombMr2() {
+    Util.setSdkVersionInt(Build.VERSION_CODES.HONEYCOMB_MR1);
+    Activity activity = Robolectric.buildActivity(Activity.class).create().start().resume().get();
+    android.app.Fragment fragment = new android.app.Fragment();
+
+    activity.getFragmentManager().beginTransaction().add(fragment, "test").commit();
+    android.app.Fragment spyFragment = Mockito.spy(fragment);
+    when(spyFragment.isDetached()).thenThrow(new NoSuchMethodError());
+
+    assertNotNull(retriever.get(spyFragment));
+  }
+
+  @Test
+  public void testDoesNotThrowIfAskedToGetManagerForFragmentPreJellyBeanMr1() {
+    Util.setSdkVersionInt(Build.VERSION_CODES.JELLY_BEAN);
+    Activity activity = Robolectric.buildActivity(Activity.class).create().start().resume().get();
+    android.app.Fragment fragment = new android.app.Fragment();
+
+    activity.getFragmentManager().beginTransaction().add(fragment, "test").commit();
+    android.app.Fragment spyFragment = Mockito.spy(fragment);
+    when(spyFragment.getChildFragmentManager()).thenThrow(new NoSuchMethodError());
+
+    assertNotNull(retriever.get(spyFragment));
+  }
+
+  private interface RetrieverHarness {
+
+    public ActivityController getController();
+
+    public RequestManager doGet();
+
+    public boolean hasFragmentWithTag(String tag);
+
+    public void addFragmentWithTag(String tag, RequestManager manager);
+  }
+
+  public class DefaultRetrieverHarness implements RetrieverHarness {
+    private final ActivityController<Activity> controller =
+        Robolectric.buildActivity(Activity.class);
+    private final android.app.Fragment parent;
+
+    public DefaultRetrieverHarness() {
+      this.parent = new android.app.Fragment();
+
+      controller.create();
+      controller.get().getFragmentManager().beginTransaction().add(parent, PARENT_TAG)
+          .commitAllowingStateLoss();
+      controller.get().getFragmentManager().executePendingTransactions();
+      controller.start().resume();
+    }
+
+    @Override
+    public ActivityController getController() {
+      return controller;
+    }
+
+    @Override
+    public RequestManager doGet() {
+      return retriever.get(controller.get());
+    }
+
+    @Override
+    public boolean hasFragmentWithTag(String tag) {
+      return null != controller
+          .get()
+          .getFragmentManager()
+          .findFragmentByTag(RequestManagerRetriever.FRAGMENT_TAG);
+    }
+
+    @Override
+    public void addFragmentWithTag(String tag, RequestManager requestManager) {
+      RequestManagerFragment fragment = new RequestManagerFragment();
+      fragment.setRequestManager(requestManager);
+      controller.get().getFragmentManager().beginTransaction()
+          .add(fragment, RequestManagerRetriever.FRAGMENT_TAG).commitAllowingStateLoss();
+      controller.get().getFragmentManager().executePendingTransactions();
+    }
+  }
+
+  public class SupportRetrieverHarness implements RetrieverHarness {
+    private final ActivityController<FragmentActivity> controller =
+        Robolectric.buildActivity(FragmentActivity.class);
+    private final Fragment parent;
+
+    public SupportRetrieverHarness() {
+      this.parent = new Fragment();
+
+      controller.create();
+      controller.get().getSupportFragmentManager().beginTransaction().add(parent, PARENT_TAG)
+          .commitAllowingStateLoss();
+      controller.get().getSupportFragmentManager().executePendingTransactions();
+      controller.start().resume();
+    }
+
+    @Override
+    public ActivityController getController() {
+      return controller;
+    }
+
+    @Override
+    public RequestManager doGet() {
+      return retriever.get(controller.get());
+    }
+
+    @Override
+    public boolean hasFragmentWithTag(String tag) {
+      return controller.get().getSupportFragmentManager()
+          .findFragmentByTag(RequestManagerRetriever.FRAGMENT_TAG) != null;
+    }
+
+    @Override
+    public void addFragmentWithTag(String tag, RequestManager manager) {
+      SupportRequestManagerFragment fragment = new SupportRequestManagerFragment();
+      fragment.setRequestManager(manager);
+      controller.get().getSupportFragmentManager().beginTransaction()
+          .add(fragment, RequestManagerRetriever.FRAGMENT_TAG).commitAllowingStateLoss();
+      controller.get().getSupportFragmentManager().executePendingTransactions();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/androidTest/java/com/bumptech/glide/load/resource/bitmap/ImageHeaderParserTest.java;<<<<<<< MINE
+
+    private static class SometimesZeroSkipInputStream extends FilterInputStream {
+        boolean returnZeroFlag = true;
+
+        protected SometimesZeroSkipInputStream(InputStream in) {
+            super(in);
+        }
+
+        @Override
+        public long skip(long byteCount) throws IOException {
+            if (returnZeroFlag) {
+                return 0;
+            }
+            returnZeroFlag = !returnZeroFlag;
+            return super.skip(byteCount);
+        }
+    }
+
+    private static class PartialSkipInputStream extends FilterInputStream {
+
+        protected PartialSkipInputStream(InputStream in) {
+            super(in);
+        }
+
+        @Override
+        public long skip(long byteCount) throws IOException {
+            long toActuallySkip = byteCount / 2;
+            if (byteCount == 1) {
+                toActuallySkip = 1;
+            }
+            return super.skip(toActuallySkip);
+        }
+    }
+
+    private static class PartialReadInputStream extends FilterInputStream {
+
+        protected PartialReadInputStream(InputStream in) {
+            super(in);
+        }
+
+        @Override
+        public int read(byte[] buffer, int byteOffset, int byteCount) throws IOException {
+            int toActuallyRead = byteCount / 2;
+            if (byteCount == 1) {
+                toActuallyRead = 1;
+            }
+            return super.read(buffer, byteOffset, toActuallyRead);
+        }
+    }
+=======
+  }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/request/RequestFutureTarget.java;<<<<<<< MINE
+    RequestFutureTarget(Handler mainHandler, int width, int height, boolean assertBackgroundThread, Waiter waiter) {
+        this.mainHandler = mainHandler;
+        this.width = width;
+        this.height = height;
+        this.assertBackgroundThread = assertBackgroundThread;
+        this.waiter = waiter;
+    }
+
+    @Override
+    public synchronized boolean cancel(boolean mayInterruptIfRunning) {
+        if (isCancelled) {
+            return true;
+        }
+
+        final boolean result = !isDone();
+        if (result) {
+            isCancelled = true;
+            if (mayInterruptIfRunning) {
+                clear();
+            }
+            waiter.notifyAll(this);
+        }
+        return result;
+    }
+
+    @Override
+    public synchronized boolean isCancelled() {
+        return isCancelled;
+    }
+
+    @Override
+    public synchronized boolean isDone() {
+        return isCancelled || resultReceived;
+    }
+
+    @Override
+    public R get() throws InterruptedException, ExecutionException {
+        try {
+            return doGet(null);
+        } catch (TimeoutException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    @Override
+    public R get(long time, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+        return doGet(timeUnit.toMillis(time));
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public void getSize(SizeReadyCallback cb) {
+        cb.onSizeReady(width, height);
+    }
+
+    @Override
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    @Override
+    public Request getRequest() {
+        return request;
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public void onLoadCleared(Drawable placeholder) {
+        // Do nothing.
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public void onLoadStarted(Drawable placeholder) {
+        // Do nothing.
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public synchronized void onLoadFailed(Exception e, Drawable errorDrawable) {
+         // We might get a null exception.
+        exceptionReceived = true;
+        this.exception = e;
+        waiter.notifyAll(this);
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public synchronized void onResourceReady(R resource, GlideAnimation<? super R> glideAnimation) {
+        // We might get a null result.
+        resultReceived = true;
+        this.resource = resource;
+        waiter.notifyAll(this);
+    }
+
+    private synchronized R doGet(Long timeoutMillis) throws ExecutionException, InterruptedException, TimeoutException {
+        if (assertBackgroundThread) {
+            Util.assertBackgroundThread();
+        }
+
+        if (isCancelled) {
+            throw new CancellationException();
+        } else if (exceptionReceived) {
+            throw new ExecutionException(exception);
+        } else if (resultReceived) {
+            return resource;
+        }
+
+        if (timeoutMillis == null) {
+            waiter.waitForTimeout(this, 0);
+        } else if (timeoutMillis > 0) {
+            waiter.waitForTimeout(this, timeoutMillis);
+        }
+
+        if (Thread.interrupted()) {
+            throw new InterruptedException();
+        } else if (exceptionReceived) {
+            throw new ExecutionException(exception);
+        } else if (isCancelled) {
+            throw new CancellationException();
+        } else if (!resultReceived) {
+            throw new TimeoutException();
+        }
+
+        return resource;
+    }
+
+    /**
+     * A callback that should never be invoked directly.
+     */
+    @Override
+    public void run() {
+        if (request != null) {
+            request.clear();
+            cancel(false /*mayInterruptIfRunning*/);
+        }
+    }
+
+    /**
+     * Can be safely called from either the main thread or a background thread to cleanup the resources used by this
+     * target.
+     */
+    @Override
+    public void clear() {
+        mainHandler.post(this);
+    }
+
+    @Override
+    public void onStart() {
+        // Do nothing.
+    }
+
+    @Override
+    public void onStop() {
+        // Do nothing.
+    }
+
+    @Override
+    public void onDestroy() {
+        // Do nothing.
+    }
+
+    // Visible for testing.
+    static class Waiter {
+
+        public void waitForTimeout(Object toWaitOn, long timeoutMillis) throws InterruptedException {
+            toWaitOn.wait(timeoutMillis);
+        }
+
+        public void notifyAll(Object toNotify) {
+            toNotify.notifyAll();
+        }
+=======
+    public void notifyAll(Object toNotify) {
+      toNotify.notifyAll();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/resource/bitmap/ImageHeaderParser.java;<<<<<<< MINE
+    public enum ImageType {
+        /** GIF type. */
+        GIF(true),
+        /** JPG type. */
+        JPEG(false),
+        /** PNG type with alpha. */
+        PNG_A(true),
+        /** PNG type without alpha. */
+        PNG(false),
+        /** Unrecognized type. */
+        UNKNOWN(false);
+        private final boolean hasAlpha;
+
+        ImageType(boolean hasAlpha) {
+            this.hasAlpha = hasAlpha;
+        }
+
+        public boolean hasAlpha() {
+            return hasAlpha;
+        }
+    }
+
+    private static final int GIF_HEADER = 0x474946;
+    private static final int PNG_HEADER = 0x89504E47;
+    private static final int EXIF_MAGIC_NUMBER = 0xFFD8;
+    // "MM".
+    private static final int MOTOROLA_TIFF_MAGIC_NUMBER = 0x4D4D;
+    // "II".
+    private static final int INTEL_TIFF_MAGIC_NUMBER = 0x4949;
+    private static final String JPEG_EXIF_SEGMENT_PREAMBLE = "Exif\0\0";
+    private static final byte[] JPEG_EXIF_SEGMENT_PREAMBLE_BYTES;
+    private static final int SEGMENT_SOS = 0xDA;
+    private static final int MARKER_EOI = 0xD9;
+    private static final int SEGMENT_START_ID = 0xFF;
+    private static final int EXIF_SEGMENT_TYPE = 0xE1;
+    private static final int ORIENTATION_TAG_TYPE = 0x0112;
+    private static final int[] BYTES_PER_FORMAT = { 0, 1, 1, 2, 4, 8, 1, 1, 2, 4, 8, 4, 8 };
+
+    private final StreamReader streamReader;
+=======
+    UNKNOWN(false);
+    private final boolean hasAlpha;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/resource/bitmap/ImageHeaderParser.java;<<<<<<< MINE
+        public int read(byte[] buffer) throws IOException {
+            int toRead = buffer.length;
+            int read;
+            while (toRead > 0 && ((read = is.read(buffer, buffer.length - toRead, toRead)) != -1)) {
+                toRead -= read;
+            }
+            return buffer.length - toRead;
+        }
+=======
+    @Override
+    public long skip(long total) throws IOException {
+      if (total < 0) {
+        return 0;
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/resource/bitmap/Downsampler.java;<<<<<<< MINE
+    /**
+     * Load and scale the image uniformly (maintaining the image's aspect ratio) so that the smallest edge of the
+     * image will be between 1x and 2x the requested size. The larger edge has no maximum size.
+     */
+    public static final Downsampler AT_LEAST = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            return Math.min(inHeight / outHeight, inWidth / outWidth);
+        }
+
+        @Override
+        public String getId() {
+            return "AT_LEAST.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    /**
+     * Load and scale the image uniformly (maintaining the image's aspect ratio) so that largest edge of the image
+     * will be between 1/2x and 1x of the requested size. The smaller edge has no minimum size.
+     */
+    public static final Downsampler AT_MOST = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            int maxIntegerFactor = (int) Math.ceil(Math.max(inHeight / (float) outHeight,
+                inWidth / (float) outWidth));
+            int lesserOrEqualSampleSize = Math.max(1, Integer.highestOneBit(maxIntegerFactor));
+            return lesserOrEqualSampleSize << (lesserOrEqualSampleSize < maxIntegerFactor ? 1 : 0);
+        }
+
+        @Override
+        public String getId() {
+            return "AT_MOST.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    /**
+     * Load the image at its original size.
+     */
+    public static final Downsampler NONE = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            return 0;
+        }
+
+        @Override
+        public String getId() {
+            return "NONE.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    // 5MB. This is the max image header size we can handle, we preallocate a much smaller buffer but will resize up to
+    // this amount if necessary.
+    private static final int MARK_POSITION = 5 * 1024 * 1024;
+
+
+    /**
+     * Load the image for the given InputStream. If a recycled Bitmap whose dimensions exactly match those of the image
+     * for the given InputStream is available, the operation is much less expensive in terms of memory.
+     *
+     * <p>
+     *     Note - this method will throw an exception of a Bitmap with dimensions not matching
+     *     those of the image for the given InputStream is provided.
+     * </p>
+     *
+     * @param is An {@link InputStream} to the data for the image.
+     * @param pool A pool of recycled bitmaps.
+     * @param outWidth The width the final image should be close to.
+     * @param outHeight The height the final image should be close to.
+     * @return A new bitmap containing the image from the given InputStream, or recycle if recycle is not null.
+     */
+    @SuppressWarnings("resource")
+    // see BitmapDecoder.decode
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/cache/DiskLruCacheWrapper.java;<<<<<<< MINE
+        return diskLruCache;
+    }
+
+    private synchronized void resetDiskCache() {
+        diskLruCache = null;
+    }
+
+    @Override
+    public File get(Key key) {
+        String safeKey = safeKeyGenerator.getSafeKey(key);
+        File result = null;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/cache/DiskCache.java;<<<<<<< MINE
+    interface Factory {
+
+        /** 250 MB of cache. */
+        int DEFAULT_DISK_CACHE_SIZE = 250 * 1024 * 1024;
+        String DEFAULT_DISK_CACHE_DIR = "image_manager_disk_cache";
+
+        /**
+         * Returns a new disk cache, or {@code null} if no disk cache could be created.
+         */
+        DiskCache build();
+    }
+=======
+    DiskCache build();
+  }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/data/HttpUrlFetcher.java;<<<<<<< MINE
+    public void cleanup() {
+        if (stream != null) {
+            try {
+                stream.close();
+            } catch (IOException e) {
+                // Ignore
+            }
+        }
+        if (urlConnection != null) {
+            urlConnection.disconnect();
+        }
+    }
+
+    @Override
+    public String getId() {
+        return glideUrl.getCacheKey();
+    }
+
+    @Override
+    public void cancel() {
+        // TODO: we should consider disconnecting the url connection here, but we can't do so directly because cancel is
+        // often called on the main thread.
+        isCancelled = true;
+    }
+
+    interface HttpUrlConnectionFactory {
+        HttpURLConnection build(URL url) throws IOException;
+    }
+
+    private static class DefaultHttpUrlConnectionFactory implements HttpUrlConnectionFactory {
+        @Override
+        public HttpURLConnection build(URL url) throws IOException {
+            return (HttpURLConnection) url.openConnection();
+        }
+=======
+    public HttpURLConnection build(URL url) throws IOException {
+      return (HttpURLConnection) url.openConnection();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/okio/revisions/rev_89e1341_c8a36a6/rev_89e1341-c8a36a6/okhttp-protocols/src/main/java/com/squareup/okhttp/internal/bytes/GzipSource.java;<<<<<<< MINE
+      consumeTrailer(deadline);
+=======
+      consumeTrailer();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6bf11c0_8024de0/rev_6bf11c0-8024de0/java/src1/com/pubnub/api/SubscribeWorker.java;<<<<<<< MINE
+                sleep = true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6bf11c0_8024de0/rev_6bf11c0-8024de0/java/src1/com/pubnub/api/SubscribeWorker.java;<<<<<<< MINE
+=======
+            sleep = true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+=======
+ *
+ * @param <IdT> type of the unique identifier of this stream.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+   * Indicates whether the listener is currently eligible for notification of
+   * {@link StreamListener#onReady()}.
+   */
+  @GuardedBy("onReadyLock")
+  private boolean shouldNotifyOnReady = true;
+  /**
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+=======
+   * Override this method to provide a stream listener.
+   */
+  protected abstract StreamListener listener();
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+    return onReadyThreshold;
+  }
+
+  /**
+   * Sets the number of queued bytes for a given stream, below which
+   * {@link StreamListener#onReady()} will be called. If not called, defaults to
+   * {@link #DEFAULT_ONREADY_THRESHOLD}.
+   *
+   * <p>This must be called from the transport thread, since a listener may be called back directly.
+   */
+  public void setOnReadyThreshold(int onReadyThreshold) {
+    checkArgument(onReadyThreshold > 0, "onReadyThreshold must be > 0");
+    boolean doNotify;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+   * Gets the listener to this stream.
+   */
+  protected abstract StreamListener listener();
+
+  /**
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+      doNotify = needToNotifyOnReady();
+    }
+    if (doNotify) {
+      listener().onReady();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+      if (!isReady()) {
+        shouldNotifyOnReady = true;
+      }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+      listener().onReady();
+=======
+      notifyIfReady();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+    return false;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/okhttp/src/test/java/io/grpc/transport/okhttp/OkHttpClientTransportTest.java;<<<<<<< MINE
+    // Now the first message is still in the queue, and it's size is smaller than the threshold.
+    // Increase the threshold should have no affection.
+    stream.setOnReadyThreshold(messageLength * 10);
+    assertFalse(listener.isOnReadyCalled());
+    // Decrease the threshold should have no affection too.
+    stream.setOnReadyThreshold(HEADER_LENGTH);
+    assertFalse(listener.isOnReadyCalled());
+    // But now increase the threshold to larger than the queued message size, onReady should be
+    // triggered.
+    stream.setOnReadyThreshold(HEADER_LENGTH + messageLength + 1);
+    assertTrue(listener.isOnReadyCalled());
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_35c7f03_449a6c6/rev_35c7f03-449a6c6/java/srcPubnubApi/com/pubnub/api/PubnubUtilCore.java;<<<<<<< MINE
+
+=======
+            
+            if (exclude != null) {
+            	if (s.indexOf(exclude) != -1) {
+            		continue;
+            	}
+            }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_8e4119c_6dbe265/rev_8e4119c-6dbe265/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+        String[] urlargs = { getPubnubUrl(), "v2/presence/sub_key",
+                this.SUBSCRIBE_KEY, "channel", PubnubUtil.urlEncode(channel),
+                "leave"
+        };
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+=======
+    private void channelGroupLeave(String group) {
+        Hashtable params = new Hashtable();
+        params.put("channel-group", group);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f/android/src/com/pubnub/api/Pubnub.java;<<<<<<< MINE
+=======
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f/android/src/com/pubnub/api/Pubnub.java;<<<<<<< MINE
+=======
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_b805692_57068a6/rev_b805692-57068a6/demo/src/main/java/com/google/android/exoplayer/demo/full/player/DemoPlayer.java;<<<<<<< MINE
+=======
+      if (type == TYPE_TEXT && index == DISABLED_TRACK && textListener != null) {
+        textListener.onText(null);
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9/java/srcPubnubApi/com/pubnub/api/PubnubCore.java;<<<<<<< MINE
+    protected Object _pamAudit(final String channel, String auth_key,
+                         Callback callback, boolean sync) {
+
+        final Callback cb = getWrappedCallback(callback);
+        Hashtable parameters = PubnubUtil.hashtableClone(params);
+=======
+    /**
+     * Unsubscribe from channels.
+     *
+     * @param channels String array containing channel names
+     */
+    public void unsubscribe(String[] channels, Callback callback) {
+        for (int i = 0; i < channels.length; i++) {
+            String channel = channels[i];
+            channelSubscriptions.removeItem(channel);
+            channelSubscriptions.state.remove(channel);
+        }
+        _leave(channels, null, callback);
+        resubscribe();
+    }
+    
+    /**
+     * Unsubscribe from channels.
+     *
+     * @param channels String array containing channel names
+     */
+    public void unsubscribe(String[] channels) {
+    	unsubscribe(channels, null);
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_17b846c_71436c3/rev_17b846c-71436c3/src/main/java/com/pubnub/api/core/Pubnub.java;<<<<<<< MINE
+
+        return prop.getProperty("version");
+
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/endpoints/pubsub/Publish.java;<<<<<<< MINE
+
+        return true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/endpoints/push/RemoveAllPushChannelsForDevice.java;<<<<<<< MINE
+
+        return true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/PubNubError.java;<<<<<<< MINE
+        // Error Objects
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1/library/src/main/java/com/google/android/exoplayer/extractor/ts/TsExtractor.java;<<<<<<< MINE
+=======
+          case TS_STREAM_TYPE_ATSC_AC3:
+          case TS_STREAM_TYPE_DVB_AC3:
+            pesPayloadReader = new Ac3Reader(output.track(streamType));
+            break;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+    public void testSubscribeWithEncryption() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+
+    @Test
+    public void testSubscribeWithEncryptionPNOther() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":{\"pn_other\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("pn_other").get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+
+    @Test
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        // if we do not have a crypto key, there is no way to process the node; let's return.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        if (input.isObject() && input.has("pn_other")) {
+            inputText = input.get("pn_other").asText();
+        } else {
+            inputText = input.asText();
+        }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        // inject the decoded response into the payload
+        if (input.isObject() && input.has("pn_other")) {
+            ObjectNode objectNode = (ObjectNode) input;
+            objectNode.set("pn_other", outputObject);
+            outputObject = objectNode;
+        }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertTrue(requests.size() >= 1);
+                assertEquals("Message", message.getMessage().get("text").asText());
+                assertEquals("coolChannel", message.getChannel());
+                assertEquals(null, message.getSubscription());
+                gotMessage.set(true);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+    @Test
+    public void testNamingSubscribeChannelGroupBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14607577960932487\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"i\":\"Client-g5d4g\",\"p\":{\"t\":\"14607577960925503\",\"r\":1},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel\",\"d\":{\"text\":\"Message\"},\"b\":\"coolChannelGroup\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertEquals("coolChannel", message.getChannel());
+                assertEquals("coolChannelGroup", message.getSubscription());
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+    public void testPresenceSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannel-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals(null, presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+    @Test
+    public void testPresenceChannelGroupSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannelGroup-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals("coolChannelGroup", presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+
+    @Test
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/pubsub/SubscribeEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/pubsub/SubscribeEndpointTest.java;<<<<<<< MINE
+        SubscribeEnvelope subscribeEnvelope = instance.sync();
+=======
+        instance.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/push/ListPushProvisionsTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/push/ModifyPushChannelsForDeviceTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/TimeEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channel("ch1").sync();
+=======
+        partialAudit.channel("ch1").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+=======
+        partialAudit.channelGroup("cg1").authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerAuditResult pnAccessManagerAuditResult = partialAudit.authKeys(Arrays.asList("key1")).channel(null).channelGroup(null).sync();
+=======
+        partialAudit.authKeys(Arrays.asList("key1")).channel(null).channelGroup(null).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.channels(Arrays.asList("ch1")).manage(true).sync();
+=======
+        partialGrant.channels(Arrays.asList("ch1")).manage(true).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+        PNAccessManagerGrantResult result = partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+=======
+        partialGrant.authKeys(Arrays.asList("key1")).channels(Arrays.asList("ch1")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAddChannelResult response = partialAddChannelChannelGroup.channels(Arrays.asList("ch1", "ch2")).sync();
+=======
+        partialAddChannelChannelGroup.channels(Arrays.asList("ch1", "ch2")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAddChannelResult response = partialAddChannelChannelGroup.channelGroup("").channels(Arrays.asList("ch1", "ch2")).sync();
+=======
+        partialAddChannelChannelGroup.channelGroup("").channels(Arrays.asList("ch1", "ch2")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAddChannelResult response = partialAddChannelChannelGroup.channelGroup("groupA").sync();
+=======
+        partialAddChannelChannelGroup.channelGroup("groupA").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAddChannelResult response = partialAddChannelChannelGroup.channelGroup("groupA").channels(Arrays.asList("ch1", "ch2")).sync();
+=======
+        partialAddChannelChannelGroup.channelGroup("groupA").channels(Arrays.asList("ch1", "ch2")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsDeleteGroupResult response = partialDeleteChannelGroup.sync();
+=======
+        partialDeleteChannelGroup.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsDeleteGroupResult response = partialDeleteChannelGroup.channelGroup("").sync();
+=======
+        partialDeleteChannelGroup.channelGroup("").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsDeleteGroupResult response = partialDeleteChannelGroup.channelGroup("groupA").sync();
+=======
+        partialDeleteChannelGroup.channelGroup("groupA").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/ListAllChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/ListAllChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsListAllResult response = partialChannelGroup.sync();
+=======
+        partialChannelGroup.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAllChannelsResult response = partialAllChannelsChannelGroup.sync();
+=======
+        partialAllChannelsChannelGroup.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAllChannelsResult response = partialAllChannelsChannelGroup.channelGroup("").sync();
+=======
+        partialAllChannelsChannelGroup.channelGroup("").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsAllChannelsResult response = partialAllChannelsChannelGroup.channelGroup("groupA").sync();
+=======
+        partialAllChannelsChannelGroup.channelGroup("groupA").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsRemoveChannelResult response = partialRemoveChannelChannelGroup.channels(Arrays.asList("ch1", "ch2")).sync();
+=======
+        partialRemoveChannelChannelGroup.channels(Arrays.asList("ch1", "ch2")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsRemoveChannelResult response = partialRemoveChannelChannelGroup.channelGroup("groupA").sync();
+=======
+        partialRemoveChannelChannelGroup.channelGroup("groupA").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+        PNChannelGroupsRemoveChannelResult response = partialRemoveChannelChannelGroup.channelGroup("groupA").channels(Arrays.asList("ch1", "ch2")).sync();
+=======
+        partialRemoveChannelChannelGroup.channelGroup("groupA").channels(Arrays.asList("ch1", "ch2")).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+        PNWhereNowResult response = partialWhereNow.sync();
+=======
+        partialWhereNow.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+        PNWhereNowResult response = partialWhereNow.sync();
+=======
+        partialWhereNow.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+        PNWhereNowResult response = partialWhereNow.sync();
+=======
+        partialWhereNow.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+        PNWhereNowResult response = partialWhereNow.sync();
+=======
+        partialWhereNow.sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest.java;<<<<<<< MINE
+        PNHereNowResult response =  partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+=======
+        partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest.java;<<<<<<< MINE
+        PNHereNowResult response =  partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+=======
+        partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest.java;<<<<<<< MINE
+        PNHereNowResult response =  partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+=======
+        partialHereNow.channels(Arrays.asList("ch1", "ch2")).includeState(true).sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+        PNGetStateResult result = partialGetState.uuid("sampleUUID").sync();
+=======
+        partialGetState.uuid("sampleUUID").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+        PNGetStateResult result = partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+=======
+        partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+        PNGetStateResult result = partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+=======
+        partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+        PNGetStateResult result = partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+=======
+        partialGetState.channels(Arrays.asList("testChannel")).uuid("sampleUUID").sync();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/LeaveTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/PubNubExceptionTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/PubNubExceptionTest.java;<<<<<<< MINE
+            pubnubError = error.getPubnubError();
+            pnErrorCode = pubnubError.getErrorCode();
+            pnErroCodeExtended = pubnubError.getErrorCodeExtended();
+            pnErrorJNode = pubnubError.getErrorObject();
+            pnErrorMessage = pubnubError.getMessage();
+            pnErrorString = pubnubError.getErrorString();
+            response = error.getResponse();
+            erroMsg = error.getErrormsg();
+            jNode = error.getJso();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/netty-socketio/revisions/rev_fcc7d33_05ec7d3/rev_fcc7d33-05ec7d3/src/main/java/com/corundumstudio/socketio/SocketIOServer.java;<<<<<<< MINE
+=======
+        bootstrap.childOption(ChannelOption.SO_LINGER, config.getSoLinger());
+>>>>>>> YOURS
+/home/arthur/analysis/projects/netty-socketio/revisions/rev_fcc7d33_05ec7d3/rev_fcc7d33-05ec7d3/src/main/java/com/corundumstudio/socketio/SocketIOServer.java;<<<<<<< MINE
+        bootstrap.option(ChannelOption.SO_LINGER, config.getSoLinger());
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+      releaseOutputBuffer();
+=======
+      releaseOutputBuffer(outputBuffer);
+      outputBuffer = null;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+      releaseOutputBuffer();
+=======
+      releaseOutputBuffer(outputBuffer);
+      outputBuffer = null;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+    releaseOutputBuffer();
+=======
+    // Release the output buffer we rendered during the previous cycle, now that we delivered a new
+    // buffer.
+    releaseOutputBuffer(renderedOutputBuffer);
+    renderedOutputBuffer = outputBuffer;
+    outputBuffer = null;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+=======
+    releaseOutputBuffer(bufferToRelease);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+=======
+      + "uniform mat3 mColorConversion;\n"
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+=======
+    checkNoGLES2Error();
+    colorMatrixLocation = GLES20.glGetUniformLocation(program, "mColorConversion");
+    checkNoGLES2Error();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+    OutputBuffer outputBuffer = this.outputBuffer;
+=======
+    synchronized (this) {
+      VpxOutputBuffer outputBuffer = this.outputBuffer;
+      if (outputBuffer == null) {
+        // Nothing to render yet.
+        return;
+      }
+
+      // Set color matrix. Assume BT709 if the color space is unknown.
+      float[] colorConversion = outputBuffer.colorspace == VpxOutputBuffer.COLORSPACE_BT601
+          ? kColorConversion601 : kColorConversion709;
+      GLES20.glUniformMatrix3fv(colorMatrixLocation, 1, false, colorConversion, 0);
+
+      for (int i = 0; i < 3; i++) {
+        int h = (i == 0) ? outputBuffer.height : (outputBuffer.height + 1) / 2;
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + i);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, yuvTextures[i]);
+        GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 1);
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE,
+            outputBuffer.yuvStrides[i], h, 0, GLES20.GL_LUMINANCE, GLES20.GL_UNSIGNED_BYTE,
+            outputBuffer.yuvPlanes[i]);
+      }
+      // Set cropping of stride if either width or stride has changed.
+      if (previousWidth != outputBuffer.width || previousStride != outputBuffer.yuvStrides[0]) {
+        float crop = (float) outputBuffer.width / outputBuffer.yuvStrides[0];
+        textureCoords = nativeFloatBuffer(
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            crop, 0.0f,
+            crop, 1.0f);
+        GLES20.glVertexAttribPointer(
+            texLocation, 2, GLES20.GL_FLOAT, false, 0, textureCoords);
+        previousWidth = outputBuffer.width;
+        previousStride = outputBuffer.yuvStrides[0];
+      }
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+    if (outputBuffer == null) {
+      // Nothing to render yet.
+      return;
+    }
+    for (int i = 0; i < 3; i++) {
+      int h = (i == 0) ? outputBuffer.height : (outputBuffer.height + 1) / 2;
+      GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + i);
+      GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, yuvTextures[i]);
+      GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 1);
+      GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE, outputBuffer.yuvStrides[i],
+          h, 0, GLES20.GL_LUMINANCE, GLES20.GL_UNSIGNED_BYTE, outputBuffer.yuvPlanes[i]);
+    }
+    // Set cropping of stride if either width or stride has changed.
+    if (previousWidth != outputBuffer.width || previousStride != outputBuffer.yuvStrides[0]) {
+      float crop = (float) outputBuffer.width / outputBuffer.yuvStrides[0];
+      textureCoords = nativeFloatBuffer(
+          0.0f, 0.0f,
+          0.0f, 1.0f,
+          crop, 0.0f,
+          crop, 1.0f);
+      GLES20.glVertexAttribPointer(
+          texLocation, 2, GLES20.GL_FLOAT, false, 0, textureCoords);
+      previousWidth = outputBuffer.width;
+      previousStride = outputBuffer.yuvStrides[0];
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil.java;<<<<<<< MINE
+   * @throws IOException If an error occurs reading from the input.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil.java;<<<<<<< MINE
+   * @throws IOException If an error occurs reading from the input.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView.java;<<<<<<< MINE
+=======
+    isAttachedToWindow = true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView.java;<<<<<<< MINE
+=======
+    isAttachedToWindow = false;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/extractor/ts/H265Reader.java;<<<<<<< MINE
+    sampleReader = new SampleReader(output);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/extractor/ts/H265Reader.java;<<<<<<< MINE
+=======
+    sampleReader = new SampleReader(output);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/BaseRenderer.java;<<<<<<< MINE
+=======
+    } else if (result == C.RESULT_FORMAT_READ) {
+      Format format = formatHolder.format;
+      if (format.subsampleOffsetUs != Format.OFFSET_SAMPLE_RELATIVE) {
+        format = format.copyWithSubsampleOffsetUs(format.subsampleOffsetUs + streamOffsetUs);
+        formatHolder.format = format;
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/demo/src/main/java/com/google/android/exoplayer2/demo/TrackSelectionHelper.java;<<<<<<< MINE
+          haveSupportedTracks = true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/extensions/gvr/src/main/java/com/google/android/exoplayer2/ext/gvr/GvrAudioProcessor.java;<<<<<<< MINE
+=======
+      case 1:
+        surroundFormat = GvrAudioSurround.SurroundFormat.SURROUND_MONO;
+        break;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+      + "\n"
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+=======
+    assertNull(masterPlaylist.muxedCaptionFormats);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(0).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(1).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(4).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * The http url from which the media playlist can be obtained.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * Format information associated with the HLS url.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * @param url See {@link #url}.
+     * @param format See {@link #format}.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of variants declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of demuxed audios declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of subtitles declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The format of the audio muxed in the variants. May be null if the playlist does not declare any
+   * muxed audio.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The format of the closed captions declared by the playlist. May be empty if the playlist
+   * explicitly declares no captions are available, or null if the playlist does not declare any
+   * captions information.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+    if (expectedPlaylistUrl != null) {
+      playlistTracker.maybeThrowPlaylistRefreshError(expectedPlaylistUrl);
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+    expectedPlaylistUrl = null;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+      expectedPlaylistUrl = selectedUrl;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+        expectedPlaylistUrl = selectedUrl;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaChunk.java;<<<<<<< MINE
+=======
+      } else {
+        closedCaptionFormats = Collections.emptyList();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+    try {
+      assertFalse(bitArray.readBit());
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      // ignored
+    }
+  }
+
+
+  public void testSkipBitsThrowsErrorIfEOB() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xF0, 0x0F));
+
+    try {
+      bitArray.skipBits(17);
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+
+  }
+  public void testSetPositionIllegalPositions() throws Exception {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xF0, 0x0F));
+
+    try {
+      bitArray.setPosition(16);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    try {
+      bitArray.setPosition(-1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+    try {
+      bitArray.readBits(24);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(1, bitArray.getPosition());
+    }
+  }
+
+  public void testLimit() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xc0, 0x02), 1);
+
+    try {
+      bitArray.skipBits(9);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    try {
+      bitArray.readBits(9);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    int byteValue = bitArray.readBits(8);
+    assertEquals(0xc0, byteValue);
+    assertEquals(8, bitArray.getPosition());
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(8, bitArray.getPosition());
+    }
+  }
+
+  public void testBitsLeft() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xc0, 0x02));
+
+    assertEquals(16, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(15, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(3);
+    assertEquals(12, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.setPosition(6);
+    assertEquals(10, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(9, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(8, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.readBits(4);
+    assertEquals(4, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.readBits(4);
+    assertEquals(0, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.bitsLeft());
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/text/ttml/TtmlRegion.java;<<<<<<< MINE
+=======
+    this.lineAnchor = lineAnchor;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+    joiningDeadlineMs = C.TIME_UNSET;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+=======
+    joiningDeadlineMs = C.TIME_UNSET;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+=======
+   * @param codecIsAdaptive Whether the codec supports seamless resolution switches.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/metadata/MetadataRenderer.java;<<<<<<< MINE
+    super.onDisabled();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/source/MediaPeriod.java;<<<<<<< MINE
+=======
+   * <p>
+   * This method should only be called after the period has been prepared.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/source/MediaPeriod.java;<<<<<<< MINE
+=======
+   * <p>
+   * This method should only be called after the period has been prepared.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/upstream/cache/CacheDataSourceFactory.java;<<<<<<< MINE
+=======
+   * @see CacheDataSource#CacheDataSource(Cache, DataSource)
+   */
+  public CacheDataSourceFactory(Cache cache, DataSource.Factory upstreamFactory) {
+    this(cache, upstreamFactory, 0);
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/upstream/ContentDataSource.java;<<<<<<< MINE
+=======
+      if (assetFileDescriptor == null) {
+        throw new FileNotFoundException("Could not open file descriptor for: " + uri);
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+=======
+   * Skips a single bit.
+   */
+  public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset++;
+    }
+    assertValidOffset();
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+
+    // Read any remaining bits.
+    if (numBits > 0) {
+      int nextBit = bitOffset + numBits;
+      byte writeMask = (byte) (0xFF >> (8 - numBits));
+
+      if (nextBit > 8) {
+        // Combine bits from current byte and next byte.
+        returnValue |= ((((data[byteOffset] & 0xFF) << (nextBit - 8)
+            | ((data[byteOffset + 1] & 0xFF) >> (16 - nextBit))) & writeMask));
+        byteOffset++;
+      } else {
+        // Bits to be read only within current byte.
+        returnValue |= (((data[byteOffset] & 0xFF) >> (8 - nextBit)) & writeMask);
+        if (nextBit == 8) {
+          byteOffset++;
+        }
+      }
+
+      bitOffset = nextBit % 8;
+    }
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+        && (bitOffset >= 0 && bitOffset < 8)
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray.java;<<<<<<< MINE
+=======
+   * Skips a single bit.
+   */
+  public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset += shouldSkipByte(byteOffset + 1) ? 2 : 1;
+    }
+    assertValidOffset();
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray.java;<<<<<<< MINE
+        && (bitOffset >= 0 && bitOffset < 8)
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader.java;<<<<<<< MINE
+=======
+    // First payload packet. Trim the payload array of the ogg packet after headers have been read.
+    oggPacket.trimPayload();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket.java;<<<<<<< MINE
+=======
+        if (packetArray.capacity() < packetArray.limit() + size) {
+          packetArray.data = Arrays.copyOf(packetArray.data, packetArray.limit() + size);
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket.java;<<<<<<< MINE
+=======
+   * Trims the packet data array.
+   */
+  public void trimPayload() {
+    if (packetArray.data.length == OggPageHeader.MAX_PAGE_PAYLOAD) {
+      return;
+    }
+    packetArray.data = Arrays.copyOf(packetArray.data, Math.max(OggPageHeader.MAX_PAGE_PAYLOAD,
+        packetArray.limit()));
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray.java;<<<<<<< MINE
+    this(data, data.length);
+  }
+
+  /**
+   * Creates a new instance that wraps an existing array.
+   *
+   * @param data the array to wrap.
+   * @param limit the limit in bytes.
+   */
+  public VorbisBitArray(byte[] data, int limit) {
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray.java;<<<<<<< MINE
+    Assertions.checkArgument(position < limit && position >= 0);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/BaseRenderer.java;<<<<<<< MINE
+   *
+   * @return Whether the source is ready.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+=======
+        unplayedPaint.setColor(unplayedColor);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    scrubberSize = scrubberEnabledSize;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    } else {
+      updateScrubberState();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/TimeBar.java;<<<<<<< MINE
+=======
+     * @param position The position of the scrubber, in milliseconds.
+>>>>>>> YOURS

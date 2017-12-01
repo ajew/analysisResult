@@ -1,0 +1,626 @@
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity.java;<<<<<<< MINE
+=======
+        searchLoading = findViewById(R.id.search_loading);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity.java;<<<<<<< MINE
+=======
+        searchLoading.setVisibility(View.VISIBLE);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/library/src/com/bumptech/glide/Glide.java;<<<<<<< MINE
+=======
+    /**
+     * Get the singleton.
+     *
+     * @return the singleton
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/library/src/com/bumptech/glide/Glide.java;<<<<<<< MINE
+=======
+     *
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                job.addCallback(cb);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+            } else {
+                job.addCallback(cb);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                // Note: this is potentially dangerous. The runner asynchronously asks our jobs map for a job
+                // matching our key after posting a runnable to the main thread and as a result, the job it gets back
+                // may not be this job. We protect against this for cancellation by not delivering failures from
+                // cancelled runners, so new jobs will not receive errors from cancelled jobs. However, new jobs may
+                // receive results from old runners if the old runner was cancelled, but completed successfully anyway
+                // because it received the cancellation too late.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_809f3b3_0b2cafb/rev_809f3b3-0b2cafb/library/src/com/bumptech/glide/resize/ImageManager.java;<<<<<<< MINE
+=======
+                    if (isCancelled) {
+                        return;
+                    }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6bf11c0_8024de0/rev_6bf11c0-8024de0/java/src1/com/pubnub/api/SubscribeWorker.java;<<<<<<< MINE
+=======
+            sleep = true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+=======
+ *
+ * @param <IdT> type of the unique identifier of this stream.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+=======
+   * Override this method to provide a stream listener.
+   */
+  protected abstract StreamListener listener();
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_35c7f03_449a6c6/rev_35c7f03-449a6c6/java/srcPubnubApi/com/pubnub/api/PubnubUtilCore.java;<<<<<<< MINE
+
+=======
+            
+            if (exclude != null) {
+            	if (s.indexOf(exclude) != -1) {
+            		continue;
+            	}
+            }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f/android/src/com/pubnub/api/Pubnub.java;<<<<<<< MINE
+=======
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f/android/src/com/pubnub/api/Pubnub.java;<<<<<<< MINE
+=======
+        _request(hreq, nonSubscribeManager);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_b805692_57068a6/rev_b805692-57068a6/demo/src/main/java/com/google/android/exoplayer/demo/full/player/DemoPlayer.java;<<<<<<< MINE
+=======
+      if (type == TYPE_TEXT && index == DISABLED_TRACK && textListener != null) {
+        textListener.onText(null);
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1/library/src/main/java/com/google/android/exoplayer/extractor/ts/TsExtractor.java;<<<<<<< MINE
+=======
+          case TS_STREAM_TYPE_ATSC_AC3:
+          case TS_STREAM_TYPE_DVB_AC3:
+            pesPayloadReader = new Ac3Reader(output.track(streamType));
+            break;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+    public void testSubscribeWithEncryption() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+
+    @Test
+    public void testSubscribeWithEncryptionPNOther() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":{\"pn_other\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("pn_other").get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+
+    @Test
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        // if we do not have a crypto key, there is no way to process the node; let's return.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        if (input.isObject() && input.has("pn_other")) {
+            inputText = input.get("pn_other").asText();
+        } else {
+            inputText = input.asText();
+        }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker.java;<<<<<<< MINE
+=======
+        // inject the decoded response into the payload
+        if (input.isObject() && input.has("pn_other")) {
+            ObjectNode objectNode = (ObjectNode) input;
+            objectNode.set("pn_other", outputObject);
+            outputObject = objectNode;
+        }
+
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertTrue(requests.size() >= 1);
+                assertEquals("Message", message.getMessage().get("text").asText());
+                assertEquals("coolChannel", message.getChannel());
+                assertEquals(null, message.getSubscription());
+                gotMessage.set(true);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+    @Test
+    public void testNamingSubscribeChannelGroupBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14607577960932487\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"i\":\"Client-g5d4g\",\"p\":{\"t\":\"14607577960925503\",\"r\":1},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel\",\"d\":{\"text\":\"Message\"},\"b\":\"coolChannelGroup\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertEquals("coolChannel", message.getChannel());
+                assertEquals("coolChannelGroup", message.getSubscription());
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+    public void testPresenceSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannel-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals(null, presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+    @Test
+    public void testPresenceChannelGroupSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannelGroup-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals("coolChannelGroup", presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+
+
+    @Test
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest.java;<<<<<<< MINE
+
+=======
+                assertTrue(requests.size() >= 1);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/pubsub/SubscribeEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/push/ListPushProvisionsTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/push/ModifyPushChannelsForDeviceTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/TimeEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest.java;<<<<<<< MINE
+
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/ListAllChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/com/pubnub/api/endpoints/presence/LeaveTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/PubNubExceptionTest.java;<<<<<<< MINE
+=======
+        wireMockRule.start();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/netty-socketio/revisions/rev_fcc7d33_05ec7d3/rev_fcc7d33-05ec7d3/src/main/java/com/corundumstudio/socketio/SocketIOServer.java;<<<<<<< MINE
+=======
+        bootstrap.childOption(ChannelOption.SO_LINGER, config.getSoLinger());
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer.java;<<<<<<< MINE
+=======
+    releaseOutputBuffer(bufferToRelease);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+=======
+      + "uniform mat3 mColorConversion;\n"
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+=======
+    checkNoGLES2Error();
+    colorMatrixLocation = GLES20.glGetUniformLocation(program, "mColorConversion");
+    checkNoGLES2Error();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView.java;<<<<<<< MINE
+=======
+    isAttachedToWindow = true;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView.java;<<<<<<< MINE
+=======
+    isAttachedToWindow = false;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/extractor/ts/H265Reader.java;<<<<<<< MINE
+=======
+    sampleReader = new SampleReader(output);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38/library/src/main/java/com/google/android/exoplayer2/BaseRenderer.java;<<<<<<< MINE
+=======
+    } else if (result == C.RESULT_FORMAT_READ) {
+      Format format = formatHolder.format;
+      if (format.subsampleOffsetUs != Format.OFFSET_SAMPLE_RELATIVE) {
+        format = format.copyWithSubsampleOffsetUs(format.subsampleOffsetUs + streamOffsetUs);
+        formatHolder.format = format;
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/extensions/gvr/src/main/java/com/google/android/exoplayer2/ext/gvr/GvrAudioProcessor.java;<<<<<<< MINE
+=======
+      case 1:
+        surroundFormat = GvrAudioSurround.SurroundFormat.SURROUND_MONO;
+        break;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+=======
+    assertNull(masterPlaylist.muxedCaptionFormats);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * The http url from which the media playlist can be obtained.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * Format information associated with the HLS url.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+    /**
+     * @param url See {@link #url}.
+     * @param format See {@link #format}.
+     */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of variants declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of demuxed audios declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The list of subtitles declared by the playlist.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The format of the audio muxed in the variants. May be null if the playlist does not declare any
+   * muxed audio.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylist.java;<<<<<<< MINE
+=======
+  /**
+   * The format of the closed captions declared by the playlist. May be empty if the playlist
+   * explicitly declares no captions are available, or null if the playlist does not declare any
+   * captions information.
+   */
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+    if (expectedPlaylistUrl != null) {
+      playlistTracker.maybeThrowPlaylistRefreshError(expectedPlaylistUrl);
+    }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+    expectedPlaylistUrl = null;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+      expectedPlaylistUrl = selectedUrl;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource.java;<<<<<<< MINE
+=======
+        expectedPlaylistUrl = selectedUrl;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaChunk.java;<<<<<<< MINE
+=======
+      } else {
+        closedCaptionFormats = Collections.emptyList();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/text/ttml/TtmlRegion.java;<<<<<<< MINE
+=======
+    this.lineAnchor = lineAnchor;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+=======
+    joiningDeadlineMs = C.TIME_UNSET;
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+=======
+   * @param codecIsAdaptive Whether the codec supports seamless resolution switches.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/source/MediaPeriod.java;<<<<<<< MINE
+=======
+   * <p>
+   * This method should only be called after the period has been prepared.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/source/MediaPeriod.java;<<<<<<< MINE
+=======
+   * <p>
+   * This method should only be called after the period has been prepared.
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/upstream/cache/CacheDataSourceFactory.java;<<<<<<< MINE
+=======
+   * @see CacheDataSource#CacheDataSource(Cache, DataSource)
+   */
+  public CacheDataSourceFactory(Cache cache, DataSource.Factory upstreamFactory) {
+    this(cache, upstreamFactory, 0);
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/upstream/ContentDataSource.java;<<<<<<< MINE
+=======
+      if (assetFileDescriptor == null) {
+        throw new FileNotFoundException("Could not open file descriptor for: " + uri);
+      }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+=======
+   * Skips a single bit.
+   */
+  public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset++;
+    }
+    assertValidOffset();
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray.java;<<<<<<< MINE
+=======
+   * Skips a single bit.
+   */
+  public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset += shouldSkipByte(byteOffset + 1) ? 2 : 1;
+    }
+    assertValidOffset();
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader.java;<<<<<<< MINE
+=======
+    // First payload packet. Trim the payload array of the ogg packet after headers have been read.
+    oggPacket.trimPayload();
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket.java;<<<<<<< MINE
+=======
+        if (packetArray.capacity() < packetArray.limit() + size) {
+          packetArray.data = Arrays.copyOf(packetArray.data, packetArray.limit() + size);
+        }
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket.java;<<<<<<< MINE
+=======
+   * Trims the packet data array.
+   */
+  public void trimPayload() {
+    if (packetArray.data.length == OggPageHeader.MAX_PAGE_PAYLOAD) {
+      return;
+    }
+    packetArray.data = Arrays.copyOf(packetArray.data, Math.max(OggPageHeader.MAX_PAGE_PAYLOAD,
+        packetArray.limit()));
+  }
+
+  /**
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+=======
+        unplayedPaint.setColor(unplayedColor);
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/TimeBar.java;<<<<<<< MINE
+=======
+     * @param position The position of the scrubber, in milliseconds.
+>>>>>>> YOURS

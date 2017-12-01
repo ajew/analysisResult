@@ -1,0 +1,4 @@
+revision;file;errors
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873.revisions;/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/cache/DiskLruCacheWrapper.java;3
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873.revisions;/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyStreamFetcher.java;2
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873.revisions;/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/androidTest/java/com/bumptech/glide/load/resource/bitmap/ImageHeaderParserTest.java;9

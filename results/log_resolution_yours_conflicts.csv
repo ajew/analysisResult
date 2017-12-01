@@ -1,0 +1,467 @@
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77/samples/flickr/src/com/bumptech/flickr/api/Api.java;<<<<<<< MINE
+        Log.d("API: searching");
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/resource/bitmap/Downsampler.java;<<<<<<< MINE
+    /**
+     * Load and scale the image uniformly (maintaining the image's aspect ratio) so that the smallest edge of the
+     * image will be between 1x and 2x the requested size. The larger edge has no maximum size.
+     */
+    public static final Downsampler AT_LEAST = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            return Math.min(inHeight / outHeight, inWidth / outWidth);
+        }
+
+        @Override
+        public String getId() {
+            return "AT_LEAST.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    /**
+     * Load and scale the image uniformly (maintaining the image's aspect ratio) so that largest edge of the image
+     * will be between 1/2x and 1x of the requested size. The smaller edge has no minimum size.
+     */
+    public static final Downsampler AT_MOST = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            int maxIntegerFactor = (int) Math.ceil(Math.max(inHeight / (float) outHeight,
+                inWidth / (float) outWidth));
+            int lesserOrEqualSampleSize = Math.max(1, Integer.highestOneBit(maxIntegerFactor));
+            return lesserOrEqualSampleSize << (lesserOrEqualSampleSize < maxIntegerFactor ? 1 : 0);
+        }
+
+        @Override
+        public String getId() {
+            return "AT_MOST.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    /**
+     * Load the image at its original size.
+     */
+    public static final Downsampler NONE = new Downsampler() {
+        @Override
+        protected int getSampleSize(int inWidth, int inHeight, int outWidth, int outHeight) {
+            return 0;
+        }
+
+        @Override
+        public String getId() {
+            return "NONE.com.bumptech.glide.load.data.bitmap";
+        }
+    };
+
+    // 5MB. This is the max image header size we can handle, we preallocate a much smaller buffer but will resize up to
+    // this amount if necessary.
+    private static final int MARK_POSITION = 5 * 1024 * 1024;
+
+
+    /**
+     * Load the image for the given InputStream. If a recycled Bitmap whose dimensions exactly match those of the image
+     * for the given InputStream is available, the operation is much less expensive in terms of memory.
+     *
+     * <p>
+     *     Note - this method will throw an exception of a Bitmap with dimensions not matching
+     *     those of the image for the given InputStream is provided.
+     * </p>
+     *
+     * @param is An {@link InputStream} to the data for the image.
+     * @param pool A pool of recycled bitmaps.
+     * @param outWidth The width the final image should be close to.
+     * @param outHeight The height the final image should be close to.
+     * @return A new bitmap containing the image from the given InputStream, or recycle if recycle is not null.
+     */
+    @SuppressWarnings("resource")
+    // see BitmapDecoder.decode
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873/library/src/main/java/com/bumptech/glide/load/engine/cache/DiskLruCacheWrapper.java;<<<<<<< MINE
+        return diskLruCache;
+    }
+
+    private synchronized void resetDiskCache() {
+        diskLruCache = null;
+    }
+
+    @Override
+    public File get(Key key) {
+        String safeKey = safeKeyGenerator.getSafeKey(key);
+        File result = null;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6bf11c0_8024de0/rev_6bf11c0-8024de0/java/src1/com/pubnub/api/SubscribeWorker.java;<<<<<<< MINE
+                sleep = true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+   * Indicates whether the listener is currently eligible for notification of
+   * {@link StreamListener#onReady()}.
+   */
+  @GuardedBy("onReadyLock")
+  private boolean shouldNotifyOnReady = true;
+  /**
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+    return onReadyThreshold;
+  }
+
+  /**
+   * Sets the number of queued bytes for a given stream, below which
+   * {@link StreamListener#onReady()} will be called. If not called, defaults to
+   * {@link #DEFAULT_ONREADY_THRESHOLD}.
+   *
+   * <p>This must be called from the transport thread, since a listener may be called back directly.
+   */
+  public void setOnReadyThreshold(int onReadyThreshold) {
+    checkArgument(onReadyThreshold > 0, "onReadyThreshold must be > 0");
+    boolean doNotify;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+   * Gets the listener to this stream.
+   */
+  protected abstract StreamListener listener();
+
+  /**
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+      doNotify = needToNotifyOnReady();
+    }
+    if (doNotify) {
+      listener().onReady();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+      if (!isReady()) {
+        shouldNotifyOnReady = true;
+      }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/core/src/main/java/io/grpc/transport/AbstractStream.java;<<<<<<< MINE
+    return false;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39/okhttp/src/test/java/io/grpc/transport/okhttp/OkHttpClientTransportTest.java;<<<<<<< MINE
+    // Now the first message is still in the queue, and it's size is smaller than the threshold.
+    // Increase the threshold should have no affection.
+    stream.setOnReadyThreshold(messageLength * 10);
+    assertFalse(listener.isOnReadyCalled());
+    // Decrease the threshold should have no affection too.
+    stream.setOnReadyThreshold(HEADER_LENGTH);
+    assertFalse(listener.isOnReadyCalled());
+    // But now increase the threshold to larger than the queued message size, onReady should be
+    // triggered.
+    stream.setOnReadyThreshold(HEADER_LENGTH + messageLength + 1);
+    assertTrue(listener.isOnReadyCalled());
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_17b846c_71436c3/rev_17b846c-71436c3/src/main/java/com/pubnub/api/core/Pubnub.java;<<<<<<< MINE
+
+        return prop.getProperty("version");
+
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/endpoints/pubsub/Publish.java;<<<<<<< MINE
+
+        return true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/endpoints/push/RemoveAllPushChannelsForDevice.java;<<<<<<< MINE
+
+        return true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_45c9719_e3860f0/rev_45c9719-e3860f0/src/main/java/com/pubnub/api/PubNubError.java;<<<<<<< MINE
+        // Error Objects
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee/src/test/java/PubNubExceptionTest.java;<<<<<<< MINE
+            pubnubError = error.getPubnubError();
+            pnErrorCode = pubnubError.getErrorCode();
+            pnErroCodeExtended = pubnubError.getErrorCodeExtended();
+            pnErrorJNode = pubnubError.getErrorObject();
+            pnErrorMessage = pubnubError.getMessage();
+            pnErrorString = pubnubError.getErrorString();
+            response = error.getResponse();
+            erroMsg = error.getErrormsg();
+            jNode = error.getJso();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/netty-socketio/revisions/rev_fcc7d33_05ec7d3/rev_fcc7d33-05ec7d3/src/main/java/com/corundumstudio/socketio/SocketIOServer.java;<<<<<<< MINE
+        bootstrap.option(ChannelOption.SO_LINGER, config.getSoLinger());
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer.java;<<<<<<< MINE
+    if (outputBuffer == null) {
+      // Nothing to render yet.
+      return;
+    }
+    for (int i = 0; i < 3; i++) {
+      int h = (i == 0) ? outputBuffer.height : (outputBuffer.height + 1) / 2;
+      GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + i);
+      GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, yuvTextures[i]);
+      GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 1);
+      GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE, outputBuffer.yuvStrides[i],
+          h, 0, GLES20.GL_LUMINANCE, GLES20.GL_UNSIGNED_BYTE, outputBuffer.yuvPlanes[i]);
+    }
+    // Set cropping of stride if either width or stride has changed.
+    if (previousWidth != outputBuffer.width || previousStride != outputBuffer.yuvStrides[0]) {
+      float crop = (float) outputBuffer.width / outputBuffer.yuvStrides[0];
+      textureCoords = nativeFloatBuffer(
+          0.0f, 0.0f,
+          0.0f, 1.0f,
+          crop, 0.0f,
+          crop, 1.0f);
+      GLES20.glVertexAttribPointer(
+          texLocation, 2, GLES20.GL_FLOAT, false, 0, textureCoords);
+      previousWidth = outputBuffer.width;
+      previousStride = outputBuffer.yuvStrides[0];
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil.java;<<<<<<< MINE
+   * @throws IOException If an error occurs reading from the input.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil.java;<<<<<<< MINE
+   * @throws IOException If an error occurs reading from the input.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6/library/src/main/java/com/google/android/exoplayer2/extractor/ts/H265Reader.java;<<<<<<< MINE
+    sampleReader = new SampleReader(output);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/demo/src/main/java/com/google/android/exoplayer2/demo/TrackSelectionHelper.java;<<<<<<< MINE
+          haveSupportedTracks = true;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+      + "\n"
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(0).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(1).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest.java;<<<<<<< MINE
+    assertNotNull(variants.get(4).format.codecs);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+    try {
+      assertFalse(bitArray.readBit());
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      // ignored
+    }
+  }
+
+
+  public void testSkipBitsThrowsErrorIfEOB() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xF0, 0x0F));
+
+    try {
+      bitArray.skipBits(17);
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {/* ignored */}
+
+  }
+  public void testSetPositionIllegalPositions() throws Exception {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xF0, 0x0F));
+
+    try {
+      bitArray.setPosition(16);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    try {
+      bitArray.setPosition(-1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest.java;<<<<<<< MINE
+
+    try {
+      bitArray.readBits(24);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(1, bitArray.getPosition());
+    }
+  }
+
+  public void testLimit() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xc0, 0x02), 1);
+
+    try {
+      bitArray.skipBits(9);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    try {
+      bitArray.readBits(9);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.getPosition());
+    }
+
+    int byteValue = bitArray.readBits(8);
+    assertEquals(0xc0, byteValue);
+    assertEquals(8, bitArray.getPosition());
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(8, bitArray.getPosition());
+    }
+  }
+
+  public void testBitsLeft() {
+    VorbisBitArray bitArray = new VorbisBitArray(TestUtil.createByteArray(0xc0, 0x02));
+
+    assertEquals(16, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(15, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(3);
+    assertEquals(12, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.setPosition(6);
+    assertEquals(10, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(9, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.skipBits(1);
+    assertEquals(8, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.readBits(4);
+    assertEquals(4, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    bitArray.readBits(4);
+    assertEquals(0, bitArray.bitsLeft());
+    assertEquals(bitArray.limit(), bitArray.getPosition() + bitArray.bitsLeft());
+
+    try {
+      bitArray.readBit();
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals(0, bitArray.bitsLeft());
+    }
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer.java;<<<<<<< MINE
+    joiningDeadlineMs = C.TIME_UNSET;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/metadata/MetadataRenderer.java;<<<<<<< MINE
+    super.onDisabled();
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+
+    // Read any remaining bits.
+    if (numBits > 0) {
+      int nextBit = bitOffset + numBits;
+      byte writeMask = (byte) (0xFF >> (8 - numBits));
+
+      if (nextBit > 8) {
+        // Combine bits from current byte and next byte.
+        returnValue |= ((((data[byteOffset] & 0xFF) << (nextBit - 8)
+            | ((data[byteOffset + 1] & 0xFF) >> (16 - nextBit))) & writeMask));
+        byteOffset++;
+      } else {
+        // Bits to be read only within current byte.
+        returnValue |= (((data[byteOffset] & 0xFF) >> (8 - nextBit)) & writeMask);
+        if (nextBit == 8) {
+          byteOffset++;
+        }
+      }
+
+      bitOffset = nextBit % 8;
+    }
+
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray.java;<<<<<<< MINE
+        && (bitOffset >= 0 && bitOffset < 8)
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray.java;<<<<<<< MINE
+        && (bitOffset >= 0 && bitOffset < 8)
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray.java;<<<<<<< MINE
+    this(data, data.length);
+  }
+
+  /**
+   * Creates a new instance that wraps an existing array.
+   *
+   * @param data the array to wrap.
+   * @param limit the limit in bytes.
+   */
+  public VorbisBitArray(byte[] data, int limit) {
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray.java;<<<<<<< MINE
+    Assertions.checkArgument(position < limit && position >= 0);
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/core/src/main/java/com/google/android/exoplayer2/BaseRenderer.java;<<<<<<< MINE
+   *
+   * @return Whether the source is ready.
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    scrubberSize = scrubberEnabledSize;
+=======
+>>>>>>> YOURS
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar.java;<<<<<<< MINE
+    } else {
+      updateScrubberState();
+=======
+>>>>>>> YOURS

@@ -1,0 +1,9 @@
+name,url
+glide,https://github.com/bumptech/glide
+java,https://github.com/pubnub/java
+grpc-java,https://github.com/grpc/grpc-java
+netty-socketio,https://github.com/mrniko/netty-socketio
+ExoPlayer,https://github.com/google/ExoPlayer
+okio,https://github.com/square/okio
+coreNLP,https://github.com/stanfordnlp/CoreNLP
+retrolambda,https://github.com/orfjackal/retrolambda

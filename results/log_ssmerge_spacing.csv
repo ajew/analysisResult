@@ -1,0 +1,1722 @@
+revision;file;methodsignature;leftbody;basebody;rightbody
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77;/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity;onCreate(Bundle);;;        searchLoading = findViewById(R.id.search_loading);
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77;/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity;executeSearch();;;        searchLoading.setVisibility(View.VISIBLE);
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77;/samples/flickr/src/com/bumptech/flickr/FlickrSearchActivity;executeSearch();;;
+            @Override
+            public void onSearchFailed(Exception e) {
+                if (currentSearch != searchCount) return;
+                e.printStackTrace();
+
+                Log.d("SEARCH: failed :(");
+                searching.setVisibility(View.VISIBLE);
+                searchLoading.setVisibility(View.INVISIBLE);
+                searchTerm.setText(getString(R.string.search_failed, searchString));
+            }
+/home/arthur/analysis/projects/glide/revisions/rev_42dde93_058ef77/rev_42dde93-058ef77;/samples/flickr/src/com/bumptech/flickr/api/Api;onSearchFailed(Exception);;;public void onSearchFailed(Exception e);
+/home/arthur/analysis/projects/retrolambda/revisions/rev_757247b_52364bc/rev_757247b-52364bc;/retrolambda/src/main/java/net/orfjackal/retrolambda/interfaces/MethodInfo;MethodInfo(int,int,MethodSignature,Type,MethodKind);;;public MethodInfo(int access, int tag, MethodSignature signature, Type owner, MethodKind kind) {
+        this.access = access;
+        this.tag = tag;
+        this.signature = signature;
+        this.owner = owner;
+        this.kind = kind;
+    }
+/home/arthur/analysis/projects/retrolambda/revisions/rev_757247b_52364bc/rev_757247b-52364bc;/retrolambda/src/main/java/net/orfjackal/retrolambda/interfaces/UpdateRelocatedMethodInvocations;UpdateRelocatedMethodInvocations(ClassVisitor,ClassAnalyzer);;;public UpdateRelocatedMethodInvocations(ClassVisitor next, ClassAnalyzer analyzer) {
+        super(ASM5, next);
+        this.analyzer = analyzer;
+    }
+/home/arthur/analysis/projects/retrolambda/revisions/rev_757247b_52364bc/rev_757247b-52364bc;/retrolambda/src/main/java/net/orfjackal/retrolambda/interfaces/AddMethodDefaultImplementations;AddMethodDefaultImplementations(ClassVisitor,ClassAnalyzer);;;public AddMethodDefaultImplementations(ClassVisitor next, ClassAnalyzer analyzer) {
+        super(ASM5, next);
+        this.analyzer = analyzer;
+    }
+/home/arthur/analysis/projects/retrolambda/revisions/rev_757247b_52364bc/rev_757247b-52364bc;/end-to-end-tests/src/test/java/net/orfjackal/retrolambda/test/anotherpackage/DifferentPackageBase;value();;;protected static String value() {
+        return "Hello";
+    }
+/home/arthur/analysis/projects/java/revisions/rev_42a30b8_b55a454/rev_42a30b8-b55a454;/java/src1/com/pubnub/api/SubscribeWorker;process(HttpRequest);                        && httpclient.checkResponseSuccess(hresp
+                                                           .getStatusCode())) {;                        && httpclient.checkResponseSuccess(hresp
+                                .getStatusCode())) {;                        && HttpUtil.checkResponseSuccess(hresp
+                                .getStatusCode())) {
+/home/arthur/analysis/projects/glide/revisions/rev_f389e91_431ccaf/rev_f389e91-431ccaf;/integration/volley/src/main/java/com/bumptech/glide/integration/volley/VolleyUrlLoader;Factory(RequestQueue);      this.requestQueue = requestQueue;
+    };            this.requestQueue = requestQueue;
+        };            this(requestQueue, VolleyStreamFetcher.DEFAULT_REQUEST_FACTORY);
+        }
+/home/arthur/analysis/projects/java/revisions/rev_6bf11c0_8024de0/rev_6bf11c0-8024de0;/java/src1/com/pubnub/api/SubscribeWorker;process(HttpRequest);;;            sleep = true;
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;setUp();;;@Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
+  }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;onStreamAllocated_shouldNotifyReady();;;@Test
+  public void onStreamAllocated_shouldNotifyReady() {
+    AbstractStream<Object> stream = new AbstractStreamBase<Object>(null);
+
+    stream.onStreamAllocated();
+
+    verify(streamListener).onReady();
+  }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;validPhaseTransitions();;;@Test
+  public void validPhaseTransitions() {
+    AbstractStream<Object> stream = new AbstractStreamBase<Object>(null);
+    Multimap<Phase, Phase> validTransitions = ImmutableMultimap.<Phase, Phase>builder()
+        .put(Phase.HEADERS, Phase.HEADERS)
+        .put(Phase.HEADERS, Phase.MESSAGE)
+        .put(Phase.HEADERS, Phase.STATUS)
+        .put(Phase.MESSAGE, Phase.MESSAGE)
+        .put(Phase.MESSAGE, Phase.STATUS)
+        .put(Phase.STATUS, Phase.STATUS)
+        .build();
+
+    for (Phase startPhase : Phase.values()) {
+      for (Phase endPhase : Phase.values()) {
+        if (validTransitions.containsEntry(startPhase, endPhase)) {
+          stream.verifyNextPhase(startPhase, endPhase);
+        } else {
+          try {
+            stream.verifyNextPhase(startPhase, endPhase);
+            fail();
+          } catch (IllegalStateException expected) {
+            // continue
+          }
+        }
+      }
+    }
+  }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;AbstractStreamBase(WritableBufferAllocator);;;private AbstractStreamBase(WritableBufferAllocator bufferAllocator) {
+      super(bufferAllocator);
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;request(int);;;@Override
+    public void request(int numMessages) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;id();;;@Override
+    @Nullable
+    public IdT id() {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;listener();;;@Override
+    protected StreamListener listener() {
+      return streamListener;
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;internalSendFrame(WritableBuffer,boolean,boolean);;;@Override
+    protected void internalSendFrame(WritableBuffer frame, boolean endOfStream, boolean flush) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;receiveMessage(InputStream);;;@Override
+    protected void receiveMessage(InputStream is) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;inboundDeliveryPaused();;;@Override
+    protected void inboundDeliveryPaused() {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;remoteEndClosed();;;@Override
+    protected void remoteEndClosed() {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;returnProcessedBytes(int);;;@Override
+    protected void returnProcessedBytes(int processedBytes) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/test/java/io/grpc/transport/AbstractStreamTest;deframeFailed(Throwable);;;@Override
+    protected void deframeFailed(Throwable cause) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/main/java/io/grpc/transport/AbstractStream;onStreamAllocated();;;    notifyIfReady();
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/main/java/io/grpc/transport/AbstractStream;onSentBytes(int);;;      boolean belowThresholdBefore = numSentBytesQueued < onReadyThreshold;
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/main/java/io/grpc/transport/AbstractStream;notifyIfReady();;;@VisibleForTesting
+  final void notifyIfReady() {
+    boolean doNotify = false;
+    synchronized (onReadyLock) {
+      doNotify = isReady();
+    }
+    if (doNotify) {
+      listener().onReady();
+    }
+  }
+/home/arthur/analysis/projects/grpc-java/revisions/rev_977c3d1_24a9f39/rev_977c3d1-24a9f39;/core/src/main/java/io/grpc/transport/AbstractStream;toStringHelper();;;
+/home/arthur/analysis/projects/java/revisions/rev_2eca1ae_f111de1/rev_2eca1ae-f111de1;/java/examples/src/com/pubnub/examples/PubnubPresenceTest;Test(int,String,String,String,String,String,boolean,JSONObject);;;Test(int id, String description, String subkey, String origin, String channelA, String channelB, boolean ssl, JSONObject steps) {
+	   this.id = id;
+	   this.description = description;
+	   this.subkey = subkey;
+	   this.origin = origin;
+	   this.channels = new LinkedHashMap<String,String>();
+	   channels.put("channelA", channelA);
+	   channels.put("channelB", channelB);
+	   this.ssl = ssl;
+	   this.result = Status.FAIL;
+	   this.steps = steps;  
+	}
+/home/arthur/analysis/projects/java/revisions/rev_2eca1ae_f111de1/rev_2eca1ae-f111de1;/java/examples/src/com/pubnub/examples/PubnubPresenceTest;updateStatus();;;void updateStatus() {
+		for (int i = 0; i < steps.size(); i++) {
+
+			JSONObject step = (JSONObject) steps.get(String.valueOf(i));
+			JSONArray expectedEvents = (JSONArray) step.get("listener");
+			JSONArray observedEvents = (JSONArray) step.get("events");
+			
+			if (expectedEvents.size() != observedEvents.size()) {
+				result = Status.FAIL;
+				return;
+			}
+			
+			if (expectedEvents.size() <= 2) { 
+				for (int j = 0; j < expectedEvents.size(); j++) {
+					String expectedEventChannel = channels.get((String)((JSONArray)expectedEvents.get(j)).get(1));
+					String expectedEventAction = (String)((JSONArray)expectedEvents.get(j)).get(0);
+					
+					String observedEventChannel = (String)((JSONObject)observedEvents.get(j)).get("channel");
+					String observedEventAction = (String)((JSONObject)observedEvents.get(j)).get("action");
+					
+					if ( !expectedEventChannel.equals(observedEventChannel) || 
+							!expectedEventAction.equals(observedEventAction)) {
+						result = Status.FAIL;
+						return;
+					}
+				}
+			} else {
+				Set expected = new LinkedHashSet();
+				Set observed = new LinkedHashSet();
+				for (int j = 0; j < expectedEvents.size(); j++) {
+					String expectedEventChannel = channels.get((String)((JSONArray)expectedEvents.get(j)).get(1));
+					String expectedEventAction = (String)((JSONArray)expectedEvents.get(j)).get(0);
+					
+					String observedEventChannel = (String)((JSONObject)observedEvents.get(j)).get("channel");
+					String observedEventAction = (String)((JSONObject)observedEvents.get(j)).get("action");
+					
+					expected.add(expectedEventChannel + "," + expectedEventAction);
+					observed.add(observedEventChannel + "," + observedEventAction);
+				}
+				if (!expected.equals(observed)) {
+					result = Status.FAIL;
+					return;
+				}
+				
+			}
+			result = Status.PASS;
+		}
+	}
+/home/arthur/analysis/projects/java/revisions/rev_2eca1ae_f111de1/rev_2eca1ae-f111de1;/java/examples/src/com/pubnub/examples/PubnubPresenceTest;printResult();;;void printResult () {
+		updateStatus();
+		System.out.println();
+		System.out.println("-----------------");
+		System.out.println("Test Id : " + id + ", " + description);
+		System.out.println("Status : " + result);
+		System.out.println("Origin : " + origin);
+		System.out.println("SSL : " + ssl);
+		System.out.println("Sub Key : " + subkey);
+		System.out.println();
+
+		for (int i = 0 ; i < steps.size() ; i++) {
+			JSONObject jso = (JSONObject) steps.get(String.valueOf(i));
+			jso.toJSONString();
+			System.out.println(jso.toJSONString());
+		}
+		System.out.println("-----------------");
+		System.out.println();
+	}
+/home/arthur/analysis/projects/java/revisions/rev_2eca1ae_f111de1/rev_2eca1ae-f111de1;/java/examples/src/com/pubnub/examples/PubnubPresenceTest;main(String[]);;;public static void main(String[] args) {
+		
+		JSONParser parser = new JSONParser();
+		
+
+
+	    try {
+
+	        Object obj = parser.parse(new FileReader("./tests.json"));
+
+	        JSONArray tests =  (JSONArray) obj;
+	        obj = parser.parse(new FileReader("./keysets.json"));
+	        JSONObject keysets = (JSONObject) obj;
+	        for (int i = 0 ; i < tests.size();i++) {
+	        	JSONObject jso = (JSONObject) tests.get(i);
+	        	JSONObject common = (JSONObject) jso.get("common");
+	        	String description = (String) common.get("description");
+	        	JSONObject steps = (JSONObject) jso.get("steps");
+	        	boolean ssl = (Boolean) common.get("ssl");
+	        	String server = (String) common.get("server");
+	        	String clientStr = (String) common.get("client");
+	        	if (!client.equals(clientStr)) {
+	        		System.out.println("Skipping Test Due to Client Mismatch : " + clientStr);
+	        		continue;
+	        	}
+	        	String origin = "pubsub";
+	        	String subkey = (String) ((JSONObject)(keysets.get(common.get("keyset")))).get("subKey") ;
+	        	long time = new Date().getTime();
+	        	String channelA = "A-java-" + i + 1 + "-" + time;
+	        	String channelB = "B-java-" + i + 1 + "-"+ time;
+	        	
+
+	        	Test t = new Test(i + 1, description, subkey, origin, channelA, channelB, ssl, steps);
+	        	testsList.add(t);		
+	        }
+	        
+
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    System.out.println("Total Number of Tests : " + testsList.size());
+	    for (int i = 0; i < testsList.size(); i++) {
+	    	System.out.println("Running Test : " + (i + 1));
+	    	testsList.get(i).run();
+	    	testsList.get(i).printResult();
+	    }
+	    System.out.println("++++++++ RESULTS ++++++++");
+	    for (int i = 0; i < testsList.size(); i++) {
+	    	testsList.get(i).printResult();
+	    }
+	}
+/home/arthur/analysis/projects/java/revisions/rev_35c7f03_449a6c6/rev_35c7f03-449a6c6;/java/srcPubnubApi/com/pubnub/api/PubnubUtilCore;hashTableKeysToDelimitedString(Hashtable,String,String);;;public static synchronized String hashTableKeysToDelimitedString(
+        Hashtable ht, String delimiter, String exclude) {
+
+        StringBuffer sb = new StringBuffer();
+        boolean first = true;
+        Enumeration e = ht.keys();
+
+        while (e.hasMoreElements()) {
+
+            String s = (String) e.nextElement();
+            
+            if (exclude != null) {
+            	if (s.indexOf(exclude) != -1) {
+            		continue;
+            	}
+            }
+            if (first) {
+                sb.append(s);
+                first = false;
+            } else {
+                sb.append(delimiter).append(s);
+            }
+        }
+        return sb.toString();
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f;/android/src/com/pubnub/api/Pubnub;requestPushNotificationEnabledChannelsForDeviceRegistrationId(String,Callback);;;        _request(hreq, nonSubscribeManager);
+/home/arthur/analysis/projects/java/revisions/rev_629a45c_d6cff1f/rev_629a45c-d6cff1f;/android/src/com/pubnub/api/Pubnub;removeAllPushNotificationsForDeviceRegistrationId(String,Callback);;;        _request(hreq, nonSubscribeManager);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_b805692_57068a6/rev_b805692-57068a6;/demo/src/main/java/com/google/android/exoplayer/demo/full/player/DemoPlayer;selectTrack(int,int);;;      if (type == TYPE_TEXT && index == DISABLED_TRACK && textListener != null) {
+        textListener.onText(null);
+      }
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d;/java/src1/com/pubnub/api/PubnubUtil;splitString(String,String);;;public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d;/java/examples/eclipse_project_console/src1/com/pubnub/api/PubnubUtil;splitString(String,String);;;public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d;/j2me/src1/com/pubnub/api/PubnubUtil;splitString(String,String);;;public static String[] splitString(String source, String delimiter) {
+        System.out.println("[" + delimiter + "] : " + source );
+        int delimiterCount = 0;
+        int index = 0;
+        String tmpStr = source;
+
+        String[] splittedList;
+
+        while ((index = tmpStr.indexOf(delimiter)) != -1) {
+
+            tmpStr = tmpStr.substring(index + delimiter.length());
+            delimiterCount++;
+        }
+
+        splittedList = new String[delimiterCount + 1];
+
+        int counter = 0;
+        tmpStr = source;
+        System.out.println("Delimiter Count : " + delimiterCount);
+        do {
+            int nextIndex = tmpStr.indexOf(delimiter, index + 1);
+            
+            System.out.println("Next Index : " + nextIndex);
+            
+            if (nextIndex != -1) {
+                System.out.println(tmpStr);
+                System.out.println(index);
+                System.out.println(index + delimiter.length() + " : " + nextIndex);
+                splittedList[counter++] = tmpStr.substring(index + delimiter.length(), nextIndex);
+                tmpStr = tmpStr.substring(nextIndex);
+
+            } else {
+                splittedList[counter++] = tmpStr.substring(index + delimiter.length());
+                tmpStr = tmpStr.substring(index + 1);
+            }
+        } while ((index = tmpStr.indexOf(delimiter)) != -1);
+
+        return splittedList;
+    }
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d;/j2me/src1/com/pubnub/api/PubnubUtil;joinString(String[],String);;;public static String joinString(String[] sourceArray, String delimiter) {
+        if (sourceArray == null || delimiter == null || sourceArray.length <= 0) {
+            return "";
+        }
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < sourceArray.length - 1; i++) {
+            sb.append(sourceArray[i]).append(delimiter);
+        }
+        sb.append(sourceArray[sourceArray.length - 1]);
+
+        return sb.toString();
+    }
+/home/arthur/analysis/projects/java/revisions/rev_1bc188b_0fadf3d/rev_1bc188b-0fadf3d;/scala/scala-pubnub-tests/java/src1/com/pubnub/api/PubnubUtil;splitString(String,String);;;public static String[] splitString(String source, String delimiter) {
+        return source.split(delimiter);
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_12807a7_fb36f85/rev_12807a7-fb36f85;/library/src/main/java/com/google/android/exoplayer/hls/HlsMediaPlaylist;Segment(String,double,boolean,long,boolean,String,String,int,int);;;public Segment(String uri, double durationSecs, boolean discontinuity, long startTimeUs,
+        boolean isEncrypted, String encryptionKeyUri, String encryptionIV, int byterangeOffset,
+        int byterangeLength) {
+      this.url = uri;
+      this.durationSecs = durationSecs;
+      this.discontinuity = discontinuity;
+      this.startTimeUs = startTimeUs;
+      this.isEncrypted = isEncrypted;
+      this.encryptionKeyUri = encryptionKeyUri;
+      this.encryptionIV = encryptionIV;
+      this.byterangeOffset = byterangeOffset;
+      this.byterangeLength = byterangeLength;
+    }
+/home/arthur/analysis/projects/java/revisions/rev_09cb418_cab09fa/rev_09cb418-cab09fa;/src/main/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroup;validateParams();    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubErrorBuilder.PNERROBJ_GROUP_MISSING).build();;    protected void validateParams() throws PubNubException
+    {
+        if (channelGroup==null || channelGroup.isEmpty())
+        {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();;    protected void validateParams() throws PubNubException {
+        if (channelGroup == null || channelGroup.isEmpty()) {
+            throw PubNubException.builder().pubnubError(PubNubError.PNERROBJ_GROUP_MISSING).build();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/util/Ac3Util;parseAnnexFAc3Format(ParsableByteArray);;;public static MediaFormat parseAnnexFAc3Format(ParsableByteArray data) {
+    // fscod (sample rate code)
+    int fscod = (data.readUnsignedByte() & 0xC0) >> 6;
+    int sampleRate = SAMPLE_RATES[fscod];
+    int nextByte = data.readUnsignedByte();
+    // Map acmod (audio coding mode) onto a channel count.
+    int channelCount = CHANNEL_COUNTS[(nextByte & 0x38) >> 3];
+    // lfeon (low frequency effects on)
+    if ((nextByte & 0x04) != 0) {
+      channelCount++;
+    }
+    // Map bit_rate_code onto a bitrate in bit/s.
+    int bitrate = BITRATES[((nextByte & 0x03) << 3) + (data.readUnsignedByte() >> 5)] * 1000;
+    return MediaFormat.createAudioFormat(MimeTypes.AUDIO_AC3, MediaFormat.NO_VALUE,
+        MediaFormat.NO_VALUE, channelCount, sampleRate, bitrate, Collections.<byte[]>emptyList());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/util/Ac3Util;parseAnnexFEAc3Format(ParsableByteArray);;;public static MediaFormat parseAnnexFEAc3Format(ParsableByteArray data) {
+    data.skipBytes(2); // Skip data_rate and num_ind_sub.
+
+    // Read only the first substream.
+    // TODO: Read later substreams?
+    // fscod (sample rate code)
+    int fscod = (data.readUnsignedByte() & 0xC0) >> 6;
+    int sampleRate = SAMPLE_RATES[fscod];
+    int nextByte = data.readUnsignedByte();
+    // Map acmod (audio coding mode) onto a channel count.
+    int channelCount = CHANNEL_COUNTS[(nextByte & 0x0E) >> 1];
+    // lfeon (low frequency effects on)
+    if ((nextByte & 0x01) != 0) {
+      channelCount++;
+    }
+    return MediaFormat.createAudioFormat(MimeTypes.AUDIO_EC3, MediaFormat.NO_VALUE,
+        channelCount, sampleRate, Collections.<byte[]>emptyList());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/util/Ac3Util;parseFrameAc3Format(ParsableBitArray);;;public static MediaFormat parseFrameAc3Format(ParsableBitArray data) {
+    // Skip syncword and crc1.
+    data.skipBits(4 * 8);
+
+    int fscod = data.readBits(2);
+    int frmsizecod = data.readBits(6);
+    data.skipBits(8); // bsid (5 bits) + bsmod (3 bits)
+    int acmod = data.readBits(3);
+    if ((acmod & 0x01) != 0 && acmod != 1) {
+      data.skipBits(2); // cmixlev
+    }
+    if ((acmod & 0x04) != 0) {
+      data.skipBits(2); // surmixlev
+    }
+    if (acmod == 0x02) {
+      data.skipBits(2); // dsurmod
+    }
+    boolean lfeon = data.readBit();
+    return MediaFormat.createAudioFormat(MimeTypes.AUDIO_AC3, MediaFormat.NO_VALUE,
+        MediaFormat.NO_VALUE, CHANNEL_COUNTS[acmod] + (lfeon ? 1 : 0), SAMPLE_RATES[fscod],
+        BITRATES[frmsizecod / 2] * 1000, Collections.<byte[]>emptyList());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/util/Ac3Util;parseFrameSize(ParsableBitArray);;;public static int parseFrameSize(ParsableBitArray data) {
+    // Skip syncword and crc1.
+    data.skipBits(4 * 8);
+
+    int fscod = data.readBits(2);
+    int frmsizecod = data.readBits(6);
+    int sampleRate = SAMPLE_RATES[fscod];
+    int bitrate = BITRATES[frmsizecod / 2];
+    if (sampleRate == 32000) {
+      return 6 * bitrate;
+    } else if (sampleRate == 44100) {
+      return 2 * (FRMSIZECOD_TO_FRAME_SIZE_44_1[frmsizecod / 2] + (frmsizecod % 2));
+    } else { // sampleRate == 48000
+      return 4 * bitrate;
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/util/Ac3Util;Ac3Util();;;private Ac3Util() {
+    // Prevent instantiation.
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/TsExtractor;consume(ParsableByteArray,boolean,ExtractorOutput);;;          case TS_STREAM_TYPE_ATSC_AC3:
+          case TS_STREAM_TYPE_DVB_AC3:
+            pesPayloadReader = new Ac3Reader(output.track(streamType));
+            break;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/TsExtractor;consume(ParsableByteArray,boolean,ExtractorOutput);            pesPayloadReader = new H264Reader(output.track(TS_STREAM_TYPE_H264),
+                seiReader);;;            pesPayloadReader = new H264Reader(output.track(TS_STREAM_TYPE_H264), seiReader);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;Ac3Reader(TrackOutput);;;public Ac3Reader(TrackOutput output) {
+    super(output);
+    headerScratchBits = new ParsableBitArray(new byte[HEADER_SIZE]);
+    headerScratchBytes = new ParsableByteArray(headerScratchBits.getData());
+    state = STATE_FINDING_SYNC;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;seek();;;public void seek() {
+    state = STATE_FINDING_SYNC;
+    bytesRead = 0;
+    lastByteWas0B = false;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;consume(ParsableByteArray,long,boolean);;;@Override
+  public void consume(ParsableByteArray data, long pesTimeUs, boolean startOfPacket) {
+    if (startOfPacket) {
+      timeUs = pesTimeUs;
+    }
+    while (data.bytesLeft() > 0) {
+      switch (state) {
+        case STATE_FINDING_SYNC:
+          if (skipToNextSync(data)) {
+            state = STATE_READING_HEADER;
+            headerScratchBytes.data[0] = 0x0B;
+            headerScratchBytes.data[1] = 0x77;
+            bytesRead = 2;
+          }
+          break;
+        case STATE_READING_HEADER:
+          if (continueRead(data, headerScratchBytes.data, HEADER_SIZE)) {
+            parseHeader();
+            headerScratchBytes.setPosition(0);
+            output.sampleData(headerScratchBytes, HEADER_SIZE);
+            state = STATE_READING_SAMPLE;
+          }
+          break;
+        case STATE_READING_SAMPLE:
+          int bytesToRead = Math.min(data.bytesLeft(), sampleSize - bytesRead);
+          output.sampleData(data, bytesToRead);
+          bytesRead += bytesToRead;
+          if (bytesRead == sampleSize) {
+            output.sampleMetadata(timeUs, C.SAMPLE_FLAG_SYNC, sampleSize, 0, null);
+            timeUs += frameDurationUs;
+            state = STATE_FINDING_SYNC;
+          }
+          break;
+      }
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;packetFinished();;;@Override
+  public void packetFinished() {
+    // Do nothing.
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;continueRead(ParsableByteArray,byte[],int);;;private boolean continueRead(ParsableByteArray source, byte[] target, int targetLength) {
+    int bytesToRead = Math.min(source.bytesLeft(), targetLength - bytesRead);
+    source.readBytes(target, bytesRead, bytesToRead);
+    bytesRead += bytesToRead;
+    return bytesRead == targetLength;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;skipToNextSync(ParsableByteArray);;;private boolean skipToNextSync(ParsableByteArray pesBuffer) {
+    while (pesBuffer.bytesLeft() > 0) {
+      if (!lastByteWas0B) {
+        lastByteWas0B = pesBuffer.readUnsignedByte() == 0x0B;
+        continue;
+      }
+      int secondByte = pesBuffer.readUnsignedByte();
+      if (secondByte == 0x77) {
+        lastByteWas0B = false;
+        return true;
+      } else {
+        lastByteWas0B = secondByte == 0x0B;
+      }
+    }
+    return false;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_aed45bb_39082d1/rev_aed45bb-39082d1;/library/src/main/java/com/google/android/exoplayer/extractor/ts/Ac3Reader;parseHeader();;;private void parseHeader() {
+    if (mediaFormat == null) {
+      headerScratchBits.setPosition(0);
+      mediaFormat = Ac3Util.parseFrameAc3Format(headerScratchBits);
+      output.format(mediaFormat);
+    }
+    headerScratchBits.setPosition(0);
+    sampleSize = Ac3Util.parseFrameSize(headerScratchBits);
+    frameDurationUs = (int) (1000000L * 8 * sampleSize / mediaFormat.bitrate);
+  }
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeWithEncryption();;;@Test
+    public void testSubscribeWithEncryption() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeWithEncryptionPNOther();;;@Test
+    public void testSubscribeWithEncryptionPNOther() {
+        final AtomicInteger atomic = new AtomicInteger(0);
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14718972508742569\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":512,\"i\":\"ff374d0b-b866-40db-9ced-42d205bb808b\",\"p\":{\"t\":\"14718972508739738\",\"r\":1},\"k\":\"demo-36\",\"c\":\"max_ch1\",\"d\":{\"pn_other\":\"6QoqmS9CnB3W9+I4mhmL7w==\"}}]}")));
+
+        pubnub.getConfiguration().setCipherKey("hello");
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() > 0);
+                assertEquals("hey", message.getMessage().get("pn_other").get("text").asText());
+                atomic.addAndGet(1);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.Matchers.greaterThan(0));
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker;processMessage(JsonNode);;;        // if we do not have a crypto key, there is no way to process the node; let's return.
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker;processMessage(JsonNode);;;        String inputText;
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker;processMessage(JsonNode);;;        if (input.isObject() && input.has("pn_other")) {
+            inputText = input.get("pn_other").asText();
+        } else {
+            inputText = input.asText();
+        }
+/home/arthur/analysis/projects/java/revisions/rev_53e6287_5f2334a/rev_53e6287-5f2334a;/src/main/java/com/pubnub/api/workers/SubscribeMessageWorker;processMessage(JsonNode);;;        // inject the decoded response into the payload
+        if (input.isObject() && input.has("pn_other")) {
+            ObjectNode objectNode = (ObjectNode) input;
+            objectNode.set("pn_other", outputObject);
+            outputObject = objectNode;
+        }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/PubNubExceptionTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/PubNubTest;getVersionAndTimeStamp();;;@org.junit.Test
+    public void getVersionAndTimeStamp() throws PubNubException {
+        pubnub = new PubNub(pnConfiguration);
+        String version = pubnub.getVersion();
+        int timeStamp = pubnub.getTimestamp();
+        Assert.assertEquals("4.0.11", version);
+        Assert.assertTrue(timeStamp > 0);
+    }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeBuilder();;;                assertTrue(requests.size() >= 1);
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeBuilder();;;                assertEquals("coolChannel", message.getChannel());
+                assertEquals(null, message.getSubscription());
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testNamingSubscribeChannelGroupBuilder();;;@Test
+    public void testNamingSubscribeChannelGroupBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14607577960932487\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"i\":\"Client-g5d4g\",\"p\":{\"t\":\"14607577960925503\",\"r\":1},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel\",\"d\":{\"text\":\"Message\"},\"b\":\"coolChannelGroup\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("Message", message.getMessage().get("text").asText());
+                assertEquals("coolChannel", message.getChannel());
+                assertEquals("coolChannelGroup", message.getSubscription());
+                gotMessage.set(true);
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testPresenceSubscribeBuilder();;;@Test
+    public void testPresenceSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannel-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals(null, presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testPresenceChannelGroupSubscribeBuilder();;;@Test
+    public void testPresenceChannelGroupSubscribeBuilder() {
+        final AtomicInteger gotStatus = new AtomicInteger();
+        final AtomicBoolean gotMessage = new AtomicBoolean();
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/ch2,ch1/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14614512228786519\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"p\":{\"t\":\"14614512228418349\",\"r\":2},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel-pnpres\",\"d\":{\"action\": \"join\", \"timestamp\": 1461451222, \"uuid\": \"4a6d5df7-e301-4e73-a7b7-6af9ab484eb0\", \"occupancy\": 1},\"b\":\"coolChannelGroup-pnpres\"}]}")));
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+                    gotStatus.addAndGet(1);
+                }
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+                List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/v2/subscribe.*")));
+                assertTrue(requests.size() >= 1);
+                assertEquals("coolChannel", presence.getChannel());
+                assertEquals("coolChannelGroup", presence.getSubscription());
+                gotMessage.set(true);
+            }
+        });
+
+
+        pubnub.subscribe().channels(Arrays.asList("ch1", "ch2")).execute();
+
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotMessage, org.hamcrest.core.IsEqual.equalTo(true));
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAtomic(gotStatus, org.hamcrest.core.IsEqual.equalTo(1));
+
+    }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeSlidingBuilder();;;                assertTrue(requests.size() >= 1);
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribeBuilderNumber();;;                assertTrue(requests.size() >= 1);
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/managers/SubscriptionManagerTest;testSubscribePresenceBuilder();;;                assertTrue(requests.size() >= 1);
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/TimeEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/pubsub/SubscribeEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/pubsub/SubscribeEndpointTest;stopAndReconnect();;;@org.junit.Test
+    public void stopAndReconnect() throws PubNubException {
+        stubFor(get(urlPathEqualTo("/v2/subscribe/mySubscribeKey/coolChannel,coolChannel2/0"))
+                .willReturn(aResponse().withBody("{\"t\":{\"t\":\"14607577960932487\",\"r\":1},\"m\":[{\"a\":\"4\",\"f\":0,\"i\":\"Client-g5d4g\",\"p\":{\"t\":\"14607577960925503\",\"r\":1},\"k\":\"sub-c-4cec9f8e-01fa-11e6-8180-0619f8945a4f\",\"c\":\"coolChannel\",\"d\":{\"text\":\"Enter Message Here\"},\"b\":\"coolChan-bnel\"}]}")));
+
+        instance.channels(Arrays.asList("coolChannel", "coolChannel2")).sync();
+        pubnub.stop();
+        pubnub.reconnect();
+        instance.channels(Arrays.asList("coolChannel", "coolChannel2")).sync();
+
+        List<LoggedRequest> requests = findAll(getRequestedFor(urlMatching("/.*")));
+        assertEquals(2, requests.size());
+    }
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/push/ListPushProvisionsTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/push/ModifyPushChannelsForDeviceTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest;beforeEach();;;
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/AuditEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest;beforeEach();;;
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest;beforeEach();;;
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/access/GrantEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/AddChannelChannelGroupEndpointTest;testErrorBodyForbiden();        Awaitility.await().atMost(15, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(15, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/DeleteChannelGroupEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/ListAllChannelGroupEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/AllChannelsChannelGroupEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/channel_groups/RemoveChannelChannelGroupEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest;testAsyncSuccess();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest;testAsyncBrokenWithString();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest;testAsyncBrokenWithoutJSON();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/WhereNowEndpointTest;testAsyncBrokenWithout200();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/HereNowEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/GetStateEndpointTest;testOperationTypeSuccessAsync();        Awaitility.await().atMost(5, TimeUnit.SECONDS)
+                .untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));;;        Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAtomic(atomic, org.hamcrest.core.IsEqual.equalTo(1));
+/home/arthur/analysis/projects/java/revisions/rev_6a231a5_e0957ee/rev_6a231a5-e0957ee;/src/test/java/com/pubnub/api/endpoints/presence/LeaveTest;beforeEach();;;        wireMockRule.start();
+/home/arthur/analysis/projects/netty-socketio/revisions/rev_fcc7d33_05ec7d3/rev_fcc7d33-05ec7d3;/src/main/java/com/corundumstudio/socketio/SocketIOServer;applyConnectionOptions(ServerBootstrap);;;        bootstrap.childOption(ChannelOption.SO_LINGER, config.getSoLinger());
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_7fb5b86_c06f844/rev_7fb5b86-c06f844;/library/src/main/java/com/google/android/exoplayer/extractor/ts/MpaReader;packetFinished();@Override
+    public void packetFinished() {
+        // Do nothing.
+    };;@Override
+  public void packetFinished() {
+    // Do nothing.
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxOutputBufferRenderer;setOutputBuffer(VpxOutputBuffer);;;void setOutputBuffer(VpxOutputBuffer outputBuffer);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;releaseOutputBuffer(VpxOutputBuffer);;;private void releaseOutputBuffer(VpxOutputBuffer buffer) throws VpxDecoderException {
+    if (buffer != null) {
+      decoder.releaseOutputBuffer(buffer);
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;renderRgbFrame(VpxOutputBuffer,boolean);;;private void renderRgbFrame(VpxOutputBuffer outputBuffer, boolean scale) {
+    if (bitmap == null || bitmap.getWidth() != outputBuffer.width
+        || bitmap.getHeight() != outputBuffer.height) {
+      bitmap = Bitmap.createBitmap(outputBuffer.width, outputBuffer.height, Bitmap.Config.RGB_565);
+    }
+    bitmap.copyPixelsFromBuffer(outputBuffer.data);
+    Canvas canvas = surface.lockCanvas(null);
+    if (scale) {
+      canvas.scale(((float) canvas.getWidth()) / outputBuffer.width,
+          ((float) canvas.getHeight()) / outputBuffer.height);
+    }
+    canvas.drawBitmap(bitmap, 0, 0, null);
+    surface.unlockCanvasAndPost(canvas);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;flushDecoder();;;    VpxOutputBuffer bufferToRelease = outputBuffer;
+    // Set this to null now because releaseOutputBuffer could throw an exception.
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;flushDecoder();;;    releaseOutputBuffer(bufferToRelease);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;setOutputBufferRenderer(VpxOutputBufferRenderer);;;private void setOutputBufferRenderer(VpxOutputBufferRenderer outputBufferRenderer) {
+    if (this.outputBufferRenderer == outputBufferRenderer) {
+      return;
+    }
+    this.outputBufferRenderer = outputBufferRenderer;
+    surface = null;
+    outputMode = (outputBufferRenderer != null)
+        ? VpxDecoder.OUTPUT_MODE_YUV : VpxDecoder.OUTPUT_MODE_UNKNOWN;
+    if (decoder != null) {
+      decoder.setOutputMode(outputMode);
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/LibvpxVideoTrackRenderer;notifyIfVideoSizeChanged(VpxOutputBuffer);;;private void notifyIfVideoSizeChanged(final VpxOutputBuffer outputBuffer) {
+    if (previousWidth == -1 || previousHeight == -1
+        || previousWidth != outputBuffer.width || previousHeight != outputBuffer.height) {
+      previousWidth = outputBuffer.width;
+      previousHeight = outputBuffer.height;
+      if (eventHandler != null && eventListener != null) {
+        eventHandler.post(new Runnable()  {
+          @Override
+          public void run() {
+            eventListener.onVideoSizeChanged(outputBuffer.width, outputBuffer.height);
+          }
+        });
+      }
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxVideoSurfaceView;setOutputBuffer(VpxOutputBuffer);;;@Override
+  public void setOutputBuffer(VpxOutputBuffer outputBuffer) {
+    renderer.setFrame(outputBuffer);
+    requestRender();
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxDecoder;decode(ByteBuffer,int,VpxOutputBuffer);;;public int decode(ByteBuffer encoded, int size, VpxOutputBuffer outputBuffer)
+      throws VpxDecoderException {
+    if (vpxDecode(vpxDecContext, encoded, size) != 0) {
+      throw new VpxDecoderException("libvpx decode error: " + vpxGetErrorMessage(vpxDecContext));
+    }
+    return vpxGetFrame(vpxDecContext, outputBuffer);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxDecoder;vpxGetFrame(long,VpxOutputBuffer);;;private native int vpxGetFrame(long context, VpxOutputBuffer outputBuffer);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer;setFrame(VpxOutputBuffer);;;public synchronized void setFrame(VpxOutputBuffer outputBuffer) {
+    this.outputBuffer = outputBuffer;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxRenderer;onSurfaceCreated(GL10,EGLConfig);;;    checkNoGLES2Error();
+    colorMatrixLocation = GLES20.glGetUniformLocation(program, "mColorConversion");
+    checkNoGLES2Error();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxOutputBuffer;initForRgbFrame(int,int);;;public void initForRgbFrame(int width, int height) {
+    this.width = width;
+    this.height = height;
+    int minimumRgbSize = width * height * 2;
+    if (data == null || data.capacity() < minimumRgbSize) {
+      data = ByteBuffer.allocateDirect(minimumRgbSize);
+      yuvPlanes = null;
+    }
+    data.position(0);
+    data.limit(minimumRgbSize);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_a1d5626_d15da1f/rev_a1d5626-d15da1f;/extensions/vp9/src/main/java/com/google/android/exoplayer/ext/vp9/VpxOutputBuffer;initForYuvFrame(int,int,int,int,int);;;public void initForYuvFrame(int width, int height, int yStride, int uvStride, int colorspace) {
+    this.width = width;
+    this.height = height;
+    this.colorspace = colorspace;
+    int yLength = yStride * height;
+    int uvLength = uvStride * ((height + 1) / 2);
+    int minimumYuvSize = yLength + (uvLength * 2);
+    if (data == null || data.capacity() < minimumYuvSize) {
+      data = ByteBuffer.allocateDirect(minimumYuvSize);
+    }
+    data.limit(minimumYuvSize);
+    if (yuvPlanes == null) {
+      yuvPlanes = new ByteBuffer[3];
+    }
+    // Rewrapping has to be done on every frame since the stride might have changed.
+    data.position(0);
+    yuvPlanes[0] = data.slice();
+    yuvPlanes[0].limit(yLength);
+    data.position(yLength);
+    yuvPlanes[1] = data.slice();
+    yuvPlanes[1].limit(uvLength);
+    data.position(yLength + uvLength);
+    yuvPlanes[2] = data.slice();
+    yuvPlanes[2].limit(uvLength);
+    if (yuvStrides == null) {
+      yuvStrides = new int[3];
+    }
+    yuvStrides[0] = yStride;
+    yuvStrides[1] = uvStride;
+    yuvStrides[2] = uvStride;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/testutil/TestUtil;getByteArray(Instrumentation,String);;;public static byte[] getByteArray(Instrumentation instrumentation, String fileName)
+      throws IOException {
+    InputStream is = instrumentation.getContext().getResources().getAssets().open(fileName);
+    return Util.toByteArray(is);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadEmptyString();;;public void testReadEmptyString() {
+    byte[] bytes = new byte[0];
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadSingleLineWithoutEndingTrail();;;public void testReadSingleLineWithoutEndingTrail() {
+    byte[] bytes = new byte[] {
+      'f', 'o', 'o'
+    };
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertEquals("foo", parser.readLine());
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadSingleLineWithEndingLf();;;public void testReadSingleLineWithEndingLf() {
+    byte[] bytes = new byte[] {
+      'f', 'o', 'o', '\n'
+    };
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertEquals("foo", parser.readLine());
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadTwoLinesWithLfFollowedByCr();;;public void testReadTwoLinesWithLfFollowedByCr() {
+    byte[] bytes = new byte[] {
+      'f', 'o', 'o', '\n', '\r', 'b', 'a', 'r'
+    };
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertEquals("foo", parser.readLine());
+    assertEquals("bar", parser.readLine());
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadThreeLinesWithEmptyLine();;;public void testReadThreeLinesWithEmptyLine() {
+    byte[] bytes = new byte[] {
+      'f', 'o', 'o', '\n', '\r', '\n', 'b', 'a', 'r'
+    };
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertEquals("foo", parser.readLine());
+    assertEquals("", parser.readLine());
+    assertEquals("bar", parser.readLine());
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/androidTest/java/com/google/android/exoplayer/util/ParsableByteArrayTest;testReadFourLinesWithCrFollowedByLf();;;public void testReadFourLinesWithCrFollowedByLf() {
+    byte[] bytes = new byte[] {
+      'f', 'o', 'o', '\r', '\n', '\n', 'b', 'a', 'r', '\n', '\r'
+    };
+    ParsableByteArray parser = new ParsableByteArray(bytes);
+    assertEquals("foo", parser.readLine());
+    assertEquals("", parser.readLine());
+    assertEquals("", parser.readLine());
+    assertEquals("bar", parser.readLine());
+    assertNull(parser.readLine());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/main/java/com/google/android/exoplayer/text/SubtitleParser;parse(byte[],int,int);;;public Subtitle parse(byte[] bytes, int offset, int length) throws ParserException;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/main/java/com/google/android/exoplayer/text/tx3g/Tx3gParser;parse(byte[],int,int);;;@Override
+  public Subtitle parse(byte[] bytes, int offset, int length) {
+    String cueText = new String(bytes, offset, length);
+    return new Tx3gSubtitle(new Cue(cueText));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil;validateWebvttHeaderLine(ParsableByteArray);;;public static void validateWebvttHeaderLine(ParsableByteArray input) throws ParserException {
+    String line = input.readLine();
+    if (line == null || !HEADER.matcher(line).matches()) {
+      throw new ParserException("Expected WEBVTT. Got " + line);
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/main/java/com/google/android/exoplayer/text/webvtt/WebvttParserUtil;findNextCueHeader(ParsableByteArray);;;public static Matcher findNextCueHeader(ParsableByteArray input) {
+    String line;
+    while ((line = input.readLine()) != null) {
+      if (COMMENT.matcher(line).matches()) {
+        // Skip until the end of the comment block.
+        while ((line = input.readLine()) != null && !line.isEmpty()) {}
+      } else {
+        Matcher cueHeaderMatcher = CUE_HEADER.matcher(line);
+        if (cueHeaderMatcher.matches()) {
+          return cueHeaderMatcher;
+        }
+      }
+    }
+    return null;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_69a42b6_6b59975/rev_69a42b6-6b59975;/library/src/main/java/com/google/android/exoplayer/util/ParsableByteArray;readLine();;;public String readLine() {
+    if (bytesLeft() == 0) {
+      return null;
+    }
+    int lineLimit = position;
+    while (lineLimit < limit && data[lineLimit] != '\n' && data[lineLimit] != '\r') {
+      lineLimit++;
+    }
+    String line = new String(data, position, lineLimit - position);
+    position = lineLimit;
+    if (position == limit) {
+      return line;
+    }
+    if (data[position] == '\n') {
+      position++;
+      if (position == limit) {
+        return line;
+      }
+    }
+    if (data[position] == '\r') {
+      position++;
+    }
+    return line;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6;/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView;setViewAlphaV11(View,float);;;@TargetApi(11)
+  private void setViewAlphaV11(View view, float alpha) {
+    view.setAlpha(alpha);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6;/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView;onAttachedToWindow();;;    isAttachedToWindow = true;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e65110e_d79f8f6/rev_e65110e-d79f8f6;/library/src/main/java/com/google/android/exoplayer2/ui/PlaybackControlView;onDetachedFromWindow();;;    isAttachedToWindow = false;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38;/library/src/main/java/com/google/android/exoplayer2/BaseRenderer;readSource(FormatHolder,DecoderInputBuffer);;;    } else if (result == C.RESULT_FORMAT_READ) {
+      Format format = formatHolder.format;
+      if (format.subsampleOffsetUs != Format.OFFSET_SAMPLE_RELATIVE) {
+        format = format.copyWithSubsampleOffsetUs(format.subsampleOffsetUs + streamOffsetUs);
+        formatHolder.format = format;
+      }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38;/library/src/main/java/com/google/android/exoplayer2/source/MediaPeriod;getNextLoadPositionUs();;;@Override
+  long getNextLoadPositionUs();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_2e7f9fb_0cacd38/rev_2e7f9fb-0cacd38;/library/src/main/java/com/google/android/exoplayer2/source/MediaPeriod;continueLoading(long);;;@Override
+  boolean continueLoading(long positionUs);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/extensions/gvr/src/main/java/com/google/android/exoplayer2/ext/gvr/GvrAudioProcessor;configure(int,int,int);;;      case 1:
+        surroundFormat = GvrAudioSurround.SurroundFormat.SURROUND_MONO;
+        break;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest;testParseMasterPlaylist();;;    assertNull(masterPlaylist.muxedCaptionFormats);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest;testMasterPlaylistWithBandwdithAverage();;;public void testMasterPlaylistWithBandwdithAverage() throws IOException {
+    HlsMasterPlaylist masterPlaylist = parseMasterPlaylist(PLAYLIST_URI,
+        AVG_BANDWIDTH_MASTER_PLAYLIST);
+
+    List<HlsMasterPlaylist.HlsUrl> variants = masterPlaylist.variants;
+
+    assertEquals(1280000, variants.get(0).format.bitrate);
+    assertEquals(1270000, variants.get(1).format.bitrate);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/androidTest/java/com/google/android/exoplayer2/source/hls/playlist/HlsMasterPlaylistParserTest;testPlaylistWithoutClosedCaptions();;;public void testPlaylistWithoutClosedCaptions() throws IOException {
+    HlsMasterPlaylist playlist = parseMasterPlaylist(PLAYLIST_URI, MASTER_PLAYLIST_WITHOUT_CC);
+    assertEquals(Collections.emptyList(), playlist.muxedCaptionFormats);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource;maybeThrowError();;;    if (expectedPlaylistUrl != null) {
+      playlistTracker.maybeThrowPlaylistRefreshError(expectedPlaylistUrl);
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource;getNextChunk(HlsMediaChunk,long,HlsChunkHolder);;;    expectedPlaylistUrl = null;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource;getNextChunk(HlsMediaChunk,long,HlsChunkHolder);;;      expectedPlaylistUrl = selectedUrl;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsChunkSource;getNextChunk(HlsMediaChunk,long,HlsChunkHolder);;;        expectedPlaylistUrl = selectedUrl;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/hls/src/main/java/com/google/android/exoplayer2/source/hls/HlsMediaChunk;createExtractor();;;      } else {
+        closedCaptionFormats = Collections.emptyList();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/AssetDataSourceTest;testReadFileUri();;;public void testReadFileUri() throws Exception {
+    AssetDataSource dataSource = new AssetDataSource(getInstrumentation().getContext());
+    DataSpec dataSpec = new DataSpec(Uri.parse("file:///android_asset/" + DATA_PATH));
+    TestUtil.assertDataSourceContent(dataSource, dataSpec,
+        TestUtil.getByteArray(getInstrumentation(), DATA_PATH));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/AssetDataSourceTest;testReadAssetUri();;;public void testReadAssetUri() throws Exception {
+    AssetDataSource dataSource = new AssetDataSource(getInstrumentation().getContext());
+    DataSpec dataSpec = new DataSpec(Uri.parse("asset:///" + DATA_PATH));
+    TestUtil.assertDataSourceContent(dataSource, dataSpec,
+        TestUtil.getByteArray(getInstrumentation(), DATA_PATH));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;testReadValidUri();;;public void testReadValidUri() throws Exception {
+    ContentDataSource dataSource = new ContentDataSource(getInstrumentation().getContext());
+    Uri contentUri = new Uri.Builder()
+        .scheme(ContentResolver.SCHEME_CONTENT)
+        .authority(AUTHORITY)
+        .path(DATA_PATH).build();
+    DataSpec dataSpec = new DataSpec(contentUri);
+    TestUtil.assertDataSourceContent(dataSource, dataSpec,
+        TestUtil.getByteArray(getInstrumentation(), DATA_PATH));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;testReadInvalidUri();;;public void testReadInvalidUri() throws Exception {
+    ContentDataSource dataSource = new ContentDataSource(getInstrumentation().getContext());
+    Uri contentUri = new Uri.Builder()
+        .scheme(ContentResolver.SCHEME_CONTENT)
+        .authority(AUTHORITY)
+        .build();
+    DataSpec dataSpec = new DataSpec(contentUri);
+    try {
+      dataSource.open(dataSpec);
+      fail();
+    } catch (ContentDataSource.ContentDataSourceException e) {
+      // Expected.
+      assertTrue(e.getCause() instanceof FileNotFoundException);
+    } finally {
+      dataSource.close();
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;onCreate();;;@Override
+    public boolean onCreate() {
+      return true;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;query(Uri,String[],String,String[],String);;;@Override
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+        String[] selectionArgs, String sortOrder) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;openAssetFile(Uri,String);;;@Override
+    public AssetFileDescriptor openAssetFile(@NonNull Uri uri, @NonNull String mode)
+        throws FileNotFoundException {
+      if (uri.getPath() == null) {
+        return null;
+      }
+      try {
+        return getContext().getAssets().openFd(uri.getPath().replaceFirst("/", ""));
+      } catch (IOException e) {
+        FileNotFoundException exception = new FileNotFoundException(e.getMessage());
+        exception.initCause(e);
+        throw exception;
+      }
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;getType(Uri);;;@Override
+    public String getType(@NonNull Uri uri) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;insert(Uri,ContentValues);;;@Override
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;delete(Uri,String,String[]);;;@Override
+    public int delete(@NonNull Uri uri, String selection,
+        String[] selectionArgs) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/upstream/ContentDataSourceTest;update(Uri,ContentValues,String,String[]);;;@Override
+    public int update(@NonNull Uri uri, ContentValues values,
+        String selection, String[] selectionArgs) {
+      throw new UnsupportedOperationException();
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testReadAllBytes();;;public void testReadAllBytes() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    byte[] bytesRead = new byte[TEST_DATA.length];
+    testArray.readBytes(bytesRead, 0, TEST_DATA.length);
+    MoreAsserts.assertEquals(TEST_DATA, bytesRead);
+    assertEquals(TEST_DATA.length * 8, testArray.getPosition());
+    assertEquals(TEST_DATA.length, testArray.getBytePosition());
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testReadBit();;;public void testReadBit() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    assertReadBitsToEnd(0, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testReadBits();;;public void testReadBits() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    assertEquals(getTestDataBits(0, 5), testArray.readBits(5));
+    assertEquals(getTestDataBits(5, 3), testArray.readBits(3));
+    assertEquals(getTestDataBits(8, 16), testArray.readBits(16));
+    assertEquals(getTestDataBits(24, 3), testArray.readBits(3));
+    assertEquals(getTestDataBits(27, 18), testArray.readBits(18));
+    assertEquals(getTestDataBits(45, 5), testArray.readBits(5));
+    assertEquals(getTestDataBits(50, 14), testArray.readBits(14));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testRead32BitsByteAligned();;;public void testRead32BitsByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    assertEquals(getTestDataBits(0, 32), testArray.readBits(32));
+    assertEquals(getTestDataBits(32, 32), testArray.readBits(32));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testRead32BitsNonByteAligned();;;public void testRead32BitsNonByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    assertEquals(getTestDataBits(0, 5), testArray.readBits(5));
+    assertEquals(getTestDataBits(5, 32), testArray.readBits(32));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testSkipBytes();;;public void testSkipBytes() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.skipBytes(2);
+    assertReadBitsToEnd(16, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testSkipBitsByteAligned();;;public void testSkipBitsByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.skipBits(16);
+    assertReadBitsToEnd(16, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testSkipBitsNonByteAligned();;;public void testSkipBitsNonByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.skipBits(5);
+    assertReadBitsToEnd(5, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testSetPositionByteAligned();;;public void testSetPositionByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.setPosition(16);
+    assertReadBitsToEnd(16, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testSetPositionNonByteAligned();;;public void testSetPositionNonByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.setPosition(5);
+    assertReadBitsToEnd(5, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testByteAlignFromNonByteAligned();;;public void testByteAlignFromNonByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.setPosition(11);
+    testArray.byteAlign();
+    assertEquals(2, testArray.getBytePosition());
+    assertEquals(16, testArray.getPosition());
+    assertReadBitsToEnd(16, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;testByteAlignFromByteAligned();;;public void testByteAlignFromByteAligned() {
+    ParsableBitArray testArray = new ParsableBitArray(TEST_DATA);
+    testArray.setPosition(16);
+    testArray.byteAlign(); // Should be a no-op.
+    assertEquals(2, testArray.getBytePosition());
+    assertEquals(16, testArray.getPosition());
+    assertReadBitsToEnd(16, testArray);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;assertReadBitsToEnd(int,ParsableBitArray);;;private static void assertReadBitsToEnd(int expectedStartPosition, ParsableBitArray testArray) {
+    int position = testArray.getPosition();
+    assertEquals(expectedStartPosition, position);
+    for (int i = position; i < TEST_DATA.length * 8; i++) {
+      assertEquals(getTestDataBit(i), testArray.readBit());
+      assertEquals(i + 1, testArray.getPosition());
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;getTestDataBits(int,int);;;private static int getTestDataBits(int bitPosition, int length) {
+    int result = 0;
+    for (int i = 0; i < length; i++) {
+      result = result << 1;
+      if (getTestDataBit(bitPosition++)) {
+        result |= 0x1;
+      }
+    }
+    return result;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/util/ParsableBitArrayTest;getTestDataBit(int);;;private static boolean getTestDataBit(int bitPosition) {
+    return (TEST_DATA[bitPosition / 8] & (0x80 >>> (bitPosition % 8))) != 0;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBit();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBit();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBit();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBit();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testSkipBits();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testGetPosition();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testSetPosition();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testSetPosition();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBits();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBits();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArrayTest;testReadBitsBeyondByteBoundaries();;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testMapping();;;public void testMapping() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector();
+    trackSelector.selectTracks(RENDERER_CAPABILITIES, TRACK_GROUPS);
+    trackSelector.assertMappedTrackGroups(0, VIDEO_TRACK_GROUP);
+    trackSelector.assertMappedTrackGroups(1, AUDIO_TRACK_GROUP);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testMappingReverseOrder();;;public void testMappingReverseOrder() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector();
+    RendererCapabilities[] reverseOrderRendererCapabilities = new RendererCapabilities[] {
+        AUDIO_CAPABILITIES, VIDEO_CAPABILITIES};
+    trackSelector.selectTracks(reverseOrderRendererCapabilities, TRACK_GROUPS);
+    trackSelector.assertMappedTrackGroups(0, AUDIO_TRACK_GROUP);
+    trackSelector.assertMappedTrackGroups(1, VIDEO_TRACK_GROUP);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testMappingMulti();;;public void testMappingMulti() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector();
+    TrackGroupArray multiTrackGroups = new TrackGroupArray(VIDEO_TRACK_GROUP, AUDIO_TRACK_GROUP,
+        VIDEO_TRACK_GROUP);
+    trackSelector.selectTracks(RENDERER_CAPABILITIES, multiTrackGroups);
+    trackSelector.assertMappedTrackGroups(0, VIDEO_TRACK_GROUP, VIDEO_TRACK_GROUP);
+    trackSelector.assertMappedTrackGroups(1, AUDIO_TRACK_GROUP);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testSelectTracks();;;public void testSelectTracks() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector(TRACK_SELECTIONS);
+    TrackSelectorResult result = trackSelector.selectTracks(RENDERER_CAPABILITIES, TRACK_GROUPS);
+    assertEquals(TRACK_SELECTIONS[0], result.selections.get(0));
+    assertEquals(TRACK_SELECTIONS[1], result.selections.get(1));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testSelectTracksWithNullOverride();;;public void testSelectTracksWithNullOverride() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector(TRACK_SELECTIONS);
+    trackSelector.setSelectionOverride(0, new TrackGroupArray(VIDEO_TRACK_GROUP), null);
+    TrackSelectorResult result = trackSelector.selectTracks(RENDERER_CAPABILITIES, TRACK_GROUPS);
+    assertNull(result.selections.get(0));
+    assertEquals(TRACK_SELECTIONS[1], result.selections.get(1));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testSelectTracksWithClearedNullOverride();;;public void testSelectTracksWithClearedNullOverride() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector(TRACK_SELECTIONS);
+    trackSelector.setSelectionOverride(0, new TrackGroupArray(VIDEO_TRACK_GROUP), null);
+    trackSelector.clearSelectionOverride(0, new TrackGroupArray(VIDEO_TRACK_GROUP));
+    TrackSelectorResult result = trackSelector.selectTracks(RENDERER_CAPABILITIES, TRACK_GROUPS);
+    assertEquals(TRACK_SELECTIONS[0], result.selections.get(0));
+    assertEquals(TRACK_SELECTIONS[1], result.selections.get(1));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;testSelectTracksWithNullOverrideForDifferentTracks();;;public void testSelectTracksWithNullOverrideForDifferentTracks() throws ExoPlaybackException {
+    FakeMappingTrackSelector trackSelector = new FakeMappingTrackSelector(TRACK_SELECTIONS);
+    trackSelector.setSelectionOverride(0, new TrackGroupArray(VIDEO_TRACK_GROUP), null);
+    TrackSelectorResult result = trackSelector.selectTracks(RENDERER_CAPABILITIES,
+        new TrackGroupArray(VIDEO_TRACK_GROUP, AUDIO_TRACK_GROUP, VIDEO_TRACK_GROUP));
+    assertEquals(TRACK_SELECTIONS[0], result.selections.get(0));
+    assertEquals(TRACK_SELECTIONS[1], result.selections.get(1));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;FakeMappingTrackSelector(TrackSelection);;;public FakeMappingTrackSelector(TrackSelection... result) {
+      this.result = result.length == 0 ? null : result;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;selectTracks(RendererCapabilities[],TrackGroupArray[],int[][][]);;;@Override
+    protected TrackSelection[] selectTracks(RendererCapabilities[] rendererCapabilities,
+        TrackGroupArray[] rendererTrackGroupArrays, int[][][] rendererFormatSupports)
+        throws ExoPlaybackException {
+      lastRendererTrackGroupArrays = rendererTrackGroupArrays;
+      return result == null ? new TrackSelection[rendererCapabilities.length] : result;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;assertMappedTrackGroups(int,TrackGroup);;;public void assertMappedTrackGroups(int rendererIndex, TrackGroup... expected) {
+      assertEquals(expected.length, lastRendererTrackGroupArrays[rendererIndex].length);
+      for (int i = 0; i < expected.length; i++) {
+        assertEquals(expected[i], lastRendererTrackGroupArrays[rendererIndex].get(i));
+      }
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;FakeRendererCapabilities(int);;;public FakeRendererCapabilities(int trackType) {
+      this.trackType = trackType;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;getTrackType();;;@Override
+    public int getTrackType() {
+      return trackType;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;supportsFormat(Format);;;@Override
+    public int supportsFormat(Format format) throws ExoPlaybackException {
+      return MimeTypes.getTrackType(format.sampleMimeType) == trackType
+          ? (FORMAT_HANDLED | ADAPTIVE_SEAMLESS) : FORMAT_UNSUPPORTED_TYPE;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/androidTest/java/com/google/android/exoplayer2/trackselection/MappingTrackSelectorTest;supportsMixedMimeTypeAdaptation();;;@Override
+    public int supportsMixedMimeTypeAdaptation() throws ExoPlaybackException {
+      return ADAPTIVE_SEAMLESS;
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/BaseRenderer;disable();;;    onDisabled();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/text/ttml/TtmlRegion;TtmlRegion(String);;;public TtmlRegion(String id) {
+    this(id, Cue.DIMEN_UNSET, Cue.DIMEN_UNSET, Cue.TYPE_UNSET, Cue.TYPE_UNSET, Cue.DIMEN_UNSET);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/text/ttml/TtmlRegion;TtmlRegion(String,float,float,int,int,float);;;public TtmlRegion(String id, float position, float line, @Cue.LineType int lineType,
+      @Cue.AnchorType int lineAnchor, float width) {
+    this.id = id;
+    this.position = position;
+    this.line = line;
+    this.lineType = lineType;
+    this.lineAnchor = lineAnchor;
+    this.width = width;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/mediacodec/MediaCodecInfo;adjustMaxInputChannelCount(String,String,int);;;private static int adjustMaxInputChannelCount(String name, String mimeType, int maxChannelCount) {
+    if (maxChannelCount > 1 || (Util.SDK_INT >= 26 && maxChannelCount > 0)) {
+      // The maximum channel count looks like it's been set correctly.
+      return maxChannelCount;
+    }
+    if (MimeTypes.AUDIO_MPEG.equals(mimeType)
+        || MimeTypes.AUDIO_AMR_NB.equals(mimeType)
+        || MimeTypes.AUDIO_AMR_WB.equals(mimeType)
+        || MimeTypes.AUDIO_AAC.equals(mimeType)
+        || MimeTypes.AUDIO_VORBIS.equals(mimeType)
+        || MimeTypes.AUDIO_OPUS.equals(mimeType)
+        || MimeTypes.AUDIO_RAW.equals(mimeType)
+        || MimeTypes.AUDIO_FLAC.equals(mimeType)
+        || MimeTypes.AUDIO_ALAW.equals(mimeType)
+        || MimeTypes.AUDIO_MLAW.equals(mimeType)
+        || MimeTypes.AUDIO_MSGSM.equals(mimeType)) {
+      // Platform code should have set a default.
+      return maxChannelCount;
+    }
+    // The maximum channel count looks incorrect. Adjust it to an assumed default.
+    int assumedMaxChannelCount;
+    if (MimeTypes.AUDIO_AC3.equals(mimeType)) {
+      assumedMaxChannelCount = 6;
+    } else if (MimeTypes.AUDIO_E_AC3.equals(mimeType)) {
+      assumedMaxChannelCount = 16;
+    } else {
+      // Default to the platform limit, which is 30.
+      assumedMaxChannelCount = 30;
+    }
+    Log.w(TAG, "AssumedMaxChannelAdjustment: " + name + ", [" + maxChannelCount + " to "
+        + assumedMaxChannelCount + "]");
+    return assumedMaxChannelCount;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer;onStopped();;;    joiningDeadlineMs = C.TIME_UNSET;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer;onOutputFormatChanged(MediaCodec,MediaFormat);;;@Override
+  protected void onOutputFormatChanged(MediaCodec codec, MediaFormat outputFormat) {
+    boolean hasCrop = outputFormat.containsKey(KEY_CROP_RIGHT)
+        && outputFormat.containsKey(KEY_CROP_LEFT) && outputFormat.containsKey(KEY_CROP_BOTTOM)
+        && outputFormat.containsKey(KEY_CROP_TOP);
+    currentWidth = hasCrop
+        ? outputFormat.getInteger(KEY_CROP_RIGHT) - outputFormat.getInteger(KEY_CROP_LEFT) + 1
+        : outputFormat.getInteger(MediaFormat.KEY_WIDTH);
+    currentHeight = hasCrop
+        ? outputFormat.getInteger(KEY_CROP_BOTTOM) - outputFormat.getInteger(KEY_CROP_TOP) + 1
+        : outputFormat.getInteger(MediaFormat.KEY_HEIGHT);
+    currentPixelWidthHeightRatio = pendingPixelWidthHeightRatio;
+    if (Util.SDK_INT >= 21) {
+      // On API level 21 and above the decoder applies the rotation when rendering to the surface.
+      // Hence currentUnappliedRotation should always be 0. For 90 and 270 degree rotations, we need
+      // to flip the width, height and pixel aspect ratio to reflect the rotation that was applied.
+      if (pendingRotationDegrees == 90 || pendingRotationDegrees == 270) {
+        int rotatedHeight = currentWidth;
+        currentWidth = currentHeight;
+        currentHeight = rotatedHeight;
+        currentPixelWidthHeightRatio = 1 / currentPixelWidthHeightRatio;
+      }
+    } else {
+      // On API level 20 and below the decoder does not apply the rotation.
+      currentUnappliedRotationDegrees = pendingRotationDegrees;
+    }
+    // Must be applied each time the output format changes.
+    setVideoScalingMode(codec, scalingMode);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/MediaCodecVideoRenderer;areAdaptationCompatible(boolean,Format,Format);;;private static boolean areAdaptationCompatible(boolean codecIsAdaptive, Format first,
+      Format second) {
+    return first.sampleMimeType.equals(second.sampleMimeType)
+        && getRotationDegrees(first) == getRotationDegrees(second)
+        && (codecIsAdaptive || (first.width == second.width && first.height == second.height));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;DummySurface(DummySurfaceThread,SurfaceTexture,boolean);;;private DummySurface(DummySurfaceThread thread, SurfaceTexture surfaceTexture, boolean secure) {
+    super(surfaceTexture);
+    this.thread = thread;
+    this.secure = secure;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;release();;;@Override
+  public void release() {
+    super.release();
+    // The Surface may be released multiple times (explicitly and by Surface.finalize()). The
+    // implementation of super.release() has its own deduplication logic. Below we need to
+    // deduplicate ourselves. Synchronization is required as we don't control the thread on which
+    // Surface.finalize() is called.
+    synchronized (thread) {
+      if (!threadReleased) {
+        thread.release();
+        threadReleased = true;
+      }
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;assertApiLevel17OrHigher();;;private static void assertApiLevel17OrHigher() {
+    if (Util.SDK_INT < 17) {
+      throw new UnsupportedOperationException("Unsupported prior to API level 17");
+    }
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;DummySurfaceThread();;;public DummySurfaceThread() {
+      super("dummySurface");
+      textureIdHolder = new int[1];
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;init(boolean);;;public DummySurface init(boolean secure) {
+      start();
+      handler = new Handler(getLooper(), this);
+      boolean wasInterrupted = false;
+      synchronized (this) {
+        handler.obtainMessage(MSG_INIT, secure ? 1 : 0, 0).sendToTarget();
+        while (surface == null && initException == null && initError == null) {
+          try {
+            wait();
+          } catch (InterruptedException e) {
+            wasInterrupted = true;
+          }
+        }
+      }
+      if (wasInterrupted) {
+        // Restore the interrupted status.
+        Thread.currentThread().interrupt();
+      }
+      if (initException != null) {
+        throw initException;
+      } else if (initError != null) {
+        throw initError;
+      } else {
+        return surface;
+      }
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;release();;;public void release() {
+      handler.sendEmptyMessage(MSG_RELEASE);
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;onFrameAvailable(SurfaceTexture);;;@Override
+    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+      handler.sendEmptyMessage(MSG_UPDATE_TEXTURE);
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;handleMessage(Message);;;@Override
+    public boolean handleMessage(Message msg) {
+      switch (msg.what) {
+        case MSG_INIT:
+          try {
+            initInternal(msg.arg1 != 0);
+          } catch (RuntimeException e) {
+            Log.e(TAG, "Failed to initialize dummy surface", e);
+            initException = e;
+          } catch (Error e) {
+            Log.e(TAG, "Failed to initialize dummy surface", e);
+            initError = e;
+          } finally {
+            synchronized (this) {
+              notify();
+            }
+          }
+          return true;
+        case MSG_UPDATE_TEXTURE:
+          surfaceTexture.updateTexImage();
+          return true;
+        case MSG_RELEASE:
+          try {
+            releaseInternal();
+          } catch (Throwable e) {
+            Log.e(TAG, "Failed to release dummy surface", e);
+          } finally {
+            quit();
+          }
+          return true;
+        default:
+          return true;
+      }
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;initInternal(boolean);private void initInternal(boolean secure) {
+      EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+      Assertions.checkState(display != null, "eglGetDisplay failed");
+
+      int[] version = new int[2];
+      boolean eglInitialized = eglInitialize(display, version, 0, version, 1);
+      Assertions.checkState(eglInitialized, "eglInitialize failed");
+
+      int[] eglAttributes = new int[] {
+          EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+          EGL_RED_SIZE, 8,
+          EGL_GREEN_SIZE, 8,
+          EGL_BLUE_SIZE, 8,
+          EGL_ALPHA_SIZE, 8,
+          EGL_DEPTH_SIZE, 0,
+          EGL_CONFIG_CAVEAT, EGL_NONE,
+          EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+          EGL_NONE
+      };
+      EGLConfig[] configs = new EGLConfig[1];
+      int[] numConfigs = new int[1];
+      boolean eglChooseConfigSuccess = eglChooseConfig(display, eglAttributes, 0, configs, 0, 1,
+          numConfigs, 0);
+      Assertions.checkState(eglChooseConfigSuccess && numConfigs[0] > 0 && configs[0] != null,
+          "eglChooseConfig failed");
+
+      EGLConfig config = configs[0];
+      int[] glAttributes;
+      if (secure) {
+        glAttributes = new int[] {
+            EGL_CONTEXT_CLIENT_VERSION, 2,
+            EGL_PROTECTED_CONTENT_EXT, EGL_TRUE,
+            EGL_NONE};
+      } else {
+        glAttributes = new int[] {
+            EGL_CONTEXT_CLIENT_VERSION, 2,
+            EGL_NONE};
+      }
+      EGLContext context = eglCreateContext(display, config, android.opengl.EGL14.EGL_NO_CONTEXT,
+          glAttributes, 0);
+      Assertions.checkState(context != null, "eglCreateContext failed");
+
+      int[] pbufferAttributes;
+      if (secure) {
+        pbufferAttributes = new int[] {
+            EGL_WIDTH, 1,
+            EGL_HEIGHT, 1,
+            EGL_PROTECTED_CONTENT_EXT, EGL_TRUE,
+            EGL_NONE};
+      } else {
+        pbufferAttributes = new int[] {
+            EGL_WIDTH, 1,
+            EGL_HEIGHT, 1,
+            EGL_NONE};
+      }
+      EGLSurface pbuffer = eglCreatePbufferSurface(display, config, pbufferAttributes, 0);
+      Assertions.checkState(pbuffer != null, "eglCreatePbufferSurface failed");
+
+      boolean eglMadeCurrent = eglMakeCurrent(display, pbuffer, pbuffer, context);
+      Assertions.checkState(eglMadeCurrent, "eglMakeCurrent failed");
+
+      glGenTextures(1, textureIdHolder, 0);
+      surfaceTexture = new SurfaceTexture(textureIdHolder[0]);
+      surfaceTexture.setOnFrameAvailableListener(this);
+      surface = new DummySurface(this, surfaceTexture, secure);
+    };;private void initInternal(boolean secure) {
+      EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+      Assertions.checkState(display != null, "eglGetDisplay failed");
+
+      int[] version = new int[2];
+      boolean eglInitialized = eglInitialize(display, version, 0, version, 1);
+      Assertions.checkState(eglInitialized, "eglInitialize failed");
+
+      int[] eglAttributes = new int[] {
+          EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+          EGL_RED_SIZE, 8,
+          EGL_GREEN_SIZE, 8,
+          EGL_BLUE_SIZE, 8,
+          EGL_ALPHA_SIZE, 8,
+          EGL_DEPTH_SIZE, 0,
+          EGL_CONFIG_CAVEAT, EGL_NONE,
+          EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+          EGL_NONE
+      };
+      EGLConfig[] configs = new EGLConfig[1];
+      int[] numConfigs = new int[1];
+      boolean eglChooseConfigSuccess = eglChooseConfig(display, eglAttributes, 0, configs, 0, 1,
+          numConfigs, 0);
+      Assertions.checkState(eglChooseConfigSuccess && numConfigs[0] > 0 && configs[0] != null,
+          "eglChooseConfig failed");
+
+      EGLConfig config = configs[0];
+      int[] glAttributes;
+      if (secure) {
+        glAttributes = new int[] {
+            EGL_CONTEXT_CLIENT_VERSION, 2,
+            EGL_PROTECTED_CONTENT_EXT,
+            EGL_TRUE, EGL_NONE};
+      } else {
+        glAttributes = new int[] {
+            EGL_CONTEXT_CLIENT_VERSION, 2,
+            EGL_NONE};
+      }
+      EGLContext context = eglCreateContext(display, config, android.opengl.EGL14.EGL_NO_CONTEXT,
+          glAttributes, 0);
+      Assertions.checkState(context != null, "eglCreateContext failed");
+
+      int[] pbufferAttributes;
+      if (secure) {
+        pbufferAttributes = new int[] {
+            EGL_WIDTH, 1,
+            EGL_HEIGHT, 1,
+            EGL_PROTECTED_CONTENT_EXT, EGL_TRUE,
+            EGL_NONE};
+      } else {
+        pbufferAttributes = new int[] {
+            EGL_WIDTH, 1,
+            EGL_HEIGHT, 1,
+            EGL_NONE};
+      }
+      EGLSurface pbuffer = eglCreatePbufferSurface(display, config, pbufferAttributes, 0);
+      Assertions.checkState(pbuffer != null, "eglCreatePbufferSurface failed");
+
+      boolean eglMadeCurrent = eglMakeCurrent(display, pbuffer, pbuffer, context);
+      Assertions.checkState(eglMadeCurrent, "eglMakeCurrent failed");
+
+      glGenTextures(1, textureIdHolder, 0);
+      surfaceTexture = new SurfaceTexture(textureIdHolder[0]);
+      surfaceTexture.setOnFrameAvailableListener(this);
+      surface = new DummySurface(this, surfaceTexture, secure);
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/video/DummySurface;releaseInternal();;;private void releaseInternal() {
+      try {
+        surfaceTexture.release();
+      } finally {
+        surface = null;
+        surfaceTexture = null;
+        glDeleteTextures(1, textureIdHolder, 0);
+      }
+    }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/upstream/ContentDataSource;open(DataSpec);;;      if (assetFileDescriptor == null) {
+        throw new FileNotFoundException("Could not open file descriptor for: " + uri);
+      }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/upstream/cache/CacheDataSourceFactory;CacheDataSourceFactory(Cache,DataSource.Factory);;;public CacheDataSourceFactory(Cache cache, DataSource.Factory upstreamFactory) {
+    this(cache, upstreamFactory, 0);
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableBitArray;skipBit();;;public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset++;
+    }
+    assertValidOffset();
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray;skipBit();;;public void skipBit() {
+    if (++bitOffset == 8) {
+      bitOffset = 0;
+      byteOffset += shouldSkipByte(byteOffset + 1) ? 2 : 1;
+    }
+    assertValidOffset();
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/util/ParsableNalUnitBitArray;readBits(int);;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/DefaultExtractorsFactory;DefaultExtractorsFactory();;;public DefaultExtractorsFactory() {
+    tsMode = TsExtractor.MODE_SINGLE_PMT;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/DefaultExtractorsFactory;setTsExtractorMode(int);;;public synchronized DefaultExtractorsFactory setTsExtractorMode(@TsExtractor.Mode int mode) {
+    tsMode = mode;
+    return this;
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader;read(ExtractorInput,PositionHolder);;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader;read(ExtractorInput,PositionHolder);;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader;read(ExtractorInput,PositionHolder);;;
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/StreamReader;readHeaders(ExtractorInput);;;    // First payload packet. Trim the payload array of the ogg packet after headers have been read.
+    oggPacket.trimPayload();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket;populate(ExtractorInput);;;        if (packetArray.capacity() < packetArray.limit() + size) {
+          packetArray.data = Arrays.copyOf(packetArray.data, packetArray.limit() + size);
+        }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/OggPacket;trimPayload();;;public void trimPayload() {
+    if (packetArray.data.length == OggPageHeader.MAX_PAGE_PAYLOAD) {
+      return;
+    }
+    packetArray.data = Arrays.copyOf(packetArray.data, Math.max(OggPageHeader.MAX_PAGE_PAYLOAD,
+        packetArray.limit()));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray;skipBits(int);;;    assertValidOffset();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray;setPosition(int);;;    assertValidOffset();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/core/src/main/java/com/google/android/exoplayer2/extractor/ogg/VorbisBitArray;assertValidOffset();;;private void assertValidOffset() {
+    // It is fine for position to be at the end of the array, but no further.
+    Assertions.checkState(byteOffset >= 0
+        && (byteOffset < byteLimit || (byteOffset == byteLimit && bitOffset == 0)));
+  }
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;DefaultTimeBar(Context,AttributeSet);;;        int scrubberColor = a.getInt(R.styleable.DefaultTimeBar_scrubber_color,
+            getDefaultScrubberColor(playedColor));
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;DefaultTimeBar(Context,AttributeSet);;;        unplayedPaint.setColor(unplayedColor);
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;setPosition(long);;;    update();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;setBufferedPosition(long);;;    update();
+/home/arthur/analysis/projects/ExoPlayer/revisions/rev_e713ddc_cbffc14/rev_e713ddc-cbffc14;/library/ui/src/main/java/com/google/android/exoplayer2/ui/DefaultTimeBar;setDuration(long);;;    update();

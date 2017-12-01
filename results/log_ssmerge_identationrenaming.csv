@@ -1,0 +1,199 @@
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/svg/src/main/java/com/bumptech/svgsample/app/MainActivity;onStart();;@Override
+    protected void onStart() {
+        super.onStart();
+        reload();
+    };@Override
+  protected void onStart() {
+    super.onStart();
+    reload();
+  }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/svg/src/main/java/com/bumptech/svgsample/app/MainActivity;cycleScaleType(View);;public void cycleScaleType(View v) {
+        ImageView.ScaleType curr = imageViewRes.getScaleType();
+        Log.w(TAG, "cycle: current=" + curr);
+        ImageView.ScaleType[] all = ImageView.ScaleType.values();
+        int nextOrdinal = (curr.ordinal() + 1) % all.length;
+        ImageView.ScaleType next = all[nextOrdinal];
+        Log.w(TAG, "cycle: next=" + next);
+        imageViewRes.setScaleType(next);
+        imageViewNet.setScaleType(next);
+        reload();
+    };public void cycleScaleType(View v) {
+    ImageView.ScaleType curr = imageViewRes.getScaleType();
+    Log.w(TAG, "cycle: current=" + curr);
+    ImageView.ScaleType[] all = ImageView.ScaleType.values();
+    int nextOrdinal = (curr.ordinal() + 1) % all.length;
+    ImageView.ScaleType next = all[nextOrdinal];
+    Log.w(TAG, "cycle: next=" + next);
+    imageViewRes.setScaleType(next);
+    imageViewNet.setScaleType(next);
+    reload();
+  }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/svg/src/main/java/com/bumptech/svgsample/app/MainActivity;reload();;private void reload() {
+        Log.w(TAG, "reloading");
+        ((TextView) findViewById(R.id.button)).setText(getString(R.string.scaleType, imageViewRes.getScaleType()));
+        loadRes();
+        loadNet();
+    };private void reload() {
+    Log.w(TAG, "reloading");
+    ((TextView) findViewById(R.id.button))
+        .setText(getString(R.string.scaleType, imageViewRes.getScaleType()));
+    loadRes();
+    loadNet();
+  }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/samples/svg/src/main/java/com/bumptech/svgsample/app/SvgDrawableTranscoder;transcode(Resource<SVG>);;@Override
+    public Resource<PictureDrawable> transcode(Resource<SVG> toTranscode) {
+        SVG svg = toTranscode.get();
+        Picture picture = svg.renderToPicture();
+        PictureDrawable drawable = new PictureDrawable(picture);
+        return new SimpleResource<PictureDrawable>(drawable);
+    };@Override
+  public Resource<PictureDrawable> transcode(Resource<SVG> toTranscode) {
+    SVG svg = toTranscode.get();
+    Picture picture = svg.renderToPicture();
+    PictureDrawable drawable = new PictureDrawable(picture);
+    return new SimpleResource<PictureDrawable>(drawable);
+  }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/library/src/androidTest/java/com/bumptech/glide/request/GenericRequestTest;testCanHandleNullResources();;@Test
+    public void testCanHandleNullResources() {
+        GenericRequest request = harness.getRequest();
+
+        request.onResourceReady(null);
+
+        assertTrue(request.isFailed());
+        verify(harness.requestListener)
+                .onException(any(Exception.class), any(Number.class), eq(harness.target), anyBoolean());
+    };@Test
+    public void testCanHandleNullResources() {
+        GenericRequest request = harness.getRequest();
+
+        request.onResourceReady(null);
+
+        assertTrue(request.isFailed());
+        verify(harness.requestListener)
+                .onException(any(Exception.class), any(Number.class), eq(harness.target),
+                    anyBoolean());
+    }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/library/src/androidTest/java/com/bumptech/glide/request/GenericRequestTest;testCanHandleNonConformingResources();;@Test
+    public void testCanHandleNonConformingResources() {
+        GenericRequest request = harness.getRequest();
+        when(((Resource) (harness.resource)).get()).thenReturn("Invalid mocked String, this should be a List");
+
+        request.onResourceReady(harness.resource);
+
+        assertTrue(request.isFailed());
+        verify(harness.engine).release(eq(harness.resource));
+        verify(harness.requestListener)
+                .onException(any(Exception.class), any(Number.class), eq(harness.target), anyBoolean());
+    };@Test
+    public void testCanHandleNonConformingResources() {
+        GenericRequest request = harness.getRequest();
+        when(((Resource) (harness.resource)).get()).thenReturn("Invalid mocked String, this should be a List");
+
+        request.onResourceReady(harness.resource);
+
+        assertTrue(request.isFailed());
+        verify(harness.engine).release(eq(harness.resource));
+        verify(harness.requestListener)
+                .onException(any(Exception.class), any(Number.class), eq(harness.target),
+                    anyBoolean());
+    }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/library/src/androidTest/java/com/bumptech/glide/request/GenericRequestTest;testIgnoresOnSizeReadyIfNotWaitingForSize();;@Test
+    public void testIgnoresOnSizeReadyIfNotWaitingForSize() {
+        GenericRequest request = harness.getRequest();
+        request.begin();
+        request.onSizeReady(100, 100);
+        request.onSizeReady(100, 100);
+
+        verify(harness.engine, times(1)).load(eq(harness.signature), eq(100), eq(100), any(DataFetcher.class),
+                any(DataLoadProvider.class), any(Transformation.class), any(ResourceTranscoder.class),
+                any(Priority.class), anyBoolean(), any(DiskCacheStrategy.class), any(ResourceCallback.class));
+    };@Test
+    public void testIgnoresOnSizeReadyIfNotWaitingForSize() {
+        GenericRequest request = harness.getRequest();
+        request.begin();
+        request.onSizeReady(100, 100);
+        request.onSizeReady(100, 100);
+
+        verify(harness.engine, times(1)).load(eq(harness.signature), eq(100), eq(100),
+            any(DataFetcher.class), any(DataLoadProvider.class), any(Transformation.class),
+            any(ResourceTranscoder.class), any(Priority.class), anyBoolean(),
+            any(DiskCacheStrategy.class), any(ResourceCallback.class));
+    }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/library/src/androidTest/java/com/bumptech/glide/request/GenericRequestTest;testEngineLoadPassedCorrectPriority();;@Test
+    public void testEngineLoadPassedCorrectPriority() {
+        Priority expected = Priority.HIGH;
+        harness.priority = expected;
+        GenericRequest request = harness.getRequest();
+        request.begin();
+
+        request.onSizeReady(100, 100);
+
+        verify(harness.engine).load(any(Key.class), anyInt(), anyInt(), any(DataFetcher.class),
+                any(DataLoadProvider.class), any(Transformation.class), any(ResourceTranscoder.class),
+                eq(expected), anyBoolean(), any(DiskCacheStrategy.class), any(ResourceCallback.class));
+    };@Test
+    public void testEngineLoadPassedCorrectPriority() {
+        Priority expected = Priority.HIGH;
+        harness.priority = expected;
+        GenericRequest request = harness.getRequest();
+        request.begin();
+
+        request.onSizeReady(100, 100);
+
+        verify(harness.engine).load(any(Key.class), anyInt(), anyInt(), any(DataFetcher.class),
+            any(DataLoadProvider.class), any(Transformation.class), any(ResourceTranscoder.class),
+            eq(expected), anyBoolean(), any(DiskCacheStrategy.class), any(ResourceCallback.class));
+    }
+/home/arthur/analysis/projects/glide/revisions/rev_e161ca9_7e0f873/rev_e161ca9-7e0f873;/library/src/main/java/com/bumptech/glide/load/engine/cache/InternalCacheDiskCacheFactory;build();;@Override
+    public DiskCache build() {
+        DiskCache diskCache = null;
+        final File cacheDir;
+
+        if (diskCacheName != null) {
+            cacheDir = Glide.getPhotoCacheDir(context, diskCacheName);
+        } else {
+            cacheDir = Glide.getPhotoCacheDir(context);
+        }
+
+        if (cacheDir != null) {
+            diskCache = DiskLruCacheWrapper.get(cacheDir, diskCacheSize);
+        }
+
+        if (diskCache == null) {
+            diskCache = new DiskCacheAdapter();
+        }
+        return diskCache;
+    };@Override
+  public DiskCache build() {
+    DiskCache diskCache = null;
+    final File cacheDir;
+
+    if (diskCacheName != null) {
+      cacheDir = Glide.getPhotoCacheDir(context, diskCacheName);
+    } else {
+      cacheDir = Glide.getPhotoCacheDir(context);
+    }
+
+    if (cacheDir != null) {
+      diskCache = DiskLruCacheWrapper.get(cacheDir, diskCacheSize);
+    }
+
+    if (diskCache == null) {
+      diskCache = new DiskCacheAdapter();
+    }
+    return diskCache;
+  }
+/home/arthur/analysis/projects/java/revisions/rev_0f0a6a3_6caaea9/rev_0f0a6a3-6caaea9;/java/srcPubnubApi/com/pubnub/api/PubnubCore;unsubscribe(Hashtable);;protected void unsubscribe(Hashtable args) {
+        String[] channelList = (String[]) args.get("channels");
+        if (channelList == null) {
+            channelList = new String[]{(String) args.get("channel")};
+        }
+
+        unsubscribe(channelList);
+    };protected void unsubscribe(Hashtable args) {
+        String[] channelList = (String[]) args.get("channels");
+        if (channelList == null) {
+            channelList = new String[]{(String) args.get("channel")};
+        }
+        unsubscribe(channelList);
+    }
